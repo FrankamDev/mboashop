@@ -15,8 +15,7 @@ export default defineConfig({
     minify: "true",
     cssCodeSplit: true,
 
-   
-
+  
     chunkSizeWarningLimit: 500,
   },
 
