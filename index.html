@@ -1,14 +1,174 @@
+
 <!doctype html>
-<html lang="en">
+<html lang="fr-CM">
   <head>
+    <!-- ========================================= -->
+    <!-- CONFIGURATION GÉNÉRALE -->
+    <!-- ========================================= -->
+
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/index.css" rel="stylesheet">
-    <title>mboashop</title>
+
+    <meta name="author" content="MBOASHOP" />
+    <meta name="application-name" content="MBOASHOP" />
+    <meta name="theme-color" content="#0755d9" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- ========================================= -->
+    <!-- SEO PRINCIPAL -->
+    <!-- ========================================= -->
+    <link rel="icon" href="./src/assets/logo-icon.png">
+    <title>
+      MBOASHOP | Boutique en ligne au Cameroun – Découvrez nos produits
+    </title>
+
+    <meta
+      name="description"
+      content="Bienvenue chez MBOASHOP, votre boutique en ligne au Cameroun. Découvrez notre sélection de produits, consultez les prix et passez vos commandes facilement."
+    />
+
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+
+    <meta
+      name="googlebot"
+      content="index, follow, max-image-preview:large"
+    />
+
+    <!-- ========================================= -->
+    <!-- URL CANONIQUE -->
+    <!-- À remplacer par ton véritable domaine -->
+    <!-- ========================================= -->
+
+    <link
+      rel="canonical"
+      href="https://www.mboashop.getomiie.com/"
+    />
+
+    <!-- ========================================= -->
+    <!-- FAVICON ET IDENTITÉ VISUELLE -->
+    <!-- ========================================= -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/logo.png"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      href="/logo.png"
+    />
+
+    <!-- ========================================= -->
+    <!-- OPEN GRAPH : FACEBOOK / WHATSAPP -->
+    <!-- ========================================= -->
+
+    <meta property="og:type" content="website" />
+
+    <meta
+      property="og:site_name"
+      content="MBOASHOP"
+    />
+
+    <meta
+      property="og:title"
+      content="MBOASHOP | Votre boutique en ligne au Cameroun"
+    />
+
+    <meta
+      property="og:description"
+      content="Découvrez les produits disponibles chez MBOASHOP. Consultez notre catalogue et commandez facilement en ligne."
+    />
+
+    <meta
+      property="og:url"
+      content="https://www.mboashop.getomiie.com/"
+    />
+
+    <meta
+      property="og:image"
+      content="https://www.mboashop.getomiie.com/images/mboashop-social.jpg"
+    />
+
+    <meta
+      property="og:image:alt"
+      content="MBOASHOP - Boutique en ligne"
+    />
+
+    <meta property="og:locale" content="fr_CM" />
+
+    <!-- ========================================= -->
+    <!-- TWITTER / X CARDS -->
+    <!-- ========================================= -->
+
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content="MBOASHOP | Boutique en ligne"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Découvrez notre sélection de produits et commandez facilement chez MBOASHOP."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://www.mboashop.getomiie.com/images/logo.png"
+    />
+
+    <!-- ========================================= -->
+    <!-- PERFORMANCE ET POLICES -->
+    <!-- ========================================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ========================================= -->
+    <!-- DONNÉES STRUCTURÉES : GOOGLE -->
+    <!-- ========================================= -->
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "OnlineStore",
+        "name": "MBOASHOP",
+        "url": "https://www.mboashop.getomiie.com/",
+        "description": "MBOASHOP est une boutique en ligne proposant une sélection de produits aux consommateurs.",
+        "image": "https://www.votre-domaine.com/images/mboashop-social.jpg",
+        "logo": "https://www.votre-domaine.com/mboashop-icon.png",
+        "currenciesAccepted": "XAF",
+        "availableLanguage": "French",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Cameroon"
+        }
+      }
+    </script>
   </head>
+
   <body>
+    <!-- APPLICATION REACT -->
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

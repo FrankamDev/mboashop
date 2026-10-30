@@ -1,0 +1,1 @@
+// # Fonction qui prépare le message WhatsApp pré-rempli
