@@ -2,20 +2,20 @@
 export const products = [
   {
     id: 1,
-    slug: "casque-bluetooth-pro",
-    name: "Casque Bluetooth Pro",
-    category: "Audio",
-    shortDescription: "Un son immersif et une autonomie longue durée.",
+    slug: "montre-rolex-pro",
+    name: "Montre Rolex Pro",
+    category: "Accessoires",
+    shortDescription: "Une montre élégante et fiable pour tous les jours.",
     description:
-      "Profitez d'une expérience audio exceptionnelle avec ce casque Bluetooth confortable, idéal pour la musique, les appels et les déplacements.",
+      "Découvrez la montre Rolex Pro, un symbole d'excellence et d'élégance dans chaque détail.",
     price: 12999,
     oldPrice: 18000,
     currency: "XAF",
     images: [
-      "/images/products/casque-bluetooth-pro/1.webp",
-      "/images/products/casque-bluetooth-pro/2.webp",
-      "/images/products/casque-bluetooth-pro/3.webp",
-      "/images/products/casque-bluetooth-pro/4.webp",
+      "/images/products/montres/m1.jpg",
+      "/images/products/montres/mm1.jpg",
+      "/images/products/montres/mm2.jpg",
+      "/images/products/montre-rolex-pro/4.webp",
     ],
     specifications: [
       { label: "Connexion", value: "Bluetooth 5.3" },
@@ -37,8 +37,8 @@ export const products = [
   },
   {
     id: 2,
-    slug: "mini-projecteur-hd",
-    name: "Mini Projecteur HD",
+    slug: "montre-connecte",
+    name: "Montre connectée",
     category: "Électronique",
     shortDescription: "Transformez votre chambre en salle de cinéma.",
     description:
@@ -47,10 +47,10 @@ export const products = [
     oldPrice: 22000,
     currency: "XAF",
     images: [
-      "/images/products/mini-projecteur-hd/1.webp",
-      "/images/products/mini-projecteur-hd/2.webp",
-      "/images/products/mini-projecteur-hd/3.webp",
-      "/images/products/mini-projecteur-hd/4.webp",
+      "/images/products/montres/m2.jpg",
+      "/images/products/montre-connecte/2.webp",
+      "/images/products/montre-connecte/3.webp",
+      "/images/products/montre-connecte/4.webp",
     ],
     specifications: [
       { label: "Résolution", value: "HD" },

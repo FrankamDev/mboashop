@@ -13847,8 +13847,39 @@ function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
 	return Component;
 }
 
+// node_modules/lucide-react/dist/esm/icons/arrow-down-wide-narrow.mjs
+var __iconData$32 = {
+	name: "arrow-down-wide-narrow",
+	size: 24,
+	node: [
+		["path", {
+			d: "m3 16 4 4 4-4",
+			key: "1co6wj"
+		}],
+		["path", {
+			d: "M7 20V4",
+			key: "1yoxec"
+		}],
+		["path", {
+			d: "M11 4h10",
+			key: "1w87gc"
+		}],
+		["path", {
+			d: "M11 8h7",
+			key: "djye34"
+		}],
+		["path", {
+			d: "M11 12h4",
+			key: "q8tih4"
+		}]
+	],
+	aliases: ["sort-desc"]
+};
+__iconData$32.node;
+var ArrowDownWideNarrow = createLucideIcon(__iconData$32);
+
 // node_modules/lucide-react/dist/esm/icons/arrow-left.mjs
-var __iconData$28 = {
+var __iconData$31 = {
 	name: "arrow-left",
 	size: 24,
 	node: [["path", {
@@ -13859,11 +13890,11 @@ var __iconData$28 = {
 		key: "x3x0zl"
 	}]]
 };
-__iconData$28.node;
-var ArrowLeft = createLucideIcon(__iconData$28);
+__iconData$31.node;
+var ArrowLeft = createLucideIcon(__iconData$31);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-right.mjs
-var __iconData$27 = {
+var __iconData$30 = {
 	name: "arrow-right",
 	size: 24,
 	node: [["path", {
@@ -13874,11 +13905,11 @@ var __iconData$27 = {
 		key: "xquz4c"
 	}]]
 };
-__iconData$27.node;
-var ArrowRight = createLucideIcon(__iconData$27);
+__iconData$30.node;
+var ArrowRight = createLucideIcon(__iconData$30);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-up-down.mjs
-var __iconData$26 = {
+var __iconData$29 = {
 	name: "arrow-up-down",
 	size: 24,
 	node: [
@@ -13900,11 +13931,11 @@ var __iconData$26 = {
 		}]
 	]
 };
-__iconData$26.node;
-var ArrowUpDown = createLucideIcon(__iconData$26);
+__iconData$29.node;
+var ArrowUpDown = createLucideIcon(__iconData$29);
 
 // node_modules/lucide-react/dist/esm/icons/check.mjs
-var __iconData$25 = {
+var __iconData$28 = {
 	name: "check",
 	size: 24,
 	node: [["path", {
@@ -13912,11 +13943,11 @@ var __iconData$25 = {
 		key: "1gmf2c"
 	}]]
 };
-__iconData$25.node;
-var Check = createLucideIcon(__iconData$25);
+__iconData$28.node;
+var Check = createLucideIcon(__iconData$28);
 
 // node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
-var __iconData$24 = {
+var __iconData$27 = {
 	name: "chevron-left",
 	size: 24,
 	node: [["path", {
@@ -13924,11 +13955,11 @@ var __iconData$24 = {
 		key: "1wnfg3"
 	}]]
 };
-__iconData$24.node;
-var ChevronLeft = createLucideIcon(__iconData$24);
+__iconData$27.node;
+var ChevronLeft = createLucideIcon(__iconData$27);
 
 // node_modules/lucide-react/dist/esm/icons/chevron-right.mjs
-var __iconData$23 = {
+var __iconData$26 = {
 	name: "chevron-right",
 	size: 24,
 	node: [["path", {
@@ -13936,11 +13967,11 @@ var __iconData$23 = {
 		key: "mthhwq"
 	}]]
 };
-__iconData$23.node;
-var ChevronRight = createLucideIcon(__iconData$23);
+__iconData$26.node;
+var ChevronRight = createLucideIcon(__iconData$26);
 
 // node_modules/lucide-react/dist/esm/icons/drone.mjs
-var __iconData$22 = {
+var __iconData$25 = {
 	name: "drone",
 	size: 24,
 	node: [
@@ -13986,11 +14017,11 @@ var __iconData$22 = {
 		}]
 	]
 };
-__iconData$22.node;
-var Drone = createLucideIcon(__iconData$22);
+__iconData$25.node;
+var Drone = createLucideIcon(__iconData$25);
 
 // node_modules/lucide-react/dist/esm/icons/gamepad-2.mjs
-var __iconData$21 = {
+var __iconData$24 = {
 	name: "gamepad-2",
 	size: 24,
 	node: [
@@ -14028,11 +14059,11 @@ var __iconData$21 = {
 		}]
 	]
 };
-__iconData$21.node;
-var Gamepad2 = createLucideIcon(__iconData$21);
+__iconData$24.node;
+var Gamepad2 = createLucideIcon(__iconData$24);
 
 // node_modules/lucide-react/dist/esm/icons/headphones.mjs
-var __iconData$20 = {
+var __iconData$23 = {
 	name: "headphones",
 	size: 24,
 	node: [["path", {
@@ -14040,11 +14071,11 @@ var __iconData$20 = {
 		key: "1xhozi"
 	}]]
 };
-__iconData$20.node;
-var Headphones = createLucideIcon(__iconData$20);
+__iconData$23.node;
+var Headphones = createLucideIcon(__iconData$23);
 
 // node_modules/lucide-react/dist/esm/icons/heart.mjs
-var __iconData$19 = {
+var __iconData$22 = {
 	name: "heart",
 	size: 24,
 	node: [["path", {
@@ -14052,11 +14083,11 @@ var __iconData$19 = {
 		key: "mvr1a0"
 	}]]
 };
-__iconData$19.node;
-var Heart = createLucideIcon(__iconData$19);
+__iconData$22.node;
+var Heart = createLucideIcon(__iconData$22);
 
 // node_modules/lucide-react/dist/esm/icons/house.mjs
-var __iconData$18 = {
+var __iconData$21 = {
 	name: "house",
 	size: 24,
 	node: [["path", {
@@ -14068,11 +14099,11 @@ var __iconData$18 = {
 	}]],
 	aliases: ["home"]
 };
-__iconData$18.node;
-var House = createLucideIcon(__iconData$18);
+__iconData$21.node;
+var House = createLucideIcon(__iconData$21);
 
 // node_modules/lucide-react/dist/esm/icons/laptop.mjs
-var __iconData$17 = {
+var __iconData$20 = {
 	name: "laptop",
 	size: 24,
 	node: [["path", {
@@ -14083,11 +14114,11 @@ var __iconData$17 = {
 		key: "14rxg9"
 	}]]
 };
-__iconData$17.node;
-var Laptop = createLucideIcon(__iconData$17);
+__iconData$20.node;
+var Laptop = createLucideIcon(__iconData$20);
 
 // node_modules/lucide-react/dist/esm/icons/message-circle.mjs
-var __iconData$16 = {
+var __iconData$19 = {
 	name: "message-circle",
 	size: 24,
 	node: [["path", {
@@ -14095,11 +14126,11 @@ var __iconData$16 = {
 		key: "1sd12s"
 	}]]
 };
-__iconData$16.node;
-var MessageCircle = createLucideIcon(__iconData$16);
+__iconData$19.node;
+var MessageCircle = createLucideIcon(__iconData$19);
 
 // node_modules/lucide-react/dist/esm/icons/minus.mjs
-var __iconData$15 = {
+var __iconData$18 = {
 	name: "minus",
 	size: 24,
 	node: [["path", {
@@ -14107,11 +14138,11 @@ var __iconData$15 = {
 		key: "1ays0h"
 	}]]
 };
-__iconData$15.node;
-var Minus = createLucideIcon(__iconData$15);
+__iconData$18.node;
+var Minus = createLucideIcon(__iconData$18);
 
 // node_modules/lucide-react/dist/esm/icons/package-check.mjs
-var __iconData$14 = {
+var __iconData$17 = {
 	name: "package-check",
 	size: 24,
 	node: [
@@ -14137,11 +14168,11 @@ var __iconData$14 = {
 		}]
 	]
 };
-__iconData$14.node;
-var PackageCheck = createLucideIcon(__iconData$14);
+__iconData$17.node;
+var PackageCheck = createLucideIcon(__iconData$17);
 
 // node_modules/lucide-react/dist/esm/icons/package-search.mjs
-var __iconData$13 = {
+var __iconData$16 = {
 	name: "package-search",
 	size: 24,
 	node: [
@@ -14173,11 +14204,11 @@ var __iconData$13 = {
 		}]
 	]
 };
-__iconData$13.node;
-var PackageSearch = createLucideIcon(__iconData$13);
+__iconData$16.node;
+var PackageSearch = createLucideIcon(__iconData$16);
 
 // node_modules/lucide-react/dist/esm/icons/plus.mjs
-var __iconData$12 = {
+var __iconData$15 = {
 	name: "plus",
 	size: 24,
 	node: [["path", {
@@ -14188,11 +14219,11 @@ var __iconData$12 = {
 		key: "s699le"
 	}]]
 };
-__iconData$12.node;
-var Plus = createLucideIcon(__iconData$12);
+__iconData$15.node;
+var Plus = createLucideIcon(__iconData$15);
 
 // node_modules/lucide-react/dist/esm/icons/search.mjs
-var __iconData$11 = {
+var __iconData$14 = {
 	name: "search",
 	size: 24,
 	node: [["path", {
@@ -14205,11 +14236,11 @@ var __iconData$11 = {
 		key: "4ej97u"
 	}]]
 };
-__iconData$11.node;
-var Search = createLucideIcon(__iconData$11);
+__iconData$14.node;
+var Search = createLucideIcon(__iconData$14);
 
 // node_modules/lucide-react/dist/esm/icons/share-2.mjs
-var __iconData$10 = {
+var __iconData$13 = {
 	name: "share-2",
 	size: 24,
 	node: [
@@ -14247,11 +14278,11 @@ var __iconData$10 = {
 		}]
 	]
 };
-__iconData$10.node;
-var Share2 = createLucideIcon(__iconData$10);
+__iconData$13.node;
+var Share2 = createLucideIcon(__iconData$13);
 
 // node_modules/lucide-react/dist/esm/icons/shield-check.mjs
-var __iconData$9 = {
+var __iconData$12 = {
 	name: "shield-check",
 	size: 24,
 	node: [["path", {
@@ -14262,11 +14293,11 @@ var __iconData$9 = {
 		key: "dzmm74"
 	}]]
 };
-__iconData$9.node;
-var ShieldCheck = createLucideIcon(__iconData$9);
+__iconData$12.node;
+var ShieldCheck = createLucideIcon(__iconData$12);
 
 // node_modules/lucide-react/dist/esm/icons/shopping-bag.mjs
-var __iconData$8 = {
+var __iconData$11 = {
 	name: "shopping-bag",
 	size: 24,
 	node: [
@@ -14284,11 +14315,11 @@ var __iconData$8 = {
 		}]
 	]
 };
-__iconData$8.node;
-var ShoppingBag = createLucideIcon(__iconData$8);
+__iconData$11.node;
+var ShoppingBag = createLucideIcon(__iconData$11);
 
 // node_modules/lucide-react/dist/esm/icons/shopping-cart.mjs
-var __iconData$7 = {
+var __iconData$10 = {
 	name: "shopping-cart",
 	size: 24,
 	node: [
@@ -14314,11 +14345,11 @@ var __iconData$7 = {
 		}]
 	]
 };
-__iconData$7.node;
-var ShoppingCart = createLucideIcon(__iconData$7);
+__iconData$10.node;
+var ShoppingCart = createLucideIcon(__iconData$10);
 
 // node_modules/lucide-react/dist/esm/icons/sliders-horizontal.mjs
-var __iconData$6 = {
+var __iconData$9 = {
 	name: "sliders-horizontal",
 	size: 24,
 	node: [
@@ -14360,11 +14391,11 @@ var __iconData$6 = {
 		}]
 	]
 };
-__iconData$6.node;
-var SlidersHorizontal = createLucideIcon(__iconData$6);
+__iconData$9.node;
+var SlidersHorizontal = createLucideIcon(__iconData$9);
 
 // node_modules/lucide-react/dist/esm/icons/smartphone.mjs
-var __iconData$5 = {
+var __iconData$8 = {
 	name: "smartphone",
 	size: 24,
 	node: [["rect", {
@@ -14380,11 +14411,40 @@ var __iconData$5 = {
 		key: "mhygvu"
 	}]]
 };
-__iconData$5.node;
-var Smartphone = createLucideIcon(__iconData$5);
+__iconData$8.node;
+var Smartphone = createLucideIcon(__iconData$8);
+
+// node_modules/lucide-react/dist/esm/icons/sparkles.mjs
+var __iconData$7 = {
+	name: "sparkles",
+	size: 24,
+	node: [
+		["path", {
+			d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
+			key: "1s2grr"
+		}],
+		["path", {
+			d: "M20 2v4",
+			key: "1rf3ol"
+		}],
+		["path", {
+			d: "M22 4h-4",
+			key: "gwowj6"
+		}],
+		["circle", {
+			cx: "4",
+			cy: "20",
+			r: "2",
+			key: "6kqj1y"
+		}]
+	],
+	aliases: ["stars"]
+};
+__iconData$7.node;
+var Sparkles = createLucideIcon(__iconData$7);
 
 // node_modules/lucide-react/dist/esm/icons/star.mjs
-var __iconData$4 = {
+var __iconData$6 = {
 	name: "star",
 	size: 24,
 	node: [["path", {
@@ -14392,8 +14452,48 @@ var __iconData$4 = {
 		key: "r04s7s"
 	}]]
 };
+__iconData$6.node;
+var Star = createLucideIcon(__iconData$6);
+
+// node_modules/lucide-react/dist/esm/icons/store.mjs
+var __iconData$5 = {
+	name: "store",
+	size: 24,
+	node: [
+		["path", {
+			d: "M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5",
+			key: "slp6dd"
+		}],
+		["path", {
+			d: "M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244",
+			key: "o0xfot"
+		}],
+		["path", {
+			d: "M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05",
+			key: "wn3emo"
+		}]
+	]
+};
+__iconData$5.node;
+var Store = createLucideIcon(__iconData$5);
+
+// node_modules/lucide-react/dist/esm/icons/tag.mjs
+var __iconData$4 = {
+	name: "tag",
+	size: 24,
+	node: [["path", {
+		d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+		key: "vktsd0"
+	}], ["circle", {
+		cx: "7.5",
+		cy: "7.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "kqv944"
+	}]]
+};
 __iconData$4.node;
-var Star = createLucideIcon(__iconData$4);
+var Tag = createLucideIcon(__iconData$4);
 
 // node_modules/lucide-react/dist/esm/icons/trash.mjs
 var __iconData$3 = {
@@ -14611,7 +14711,7 @@ var slides = [
 		title: "SMART TECH.",
 		highlight: "BETTER EVERY DAY.",
 		description: "Discover the latest gadgets designed for work, entertainment & everyday life.",
-		image: "/images/hero-tech.webp",
+		image: "./images/hero1.png",
 		theme: "blue"
 	},
 	{
@@ -14620,7 +14720,7 @@ var slides = [
 		title: "TRENDY STYLE.",
 		highlight: "FOR EVERY YOU.",
 		description: "Explore our latest collection of fashion items, accessories and shoes.",
-		image: "/images/hero-fashion.webp",
+		image: "./images/2.jpg",
 		theme: "pink"
 	},
 	{
@@ -14629,7 +14729,7 @@ var slides = [
 		title: "EVERYTHING YOU NEED.",
 		highlight: "IN ONE PLACE.",
 		description: "Make your home smarter, more comfortable and stylish.",
-		image: "/images/hero-home.webp",
+		image: "./images/3.png",
 		theme: "orange"
 	},
 	{
@@ -14638,7 +14738,7 @@ var slides = [
 		title: "LOOK GOOD.",
 		highlight: "FEEL GREAT.",
 		description: "Discover our beauty, health and personal care products.",
-		image: "/images/hero-beauty.webp",
+		image: "./images/4.jpg",
 		theme: "cyan"
 	}
 ];
@@ -14939,9 +15039,11 @@ function useCart() {
 // src/composnents/Navbar.jsx
 function Navbar() {
 	const { cartCount } = useCart();
+	const navigate = useNavigate();
 	const [menuOpen, setMenuOpen] = (0, import_react.useState)(false);
 	const [searchValue, setSearchValue] = (0, import_react.useState)("");
-	const navigate = useNavigate();
+	const [filterOpen, setFilterOpen] = (0, import_react.useState)(false);
+	const filterRef = (0, import_react.useRef)(null);
 	const whatsappNumber = "237690372977";
 	const links = [
 		{
@@ -14962,32 +15064,50 @@ function Navbar() {
 		},
 		{
 			name: "À propos",
-			href: "/#about"
+			href: "/about"
 		},
 		{
 			name: "Contact",
-			href: "/#contact"
+			href: "/contact"
 		}
 	];
+	(0, import_react.useEffect)(() => {
+		const handleClickOutside = (event) => {
+			if (filterRef.current && !filterRef.current.contains(event.target)) setFilterOpen(false);
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 	const handleSearch = (event) => {
 		event.preventDefault();
 		const query = searchValue.trim();
 		if (!query) return;
-		navigate(`/all-products?search=${encodeURIComponent(query)}`);
+		setFilterOpen(false);
 		setMenuOpen(false);
+		navigate(`/all-products?search=${encodeURIComponent(query)}`);
+	};
+	const applyFilter = (sort) => {
+		setFilterOpen(false);
+		setMenuOpen(false);
+		navigate(`/all-products?sort=${sort}`);
 	};
 	const handleWhatsApp = () => {
 		window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Bonjour MBOASHOP, je souhaite avoir des informations sur vos produits.")}`, "_blank", "noopener,noreferrer");
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md",
+		className: "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-xl",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "relative mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						type: "button",
-						onClick: () => setMenuOpen(!menuOpen),
+						onClick: () => {
+							setMenuOpen(!menuOpen);
+							setFilterOpen(false);
+						},
 						"aria-label": menuOpen ? "Fermer le menu" : "Ouvrir le menu",
 						"aria-expanded": menuOpen,
 						className: "group flex items-center gap-2.5 rounded-lg py-2 pr-2",
@@ -15010,7 +15130,7 @@ function Navbar() {
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-1.5",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: "/images/ecommerce.jpg",
+								src: "/images/logo.png",
 								alt: "MBOASHOP",
 								className: "h-9 w-9 object-contain"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
@@ -15030,9 +15150,9 @@ function Navbar() {
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 							to: "/cart",
 							"aria-label": `Panier, ${cartCount} article(s)`,
-							className: "relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition hover:bg-blue-50 hover:text-blue-700",
+							className: "relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition duration-300 hover:bg-blue-50 hover:text-blue-700",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 21 }), cartCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm",
+								className: "absolute -right-1 -top-1 flex h-5 min-w-5 animate-in zoom-in items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm",
 								children: cartCount > 99 ? "99+" : cartCount
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
@@ -15045,37 +15165,149 @@ function Navbar() {
 					})
 				]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-				onSubmit: handleSearch,
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex h-11 flex-1 items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-md focus-within:shadow-blue-100",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-							size: 19,
-							className: "shrink-0 text-gray-500"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-							type: "search",
-							value: searchValue,
-							onChange: (event) => setSearchValue(event.target.value),
-							placeholder: "Rechercher un produit...",
-							className: "w-full bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
-						}),
-						searchValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							onClick: () => setSearchValue(""),
-							"aria-label": "Effacer la recherche",
-							className: "text-gray-400 hover:text-gray-700",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 16 })
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("form", {
+					onSubmit: handleSearch,
+					className: "flex min-w-0 flex-1",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "group flex h-12 w-full items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-lg focus-within:shadow-blue-100/70",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+								size: 19,
+								className: "shrink-0 text-gray-400 transition-colors group-focus-within:text-blue-600"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								type: "search",
+								value: searchValue,
+								onChange: (event) => setSearchValue(event.target.value),
+								placeholder: "Rechercher un produit...",
+								"aria-label": "Rechercher un produit",
+								className: "w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+							}),
+							searchValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: () => setSearchValue(""),
+								"aria-label": "Effacer la recherche",
+								className: "shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-800",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 16 })
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "submit",
+								disabled: !searchValue.trim(),
+								"aria-label": "Lancer la recherche",
+								className: "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { size: 15 })
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					ref: filterRef,
+					className: "relative shrink-0",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						onClick: () => {
+							setFilterOpen(!filterOpen);
+							setMenuOpen(false);
+						},
+						"aria-label": "Ouvrir les filtres",
+						"aria-expanded": filterOpen,
+						className: `relative flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 active:scale-95 ${filterOpen ? "border-blue-700 bg-blue-700 text-white shadow-lg shadow-blue-200" : "border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"}`,
+						children: filterOpen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 20 }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 20 })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: `absolute right-0 top-[calc(100%+12px)] z-[60] w-[min(320px,calc(100vw-32px))] origin-top-right transition-all duration-300 ${filterOpen ? "visible translate-y-0 scale-100 opacity-100" : "invisible -translate-y-3 scale-95 opacity-0"}`,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/10",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "bg-gradient-to-r from-blue-700 to-blue-600 px-5 py-4 text-white",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 19 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "font-bold",
+										children: "Filtrer les produits"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "mt-1 text-xs text-blue-100",
+									children: "Trouvez rapidement ce que vous recherchez."
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2 p-3",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[1.5px] text-gray-400",
+										children: "Trier les produits"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										onClick: () => applyFilter("price-asc"),
+										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700 transition group-hover:bg-blue-100",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDownWideNarrow, { size: 18 })
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-semibold text-gray-800",
+											children: "Prix croissant"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-xs text-gray-400",
+											children: "Du moins cher au plus cher"
+										})] })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										onClick: () => applyFilter("price-desc"),
+										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpDown, { size: 18 })
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-semibold text-gray-800",
+											children: "Prix décroissant"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-xs text-gray-400",
+											children: "Du plus cher au moins cher"
+										})] })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										onClick: () => applyFilter("discount"),
+										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-orange-50",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tag, { size: 18 })
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-semibold text-gray-800",
+											children: "Promotions"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-xs text-gray-400",
+											children: "Voir les produits en réduction"
+										})] })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										onClick: () => applyFilter("newest"),
+										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-emerald-50",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { size: 18 })
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-semibold text-gray-800",
+											children: "Nouveautés"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-xs text-gray-400",
+											children: "Découvrir les derniers produits"
+										})] })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "border-t border-gray-100 pt-3",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+											onClick: () => {
+												setFilterOpen(false);
+												navigate("/all-products");
+											},
+											className: "flex w-full items-center justify-center gap-2 rounded-xl bg-gray-100 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-200",
+											children: ["Voir tous les produits", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { size: 16 })]
+										})
+									})
+								]
+							})]
 						})
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-					type: "button",
-					onClick: () => navigate("/all-products"),
-					"aria-label": "Voir les produits et leurs filtres",
-					className: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all duration-300 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700 active:scale-95",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 19 })
+					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -15216,19 +15448,19 @@ function ProductCard({ product }) {
 var products = [
 	{
 		id: 1,
-		slug: "casque-bluetooth-pro",
-		name: "Casque Bluetooth Pro",
-		category: "Audio",
-		shortDescription: "Un son immersif et une autonomie longue durée.",
-		description: "Profitez d'une expérience audio exceptionnelle avec ce casque Bluetooth confortable, idéal pour la musique, les appels et les déplacements.",
+		slug: "montre-rolex-pro",
+		name: "Montre Rolex Pro",
+		category: "Accessoires",
+		shortDescription: "Une montre élégante et fiable pour tous les jours.",
+		description: "Découvrez la montre Rolex Pro, un symbole d'excellence et d'élégance dans chaque détail.",
 		price: 12999,
 		oldPrice: 18e3,
 		currency: "XAF",
 		images: [
-			"/images/products/casque-bluetooth-pro/1.webp",
-			"/images/products/casque-bluetooth-pro/2.webp",
-			"/images/products/casque-bluetooth-pro/3.webp",
-			"/images/products/casque-bluetooth-pro/4.webp"
+			"/images/products/montres/m1.jpg",
+			"/images/products/montres/mm1.jpg",
+			"/images/products/montres/mm2.jpg",
+			"/images/products/montre-rolex-pro/4.webp"
 		],
 		specifications: [
 			{
@@ -15263,8 +15495,8 @@ var products = [
 	},
 	{
 		id: 2,
-		slug: "mini-projecteur-hd",
-		name: "Mini Projecteur HD",
+		slug: "montre-connecte",
+		name: "Montre connectée",
 		category: "Électronique",
 		shortDescription: "Transformez votre chambre en salle de cinéma.",
 		description: "Un mini-projecteur compact pour profiter de vos films, séries et présentations sur grand écran.",
@@ -15272,10 +15504,10 @@ var products = [
 		oldPrice: 22e3,
 		currency: "XAF",
 		images: [
-			"/images/products/mini-projecteur-hd/1.webp",
-			"/images/products/mini-projecteur-hd/2.webp",
-			"/images/products/mini-projecteur-hd/3.webp",
-			"/images/products/mini-projecteur-hd/4.webp"
+			"/images/products/montres/m2.jpg",
+			"/images/products/montre-connecte/2.webp",
+			"/images/products/montre-connecte/3.webp",
+			"/images/products/montre-connecte/4.webp"
 		],
 		specifications: [
 			{
@@ -16931,9 +17163,237 @@ Merci de me confirmer la disponibilité et les frais de livraison.
 	});
 }
 
+// src/composnents/MobileBottomNav.jsx
+function MobileBottomNav() {
+	const { cartCount } = useCart();
+	const [searchOpen, setSearchOpen] = (0, import_react.useState)(false);
+	const [searchValue, setSearchValue] = (0, import_react.useState)("");
+	const normalize = (value = "") => String(value).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+	const results = (0, import_react.useMemo)(() => {
+		const query = normalize(searchValue);
+		if (!query) return [];
+		return products.filter((product) => {
+			if (product.isPublished === false) return false;
+			return normalize([
+				product.name,
+				product.category,
+				product.shortDescription,
+				product.description,
+				...product.tags || []
+			].join(" ")).includes(query);
+		}).slice(0, 6);
+	}, [searchValue]);
+	const formatPrice = (price) => `${Number(price || 0).toLocaleString("fr-FR")} FCFA`;
+	const closeSearch = () => {
+		setSearchOpen(false);
+		setSearchValue("");
+	};
+	const navItems = [
+		{
+			label: "Accueil",
+			path: "/",
+			icon: House,
+			end: true
+		},
+		{
+			label: "Boutique",
+			path: "/all-products",
+			icon: Store
+		},
+		{
+			label: "Recherche",
+			action: true,
+			icon: Search
+		},
+		{
+			label: "Panier",
+			path: "/cart",
+			icon: ShoppingBag
+		}
+	];
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: `fixed inset-x-0 bottom-[76px] z-[70] px-3 transition-all duration-300 md:hidden ${searchOpen ? "visible translate-y-0 opacity-100" : "invisible translate-y-5 opacity-0 pointer-events-none"}`,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mx-auto max-w-lg overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3 border-b border-gray-100 p-3",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+							size: 20,
+							className: "shrink-0 text-blue-600"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							type: "search",
+							autoFocus: searchOpen,
+							value: searchValue,
+							onChange: (event) => setSearchValue(event.target.value),
+							placeholder: "Rechercher un produit...",
+							className: "min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400"
+						}),
+						searchValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							onClick: () => setSearchValue(""),
+							"aria-label": "Effacer la recherche",
+							className: "rounded-full p-1 text-gray-400 hover:bg-gray-100",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 17 })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							onClick: closeSearch,
+							"aria-label": "Fermer la recherche",
+							className: "rounded-full p-1 text-gray-500 hover:bg-gray-100",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 19 })
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "max-h-[55vh] overflow-y-auto p-3",
+					children: !searchValue.trim() ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "py-7 text-center",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+								size: 30,
+								className: "mx-auto mb-2 text-gray-300"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm font-semibold text-gray-700",
+								children: "Que recherchez-vous ?"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-1 text-xs text-gray-400",
+								children: "Les produits apparaîtront pendant votre saisie."
+							})
+						]
+					}) : results.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mb-3 flex items-center justify-between",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xs font-bold uppercase tracking-wider text-gray-400",
+								children: "Résultats de recherche"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-700",
+								children: [results.length, " résultat(s) affiché(s)"]
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "space-y-2",
+							children: results.map((product, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+								to: `/produit/${product.slug}`,
+								onClick: closeSearch,
+								style: { animationDelay: `${index * 50}ms` },
+								className: "flex animate-in fade-in slide-in-from-bottom-2 items-center gap-3 rounded-xl p-2 transition duration-200 hover:bg-blue-50",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: product.images?.[0] || "/images/placeholder.webp",
+										alt: product.name,
+										className: "h-14 w-14 shrink-0 rounded-lg bg-gray-100 object-cover"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "min-w-0 flex-1",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "truncate text-sm font-semibold text-gray-800",
+												children: product.name
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "mt-1 text-xs text-gray-400",
+												children: product.category
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "mt-1 text-sm font-extrabold text-blue-700",
+												children: formatPrice(product.price)
+											})
+										]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
+										size: 17,
+										className: "shrink-0 text-gray-400"
+									})
+								]
+							}, product.id))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: `/all-products?search=${encodeURIComponent(searchValue.trim())}`,
+							onClick: closeSearch,
+							className: "mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-700 py-3 text-xs font-bold text-white transition hover:bg-blue-800",
+							children: ["Voir tous les résultats", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { size: 15 })]
+						})
+					] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "py-8 text-center",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+								size: 30,
+								className: "mx-auto mb-2 text-gray-300"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm font-bold text-gray-700",
+								children: "Aucun produit trouvé"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-1 text-xs text-gray-400",
+								children: "Essayez un autre nom ou une autre catégorie."
+							})
+						]
+					})
+				})]
+			})
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+			type: "button",
+			"aria-label": "Fermer la recherche",
+			onClick: closeSearch,
+			className: `fixed inset-0 z-[60] bg-black/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${searchOpen ? "visible opacity-100" : "invisible opacity-0"}`
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+			className: "fixed bottom-0 left-0 z-[80] w-full border-t border-gray-100 bg-white/95 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "mx-auto flex h-[72px] max-w-lg items-center justify-around px-2 pb-[env(safe-area-inset-bottom)]",
+				children: navItems.map((item) => {
+					const Icon = item.icon;
+					if (item.action) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
+						onClick: () => setSearchOpen(!searchOpen),
+						"aria-expanded": searchOpen,
+						className: `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${searchOpen ? "text-blue-700" : "text-gray-400"}`,
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: `flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${searchOpen ? "scale-105 bg-blue-50" : "active:scale-90"}`,
+								children: searchOpen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 21 }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, { size: 21 })
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[10px] font-semibold",
+								children: "Recherche"
+							}),
+							searchOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute top-0 h-[3px] w-7 rounded-full bg-blue-600" })
+						]
+					}, item.label);
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavLink, {
+						to: item.path,
+						end: item.end,
+						onClick: () => setSearchOpen(false),
+						className: ({ isActive }) => `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${isActive ? "text-blue-700" : "text-gray-400"}`,
+						children: ({ isActive }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: `relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${isActive ? "scale-105 bg-blue-50" : "active:scale-90"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, { size: 21 }), item.label === "Panier" && cartCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "absolute -right-1 -top-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white ring-2 ring-white",
+									children: cartCount > 99 ? "99+" : cartCount
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[10px] font-semibold",
+								children: item.label
+							}),
+							isActive && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute top-0 h-[3px] w-7 rounded-full bg-blue-600" })
+						] })
+					}, item.label);
+				})
+			})
+		})
+	] });
+}
+
 // src/App.jsx
 function App() {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 			path: "/",
 			element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Home, {})
@@ -16950,7 +17410,7 @@ function App() {
 			path: "/cart",
 			element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cart, {})
 		})
-	] });
+	] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MobileBottomNav, {})] });
 }
 
 // src/main.jsx

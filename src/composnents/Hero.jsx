@@ -142,7 +142,7 @@ const slides = [
     highlight: "BETTER EVERY DAY.",
     description:
       "Discover the latest gadgets designed for work, entertainment & everyday life.",
-    image: "/images/hero-tech.webp",
+    image: "./images/hero1.png",
     theme: "blue",
   },
   {
@@ -152,7 +152,7 @@ const slides = [
     highlight: "FOR EVERY YOU.",
     description:
       "Explore our latest collection of fashion items, accessories and shoes.",
-    image: "/images/hero-fashion.webp",
+    image: "./images/2.jpg",
     theme: "pink",
   },
   {
@@ -162,7 +162,7 @@ const slides = [
     highlight: "IN ONE PLACE.",
     description:
       "Make your home smarter, more comfortable and stylish.",
-    image: "/images/hero-home.webp",
+    image: "./images/3.png",
     theme: "orange",
   },
   {
@@ -172,7 +172,7 @@ const slides = [
     highlight: "FEEL GREAT.",
     description:
       "Discover our beauty, health and personal care products.",
-    image: "/images/hero-beauty.webp",
+    image: "./images/4.jpg",
     theme: "cyan",
   },
 ];

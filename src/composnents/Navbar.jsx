@@ -134,7 +134,7 @@ export default function Navbar() {
         >
           <div className="flex items-center gap-1.5">
             <img
-              src="/images/ecommerce.jpg"
+              src="/images/logo.png"
               alt="MBOASHOP"
               className="h-9 w-9 object-contain"
             />
