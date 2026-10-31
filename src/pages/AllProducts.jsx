@@ -10,6 +10,7 @@ import {
 
 import { products } from "../data/products";
 import ProductCard from "../composnents/ProductCard";
+import Navbar from "../composnents/Navbar";
 // import ProductCard from "../components/ProductCard";
 
 const categories = [
@@ -80,7 +81,7 @@ export default function AllProducts({ onAddToCart = () => {} }) {
 
       {/* En-tête */}
       <section className="mx-auto max-w-7xl px-4 pt-7 sm:pt-10">
-
+<Navbar />
         <div className="mb-6">
           <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
             MBOASHOP STORE
