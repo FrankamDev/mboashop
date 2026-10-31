@@ -1,11 +1,15 @@
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Search,
   SlidersHorizontal,
   ChevronRight,
   ShoppingCart,
   X,
+  ArrowDownWideNarrow,
+  Tag,
+  Sparkles,
+  ArrowUpDown,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
@@ -13,11 +17,13 @@ import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
   const { cartCount } = useCart();
+  const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  const navigate = useNavigate();
+  const filterRef = useRef(null);
 
   const whatsappNumber = "237690372977";
 
@@ -26,10 +32,26 @@ export default function Navbar() {
     { name: "Boutique", href: "/all-products" },
     { name: "Catégories", href: "/all-products" },
     { name: "Promotions", href: "/all-products?sort=discount" },
-    { name: "À propos", href: "/#about" },
-    { name: "Contact", href: "/#contact" },
+    { name: "À propos", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
+  // Fermer le panneau en cliquant à l'extérieur
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Recherche
   const handleSearch = (event) => {
     event.preventDefault();
 
@@ -37,8 +59,18 @@ export default function Navbar() {
 
     if (!query) return;
 
-    navigate(`/all-products?search=${encodeURIComponent(query)}`);
+    setFilterOpen(false);
     setMenuOpen(false);
+
+    navigate(`/all-products?search=${encodeURIComponent(query)}`);
+  };
+
+  // Appliquer un tri ou un filtre
+  const applyFilter = (sort) => {
+    setFilterOpen(false);
+    setMenuOpen(false);
+
+    navigate(`/all-products?sort=${sort}`);
   };
 
   const handleWhatsApp = () => {
@@ -53,15 +85,18 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-xl">
 
       {/* HEADER PRINCIPAL */}
       <div className="relative mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6">
 
-        {/* BURGER MENU */}
+        {/* MENU BURGER */}
         <button
           type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+            setFilterOpen(false);
+          }}
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}
           className="group flex items-center gap-2.5 rounded-lg py-2 pr-2"
@@ -91,7 +126,7 @@ export default function Navbar() {
           </span>
         </button>
 
-        {/* LOGO ET SLOGAN */}
+        {/* LOGO */}
         <Link
           to="/"
           onClick={() => setMenuOpen(false)}
@@ -114,25 +149,23 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* ACTIONS À DROITE */}
+        {/* ACTIONS */}
         <div className="flex items-center gap-2">
 
-          {/* PANIER */}
           <Link
             to="/cart"
             aria-label={`Panier, ${cartCount} article(s)`}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition hover:bg-blue-50 hover:text-blue-700"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition duration-300 hover:bg-blue-50 hover:text-blue-700"
           >
             <ShoppingCart size={21} />
 
             {cartCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm">
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 animate-in zoom-in items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm">
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             )}
           </Link>
 
-          {/* WHATSAPP */}
           <button
             type="button"
             onClick={handleWhatsApp}
@@ -144,45 +177,179 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* BARRE DE RECHERCHE */}
-      <form
-        onSubmit={handleSearch}
-        className="mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6"
-      >
-        <div className="flex h-11 flex-1 items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-md focus-within:shadow-blue-100">
-          <Search size={19} className="shrink-0 text-gray-500" />
+      {/* RECHERCHE ET FILTRES */}
+      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6">
 
-          <input
-            type="search"
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
-            placeholder="Rechercher un produit..."
-            className="w-full bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
-          />
+        <form onSubmit={handleSearch} className="flex min-w-0 flex-1">
+          <div className="group flex h-12 w-full items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-lg focus-within:shadow-blue-100/70">
+            <Search
+              size={19}
+              className="shrink-0 text-gray-400 transition-colors group-focus-within:text-blue-600"
+            />
 
-          {searchValue && (
+            <input
+              type="search"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+              placeholder="Rechercher un produit..."
+              aria-label="Rechercher un produit"
+              className="w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+            />
+
+            {searchValue && (
+              <button
+                type="button"
+                onClick={() => setSearchValue("")}
+                aria-label="Effacer la recherche"
+                className="shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-800"
+              >
+                <X size={16} />
+              </button>
+            )}
+
             <button
-              type="button"
-              onClick={() => setSearchValue("")}
-              aria-label="Effacer la recherche"
-              className="text-gray-400 hover:text-gray-700"
+              type="submit"
+              disabled={!searchValue.trim()}
+              aria-label="Lancer la recherche"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <X size={16} />
+              <Search size={15} />
             </button>
-          )}
+          </div>
+        </form>
+
+        {/* BOUTON FILTRE */}
+        <div ref={filterRef} className="relative shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              setFilterOpen(!filterOpen);
+              setMenuOpen(false);
+            }}
+            aria-label="Ouvrir les filtres"
+            aria-expanded={filterOpen}
+            className={`relative flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 active:scale-95 ${
+              filterOpen
+                ? "border-blue-700 bg-blue-700 text-white shadow-lg shadow-blue-200"
+                : "border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
+            }`}
+          >
+            {filterOpen ? <X size={20} /> : <SlidersHorizontal size={20} />}
+          </button>
+
+          {/* PANNEAU DE FILTRAGE */}
+          <div
+            className={`absolute right-0 top-[calc(100%+12px)] z-[60] w-[min(320px,calc(100vw-32px))] origin-top-right transition-all duration-300 ${
+              filterOpen
+                ? "visible translate-y-0 scale-100 opacity-100"
+                : "invisible -translate-y-3 scale-95 opacity-0"
+            }`}
+          >
+            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/10">
+
+              <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-5 py-4 text-white">
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal size={19} />
+                  <h3 className="font-bold">Filtrer les produits</h3>
+                </div>
+                <p className="mt-1 text-xs text-blue-100">
+                  Trouvez rapidement ce que vous recherchez.
+                </p>
+              </div>
+
+              <div className="space-y-2 p-3">
+
+                <p className="px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[1.5px] text-gray-400">
+                  Trier les produits
+                </p>
+
+                <button
+                  onClick={() => applyFilter("price-asc")}
+                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700 transition group-hover:bg-blue-100">
+                    <ArrowDownWideNarrow size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-gray-800">
+                      Prix croissant
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      Du moins cher au plus cher
+                    </span>
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => applyFilter("price-desc")}
+                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                    <ArrowUpDown size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-gray-800">
+                      Prix décroissant
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      Du plus cher au moins cher
+                    </span>
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => applyFilter("discount")}
+                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-orange-50"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600">
+                    <Tag size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-gray-800">
+                      Promotions
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      Voir les produits en réduction
+                    </span>
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => applyFilter("newest")}
+                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-emerald-50"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                    <Sparkles size={18} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-gray-800">
+                      Nouveautés
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      Découvrir les derniers produits
+                    </span>
+                  </span>
+                </button>
+
+                <div className="border-t border-gray-100 pt-3">
+                  <button
+                    onClick={() => {
+                      setFilterOpen(false);
+                      navigate("/all-products");
+                    }}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gray-100 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-200"
+                  >
+                    Voir tous les produits
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <button
-          type="button"
-          onClick={() => navigate("/all-products")}
-          aria-label="Voir les produits et leurs filtres"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all duration-300 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700 active:scale-95"
-        >
-          <SlidersHorizontal size={19} />
-        </button>
-      </form>
-
-      {/* MENU DÉROULANT ANIMÉ */}
+      {/* MENU DÉROULANT */}
       <div
         className={`absolute left-0 top-full w-full overflow-hidden border-t border-gray-100 bg-white shadow-xl transition-all duration-300 ease-in-out ${
           menuOpen
@@ -210,7 +377,6 @@ export default function Navbar() {
               }`}
             >
               {link.name}
-
               <ChevronRight
                 size={17}
                 className="text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-700"
@@ -218,7 +384,6 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* LIEN PANIER */}
           <Link
             to="/cart"
             onClick={() => setMenuOpen(false)}
@@ -228,13 +393,11 @@ export default function Navbar() {
               <ShoppingCart size={18} />
               Mon panier
             </span>
-
             <span className="rounded-full bg-blue-600 px-2 py-1 text-[10px] text-white">
               {cartCount}
             </span>
           </Link>
 
-          {/* WHATSAPP */}
           <div className="mt-3 border-t border-gray-100 pt-3">
             <button
               type="button"
