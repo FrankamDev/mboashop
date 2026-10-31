@@ -15460,7 +15460,7 @@ var products = [
 			"/images/products/montres/m1.jpg",
 			"/images/products/montres/mm1.jpg",
 			"/images/products/montres/mm2.jpg",
-			"/images/products/montre-rolex-pro/4.webp"
+			"/images/products/montres/mm3.png"
 		],
 		specifications: [
 			{
@@ -15505,9 +15505,9 @@ var products = [
 		currency: "XAF",
 		images: [
 			"/images/products/montres/m2.jpg",
-			"/images/products/montre-connecte/2.webp",
-			"/images/products/montre-connecte/3.webp",
-			"/images/products/montre-connecte/4.webp"
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m2.jpg"
 		],
 		specifications: [
 			{
@@ -15551,10 +15551,10 @@ var products = [
 		oldPrice: 14e3,
 		currency: "XAF",
 		images: [
-			"/images/products/chargeur-rapide-usb-c/1.webp",
-			"/images/products/chargeur-rapide-usb-c/2.webp",
-			"/images/products/chargeur-rapide-usb-c/3.webp",
-			"/images/products/chargeur-rapide-usb-c/4.webp"
+			"/images/products/chargeurs/c1.jpg",
+			"/images/products/chargeurs/c1.jpg",
+			"/images/products/chargeurs/c1.jpg",
+			"/images/products/chargeurs/c1.jpg"
 		],
 		specifications: [
 			{
@@ -15598,10 +15598,10 @@ var products = [
 		oldPrice: 16e3,
 		currency: "XAF",
 		images: [
-			"/images/products/montre-connectee/1.webp",
-			"/images/products/montre-connectee/2.webp",
-			"/images/products/montre-connectee/3.webp",
-			"/images/products/montre-connectee/4.webp"
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m2.jpg"
 		],
 		specifications: [
 			{
@@ -15649,10 +15649,9 @@ var products = [
 		oldPrice: 11e3,
 		currency: "XAF",
 		images: [
-			"/images/products/enceinte-bluetooth/1.webp",
-			"/images/products/enceinte-bluetooth/2.webp",
-			"/images/products/enceinte-bluetooth/3.webp",
-			"/images/products/enceinte-bluetooth/4.webp"
+			"/images/products/bluetooth/1.webp",
+			"/images/products/bluetooth/3.webp",
+			"/images/products/bluetooth/4.webp"
 		],
 		specifications: [
 			{
@@ -15747,10 +15746,10 @@ var products = [
 		oldPrice: 1e4,
 		currency: "XAF",
 		images: [
-			"/images/products/blender-electrique/1.webp",
-			"/images/products/blender-electrique/2.webp",
-			"/images/products/blender-electrique/3.webp",
-			"/images/products/blender-electrique/4.webp"
+			"/images/products/blender/1.jpg",
+			"/images/products/blender/2.jpg",
+			"/images/products/blender/3.jpg",
+			"/images/products/blender/4.jpg"
 		],
 		specifications: [
 			{
@@ -15794,10 +15793,10 @@ var products = [
 		oldPrice: 9e3,
 		currency: "XAF",
 		images: [
-			"/images/products/lampe-led-decorative/1.webp",
-			"/images/products/lampe-led-decorative/2.webp",
-			"/images/products/lampe-led-decorative/3.webp",
-			"/images/products/lampe-led-decorative/4.webp"
+			"/images/products/lampes/1.webp",
+			"/images/products/lampes/2.webp",
+			"/images/products/lampes/3.webp",
+			"/images/products/lampes/4.webp"
 		],
 		specifications: [
 			{
@@ -15841,10 +15840,10 @@ var products = [
 		oldPrice: 19e3,
 		currency: "XAF",
 		images: [
-			"/images/products/clavier-mecanique/1.webp",
-			"/images/products/clavier-mecanique/2.webp",
-			"/images/products/clavier-mecanique/3.webp",
-			"/images/products/clavier-mecanique/4.webp"
+			"/images/products/images/1.webp",
+			"/images/products/images/2.webp",
+			"/images/products/images/3.webp",
+			"/images/products/images/4.webp"
 		],
 		specifications: [
 			{
@@ -15888,10 +15887,10 @@ var products = [
 		oldPrice: 12500,
 		currency: "XAF",
 		images: [
-			"/images/products/mini-camera-webcam/1.webp",
-			"/images/products/mini-camera-webcam/2.webp",
-			"/images/products/mini-camera-webcam/3.webp",
-			"/images/products/mini-camera-webcam/4.webp"
+			"/images/products/images/1.webp",
+			"/images/products/images/2.webp",
+			"/images/products/images/3.webp",
+			"/images/products/images/4.webp"
 		],
 		specifications: [
 			{
