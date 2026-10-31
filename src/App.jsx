@@ -1,35 +1,17 @@
-// import Home from "./pages/Home";
 
-// export default function App() {
-//   return (
-//     <div className="App">
-      
-//         <Home/>        
-//     </div>
-//   )
-// }
-
-
-
-import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-
-
-
-// const ProductSection = lazy(() =>
-//   import("./components/ProductSection")
-// );
+import AllProducts from "./pages/AllProducts";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
-    <>
-      <Home/>
-
-      <Suspense fallback={<p className="p-6">Chargement...</p>}>
-        {/* <ProductSection /> */}
-      </Suspense>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/all-products" element={<AllProducts />} />
+      <Route path="/produit/:slug" element={<ProductDetails />} />
+    </Routes>
   );
 }
 

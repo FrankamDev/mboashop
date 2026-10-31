@@ -34,3 +34,11 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
