@@ -907,7 +907,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 {
                   name: "neighborhood",
                   label: "Quartier",
-                  placeholder: "Ex : Mvan",
+                  placeholder: "Ex : Bastos",
                   type: "text",
                 },
               ].map((field) => (

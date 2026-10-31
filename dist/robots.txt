@@ -1,0 +1,10 @@
+
+User-agent: *
+Allow: /
+
+# Bloquer les fichiers internes
+Disallow: /src/
+Disallow: /node_modules/
+
+# Sitemap XML
+Sitemap: https://www.mboashop.getomiie.com/sitemap.xml
