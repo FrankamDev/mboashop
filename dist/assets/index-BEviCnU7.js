@@ -13848,7 +13848,7 @@ function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
 }
 
 // node_modules/lucide-react/dist/esm/icons/arrow-left.mjs
-var __iconData$27 = {
+var __iconData$28 = {
 	name: "arrow-left",
 	size: 24,
 	node: [["path", {
@@ -13859,11 +13859,11 @@ var __iconData$27 = {
 		key: "x3x0zl"
 	}]]
 };
-__iconData$27.node;
-var ArrowLeft = createLucideIcon(__iconData$27);
+__iconData$28.node;
+var ArrowLeft = createLucideIcon(__iconData$28);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-right.mjs
-var __iconData$26 = {
+var __iconData$27 = {
 	name: "arrow-right",
 	size: 24,
 	node: [["path", {
@@ -13874,11 +13874,11 @@ var __iconData$26 = {
 		key: "xquz4c"
 	}]]
 };
-__iconData$26.node;
-var ArrowRight = createLucideIcon(__iconData$26);
+__iconData$27.node;
+var ArrowRight = createLucideIcon(__iconData$27);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-up-down.mjs
-var __iconData$25 = {
+var __iconData$26 = {
 	name: "arrow-up-down",
 	size: 24,
 	node: [
@@ -13900,11 +13900,11 @@ var __iconData$25 = {
 		}]
 	]
 };
-__iconData$25.node;
-var ArrowUpDown = createLucideIcon(__iconData$25);
+__iconData$26.node;
+var ArrowUpDown = createLucideIcon(__iconData$26);
 
 // node_modules/lucide-react/dist/esm/icons/check.mjs
-var __iconData$24 = {
+var __iconData$25 = {
 	name: "check",
 	size: 24,
 	node: [["path", {
@@ -13912,11 +13912,11 @@ var __iconData$24 = {
 		key: "1gmf2c"
 	}]]
 };
-__iconData$24.node;
-var Check = createLucideIcon(__iconData$24);
+__iconData$25.node;
+var Check = createLucideIcon(__iconData$25);
 
 // node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
-var __iconData$23 = {
+var __iconData$24 = {
 	name: "chevron-left",
 	size: 24,
 	node: [["path", {
@@ -13924,11 +13924,11 @@ var __iconData$23 = {
 		key: "1wnfg3"
 	}]]
 };
-__iconData$23.node;
-var ChevronLeft = createLucideIcon(__iconData$23);
+__iconData$24.node;
+var ChevronLeft = createLucideIcon(__iconData$24);
 
 // node_modules/lucide-react/dist/esm/icons/chevron-right.mjs
-var __iconData$22 = {
+var __iconData$23 = {
 	name: "chevron-right",
 	size: 24,
 	node: [["path", {
@@ -13936,11 +13936,11 @@ var __iconData$22 = {
 		key: "mthhwq"
 	}]]
 };
-__iconData$22.node;
-var ChevronRight = createLucideIcon(__iconData$22);
+__iconData$23.node;
+var ChevronRight = createLucideIcon(__iconData$23);
 
 // node_modules/lucide-react/dist/esm/icons/drone.mjs
-var __iconData$21 = {
+var __iconData$22 = {
 	name: "drone",
 	size: 24,
 	node: [
@@ -13986,11 +13986,11 @@ var __iconData$21 = {
 		}]
 	]
 };
-__iconData$21.node;
-var Drone = createLucideIcon(__iconData$21);
+__iconData$22.node;
+var Drone = createLucideIcon(__iconData$22);
 
 // node_modules/lucide-react/dist/esm/icons/gamepad-2.mjs
-var __iconData$20 = {
+var __iconData$21 = {
 	name: "gamepad-2",
 	size: 24,
 	node: [
@@ -14028,11 +14028,11 @@ var __iconData$20 = {
 		}]
 	]
 };
-__iconData$20.node;
-var Gamepad2 = createLucideIcon(__iconData$20);
+__iconData$21.node;
+var Gamepad2 = createLucideIcon(__iconData$21);
 
 // node_modules/lucide-react/dist/esm/icons/headphones.mjs
-var __iconData$19 = {
+var __iconData$20 = {
 	name: "headphones",
 	size: 24,
 	node: [["path", {
@@ -14040,11 +14040,11 @@ var __iconData$19 = {
 		key: "1xhozi"
 	}]]
 };
-__iconData$19.node;
-var Headphones = createLucideIcon(__iconData$19);
+__iconData$20.node;
+var Headphones = createLucideIcon(__iconData$20);
 
 // node_modules/lucide-react/dist/esm/icons/heart.mjs
-var __iconData$18 = {
+var __iconData$19 = {
 	name: "heart",
 	size: 24,
 	node: [["path", {
@@ -14052,11 +14052,11 @@ var __iconData$18 = {
 		key: "mvr1a0"
 	}]]
 };
-__iconData$18.node;
-var Heart = createLucideIcon(__iconData$18);
+__iconData$19.node;
+var Heart = createLucideIcon(__iconData$19);
 
 // node_modules/lucide-react/dist/esm/icons/house.mjs
-var __iconData$17 = {
+var __iconData$18 = {
 	name: "house",
 	size: 24,
 	node: [["path", {
@@ -14068,11 +14068,11 @@ var __iconData$17 = {
 	}]],
 	aliases: ["home"]
 };
-__iconData$17.node;
-var House = createLucideIcon(__iconData$17);
+__iconData$18.node;
+var House = createLucideIcon(__iconData$18);
 
 // node_modules/lucide-react/dist/esm/icons/laptop.mjs
-var __iconData$16 = {
+var __iconData$17 = {
 	name: "laptop",
 	size: 24,
 	node: [["path", {
@@ -14083,11 +14083,11 @@ var __iconData$16 = {
 		key: "14rxg9"
 	}]]
 };
-__iconData$16.node;
-var Laptop = createLucideIcon(__iconData$16);
+__iconData$17.node;
+var Laptop = createLucideIcon(__iconData$17);
 
 // node_modules/lucide-react/dist/esm/icons/message-circle.mjs
-var __iconData$15 = {
+var __iconData$16 = {
 	name: "message-circle",
 	size: 24,
 	node: [["path", {
@@ -14095,11 +14095,11 @@ var __iconData$15 = {
 		key: "1sd12s"
 	}]]
 };
-__iconData$15.node;
-var MessageCircle = createLucideIcon(__iconData$15);
+__iconData$16.node;
+var MessageCircle = createLucideIcon(__iconData$16);
 
 // node_modules/lucide-react/dist/esm/icons/minus.mjs
-var __iconData$14 = {
+var __iconData$15 = {
 	name: "minus",
 	size: 24,
 	node: [["path", {
@@ -14107,11 +14107,11 @@ var __iconData$14 = {
 		key: "1ays0h"
 	}]]
 };
-__iconData$14.node;
-var Minus = createLucideIcon(__iconData$14);
+__iconData$15.node;
+var Minus = createLucideIcon(__iconData$15);
 
 // node_modules/lucide-react/dist/esm/icons/package-check.mjs
-var __iconData$13 = {
+var __iconData$14 = {
 	name: "package-check",
 	size: 24,
 	node: [
@@ -14137,11 +14137,11 @@ var __iconData$13 = {
 		}]
 	]
 };
-__iconData$13.node;
-var PackageCheck = createLucideIcon(__iconData$13);
+__iconData$14.node;
+var PackageCheck = createLucideIcon(__iconData$14);
 
 // node_modules/lucide-react/dist/esm/icons/package-search.mjs
-var __iconData$12 = {
+var __iconData$13 = {
 	name: "package-search",
 	size: 24,
 	node: [
@@ -14173,11 +14173,11 @@ var __iconData$12 = {
 		}]
 	]
 };
-__iconData$12.node;
-var PackageSearch = createLucideIcon(__iconData$12);
+__iconData$13.node;
+var PackageSearch = createLucideIcon(__iconData$13);
 
 // node_modules/lucide-react/dist/esm/icons/plus.mjs
-var __iconData$11 = {
+var __iconData$12 = {
 	name: "plus",
 	size: 24,
 	node: [["path", {
@@ -14188,11 +14188,11 @@ var __iconData$11 = {
 		key: "s699le"
 	}]]
 };
-__iconData$11.node;
-var Plus = createLucideIcon(__iconData$11);
+__iconData$12.node;
+var Plus = createLucideIcon(__iconData$12);
 
 // node_modules/lucide-react/dist/esm/icons/search.mjs
-var __iconData$10 = {
+var __iconData$11 = {
 	name: "search",
 	size: 24,
 	node: [["path", {
@@ -14205,11 +14205,11 @@ var __iconData$10 = {
 		key: "4ej97u"
 	}]]
 };
-__iconData$10.node;
-var Search = createLucideIcon(__iconData$10);
+__iconData$11.node;
+var Search = createLucideIcon(__iconData$11);
 
 // node_modules/lucide-react/dist/esm/icons/share-2.mjs
-var __iconData$9 = {
+var __iconData$10 = {
 	name: "share-2",
 	size: 24,
 	node: [
@@ -14247,11 +14247,11 @@ var __iconData$9 = {
 		}]
 	]
 };
-__iconData$9.node;
-var Share2 = createLucideIcon(__iconData$9);
+__iconData$10.node;
+var Share2 = createLucideIcon(__iconData$10);
 
 // node_modules/lucide-react/dist/esm/icons/shield-check.mjs
-var __iconData$8 = {
+var __iconData$9 = {
 	name: "shield-check",
 	size: 24,
 	node: [["path", {
@@ -14262,11 +14262,11 @@ var __iconData$8 = {
 		key: "dzmm74"
 	}]]
 };
-__iconData$8.node;
-var ShieldCheck = createLucideIcon(__iconData$8);
+__iconData$9.node;
+var ShieldCheck = createLucideIcon(__iconData$9);
 
 // node_modules/lucide-react/dist/esm/icons/shopping-bag.mjs
-var __iconData$7 = {
+var __iconData$8 = {
 	name: "shopping-bag",
 	size: 24,
 	node: [
@@ -14284,11 +14284,11 @@ var __iconData$7 = {
 		}]
 	]
 };
-__iconData$7.node;
-var ShoppingBag = createLucideIcon(__iconData$7);
+__iconData$8.node;
+var ShoppingBag = createLucideIcon(__iconData$8);
 
 // node_modules/lucide-react/dist/esm/icons/shopping-cart.mjs
-var __iconData$6 = {
+var __iconData$7 = {
 	name: "shopping-cart",
 	size: 24,
 	node: [
@@ -14314,11 +14314,11 @@ var __iconData$6 = {
 		}]
 	]
 };
-__iconData$6.node;
-var ShoppingCart = createLucideIcon(__iconData$6);
+__iconData$7.node;
+var ShoppingCart = createLucideIcon(__iconData$7);
 
 // node_modules/lucide-react/dist/esm/icons/sliders-horizontal.mjs
-var __iconData$5 = {
+var __iconData$6 = {
 	name: "sliders-horizontal",
 	size: 24,
 	node: [
@@ -14360,11 +14360,11 @@ var __iconData$5 = {
 		}]
 	]
 };
-__iconData$5.node;
-var SlidersHorizontal = createLucideIcon(__iconData$5);
+__iconData$6.node;
+var SlidersHorizontal = createLucideIcon(__iconData$6);
 
 // node_modules/lucide-react/dist/esm/icons/smartphone.mjs
-var __iconData$4 = {
+var __iconData$5 = {
 	name: "smartphone",
 	size: 24,
 	node: [["rect", {
@@ -14380,11 +14380,11 @@ var __iconData$4 = {
 		key: "mhygvu"
 	}]]
 };
-__iconData$4.node;
-var Smartphone = createLucideIcon(__iconData$4);
+__iconData$5.node;
+var Smartphone = createLucideIcon(__iconData$5);
 
 // node_modules/lucide-react/dist/esm/icons/star.mjs
-var __iconData$3 = {
+var __iconData$4 = {
 	name: "star",
 	size: 24,
 	node: [["path", {
@@ -14392,8 +14392,39 @@ var __iconData$3 = {
 		key: "r04s7s"
 	}]]
 };
+__iconData$4.node;
+var Star = createLucideIcon(__iconData$4);
+
+// node_modules/lucide-react/dist/esm/icons/trash.mjs
+var __iconData$3 = {
+	name: "trash",
+	size: 24,
+	node: [
+		["path", {
+			d: "M10 11v6",
+			key: "nco0om"
+		}],
+		["path", {
+			d: "M14 11v6",
+			key: "outv1u"
+		}],
+		["path", {
+			d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6",
+			key: "miytrc"
+		}],
+		["path", {
+			d: "M3 6h18",
+			key: "d0wm0j"
+		}],
+		["path", {
+			d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
+			key: "e791ji"
+		}]
+	],
+	aliases: ["trash-2"]
+};
 __iconData$3.node;
-var Star = createLucideIcon(__iconData$3);
+var Trash = createLucideIcon(__iconData$3);
 
 // node_modules/lucide-react/dist/esm/icons/truck.mjs
 var __iconData$2 = {
@@ -14819,43 +14850,143 @@ function FaWhatsapp(props) {
 	})(props);
 }
 
+// src/context/CartContext.jsx
+var CartContext = (0, import_react.createContext)(null);
+var STORAGE_KEY = "mboashop-cart";
+function getInitialCart() {
+	try {
+		const saved = localStorage.getItem(STORAGE_KEY);
+		return saved ? JSON.parse(saved) : [];
+	} catch {
+		return [];
+	}
+}
+function cartReducer(state, action) {
+	switch (action.type) {
+		case "ADD": {
+			const product = action.product;
+			if (product.stock <= 0) return state;
+			if (state.find((item) => item.id === product.id)) return state.map((item) => item.id === product.id ? {
+				...item,
+				quantity: Math.min(item.quantity + 1, item.stock)
+			} : item);
+			return [...state, {
+				...product,
+				quantity: 1
+			}];
+		}
+		case "INCREASE": return state.map((item) => item.id === action.id ? {
+			...item,
+			quantity: Math.min(item.quantity + 1, item.stock)
+		} : item);
+		case "DECREASE": return state.map((item) => item.id === action.id ? {
+			...item,
+			quantity: item.quantity - 1
+		} : item).filter((item) => item.quantity > 0);
+		case "REMOVE": return state.filter((item) => item.id !== action.id);
+		case "CLEAR": return [];
+		default: return state;
+	}
+}
+function CartProvider({ children }) {
+	const [cart, dispatch] = (0, import_react.useReducer)(cartReducer, void 0, getInitialCart);
+	(0, import_react.useEffect)(() => {
+		try {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+		} catch (error) {
+			console.error("Impossible de sauvegarder le panier :", error);
+		}
+	}, [cart]);
+	const addToCart = (product) => dispatch({
+		type: "ADD",
+		product
+	});
+	const increaseQuantity = (id) => dispatch({
+		type: "INCREASE",
+		id
+	});
+	const decreaseQuantity = (id) => dispatch({
+		type: "DECREASE",
+		id
+	});
+	const removeFromCart = (id) => dispatch({
+		type: "REMOVE",
+		id
+	});
+	const clearCart = () => dispatch({ type: "CLEAR" });
+	const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+	const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartContext.Provider, {
+		value: {
+			cart,
+			cartCount,
+			cartTotal,
+			addToCart,
+			increaseQuantity,
+			decreaseQuantity,
+			removeFromCart,
+			clearCart
+		},
+		children
+	});
+}
+function useCart() {
+	const context = (0, import_react.useContext)(CartContext);
+	if (!context) throw new Error("useCart doit être utilisé dans CartProvider");
+	return context;
+}
+
 // src/composnents/Navbar.jsx
 function Navbar() {
+	const { cartCount } = useCart();
 	const [menuOpen, setMenuOpen] = (0, import_react.useState)(false);
+	const [searchValue, setSearchValue] = (0, import_react.useState)("");
+	const navigate = useNavigate();
+	const whatsappNumber = "237690372977";
 	const links = [
 		{
 			name: "Accueil",
-			href: "/home"
+			href: "/"
 		},
 		{
 			name: "Boutique",
-			href: "/products"
+			href: "/all-products"
 		},
 		{
 			name: "Catégories",
-			href: "/categories"
+			href: "/all-products"
 		},
 		{
 			name: "Promotions",
-			href: "/offers"
+			href: "/all-products?sort=discount"
 		},
 		{
 			name: "À propos",
-			href: "/about"
+			href: "/#about"
 		},
 		{
 			name: "Contact",
-			href: "/contact"
+			href: "/#contact"
 		}
 	];
-	const whatsappNumber = "237690372977";
+	const handleSearch = (event) => {
+		event.preventDefault();
+		const query = searchValue.trim();
+		if (!query) return;
+		navigate(`/all-products?search=${encodeURIComponent(query)}`);
+		setMenuOpen(false);
+	};
+	const handleWhatsApp = () => {
+		window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Bonjour MBOASHOP, je souhaite avoir des informations sur vos produits.")}`, "_blank", "noopener,noreferrer");
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky top-0 z-50 w-full border-b border-gray-100 bg-white",
+		className: "sticky z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6",
+				className: "relative mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
 						onClick: () => setMenuOpen(!menuOpen),
 						"aria-label": menuOpen ? "Fermer le menu" : "Ouvrir le menu",
 						"aria-expanded": menuOpen,
@@ -14872,13 +15003,14 @@ function Navbar() {
 							children: "MENU"
 						})]
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-						href: "#home",
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+						to: "/",
+						onClick: () => setMenuOpen(false),
 						className: "absolute left-1/2 flex -translate-x-1/2 flex-col items-center",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-1.5",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: "./images/ecommerce.jpg",
+								src: "/images/ecommerce.jpg",
 								alt: "MBOASHOP",
 								className: "h-9 w-9 object-contain"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
@@ -14889,34 +15021,59 @@ function Navbar() {
 								})]
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "mt-[-2px] ml-10 text-[10px] font-bold tracking-[2px] text-gray-500 sm:text-[9px]",
-							children: "E-commerce"
+							className: "mt-[-2px] ml-10 text-[9px] font-bold tracking-[2px] text-gray-500",
+							children: "E-COMMERCE"
 						})]
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-						href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Bonjour MBOASHOP, je souhaite avoir des informations sur vos produits.")}`,
-						target: "_blank",
-						rel: "noopener noreferrer",
-						"aria-label": "Contacter MBOASHOP sur WhatsApp",
-						className: "group flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-[#25D366] shadow-sm transition-all duration-300 hover:scale-110 hover:bg-[#25D366] hover:text-white hover:shadow-lg hover:shadow-green-200",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 25 })
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: "/cart",
+							"aria-label": `Panier, ${cartCount} article(s)`,
+							className: "relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition hover:bg-blue-50 hover:text-blue-700",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 21 }), cartCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm",
+								children: cartCount > 99 ? "99+" : cartCount
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: handleWhatsApp,
+							"aria-label": "Contacter MBOASHOP sur WhatsApp",
+							className: "group flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-[#25D366] shadow-sm transition-all duration-300 hover:scale-110 hover:bg-[#25D366] hover:text-white hover:shadow-lg hover:shadow-green-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 24 })
+						})]
 					})
 				]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+				onSubmit: handleSearch,
 				className: "mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex h-11 flex-1 items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-md focus-within:shadow-blue-100",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-						size: 19,
-						className: "shrink-0 text-gray-500"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-						type: "search",
-						placeholder: "Rechercher un produit...",
-						className: "w-full bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
-					})]
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+							size: 19,
+							className: "shrink-0 text-gray-500"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							type: "search",
+							value: searchValue,
+							onChange: (event) => setSearchValue(event.target.value),
+							placeholder: "Rechercher un produit...",
+							className: "w-full bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+						}),
+						searchValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => setSearchValue(""),
+							"aria-label": "Effacer la recherche",
+							className: "text-gray-400 hover:text-gray-700",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 16 })
+						})
+					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-					"aria-label": "Filtrer les produits",
+					type: "button",
+					onClick: () => navigate("/all-products"),
+					"aria-label": "Voir les produits et leurs filtres",
 					className: "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all duration-300 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700 active:scale-95",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 19 })
 				})]
@@ -14930,8 +15087,8 @@ function Navbar() {
 							className: "mb-3 px-3 text-[10px] font-bold tracking-[2px] text-gray-400",
 							children: "NAVIGATION"
 						}),
-						links.map((link, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: link.href,
+						links.map((link, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: link.href,
 							onClick: () => setMenuOpen(false),
 							style: { transitionDelay: menuOpen ? `${index * 45}ms` : "0ms" },
 							className: `group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:translate-x-1 hover:bg-blue-50 hover:text-blue-700 ${menuOpen ? "translate-x-0 opacity-100" : "-translate-x-3 opacity-0"}`,
@@ -14940,13 +15097,27 @@ function Navbar() {
 								className: "text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-700"
 							})]
 						}, link.name)),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: "/cart",
+							onClick: () => setMenuOpen(false),
+							className: "mt-2 flex items-center justify-between rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "flex items-center gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 18 }), "Mon panier"]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "rounded-full bg-blue-600 px-2 py-1 text-[10px] text-white",
+								children: cartCount
+							})]
+						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "mt-3 border-t border-gray-100 pt-3",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-								href: `https://wa.me/${whatsappNumber}`,
-								target: "_blank",
-								rel: "noopener noreferrer",
-								className: "flex items-center gap-3 rounded-xl bg-green-50 p-3 text-sm font-semibold text-green-700 transition hover:bg-green-100",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+								type: "button",
+								onClick: () => {
+									setMenuOpen(false);
+									handleWhatsApp();
+								},
+								className: "flex w-full items-center gap-3 rounded-xl bg-green-50 p-3 text-left text-sm font-semibold text-green-700 transition hover:bg-green-100",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 23 }), "Besoin d'aide ? Contactez-nous"]
 							})
 						})
@@ -14958,7 +15129,8 @@ function Navbar() {
 }
 
 // src/composnents/ProductCard.jsx
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product }) {
+	const { addToCart } = useCart();
 	const discount = product.oldPrice > product.price ? Math.round((product.oldPrice - product.price) / product.oldPrice * 100) : 0;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
 		className: "group min-w-[155px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:min-w-0",
@@ -15030,7 +15202,7 @@ function ProductCard({ product, onAddToCart }) {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 					type: "button",
 					disabled: product.stock <= 0,
-					onClick: () => onAddToCart?.(product),
+					onClick: () => addToCart(product),
 					"aria-label": `Ajouter ${product.name} au panier`,
 					className: "mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 py-2 text-[10px] font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 14 }), product.stock > 0 ? "Ajouter au panier" : "Épuisé"]
@@ -15639,6 +15811,7 @@ function AllProducts({ onAddToCart = () => {} }) {
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 			className: "mx-auto max-w-7xl px-4 pt-7 sm:pt-10",
 			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navbar, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mb-6",
 					children: [
@@ -16542,6 +16715,222 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 	});
 }
 
+// src/pages/Cart.jsx
+function Cart() {
+	const { cart, cartCount, cartTotal, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
+	const handleCheckout = () => {
+		const message = `
+Bonjour MBOASHOP, je souhaite commander :
+
+${cart.map((item, index) => `
+${index + 1}. ${item.name}
+Quantité : ${item.quantity}
+Prix unitaire : ${formatPrice(item.price)}
+Total : ${formatPrice(item.price * item.quantity)}
+`).join("\n")}
+
+Nombre total d'articles : ${cartCount}
+TOTAL À CONFIRMER : ${formatPrice(cartTotal)}
+
+Merci de me confirmer la disponibilité et les frais de livraison.
+`;
+		window.open(`https://wa.me/237690372977?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+	};
+	if (cart.length === 0) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
+		className: "flex min-h-[75vh] items-center justify-center bg-[#f7f8fa] px-4",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "max-w-md text-center",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-blue-50 text-blue-600",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, { size: 40 })
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+					className: "mt-7 text-3xl font-extrabold text-slate-950",
+					children: "Votre panier est vide"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-3 text-sm leading-7 text-slate-500",
+					children: "Découvrez notre sélection de produits et ajoutez vos articles préférés."
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+					to: "/all-products",
+					className: "mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-7 py-4 text-sm font-bold text-white transition hover:bg-blue-700",
+					children: ["Découvrir la boutique", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { size: 18 })]
+				})
+			]
+		})
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
+		className: "min-h-screen bg-[#f7f8fa] px-4 py-10 sm:px-8 lg:px-12",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mx-auto max-w-7xl",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+					to: "/all-products",
+					className: "inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-blue-600",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { size: 16 }), "Continuer mes achats"]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mt-8 flex flex-wrap items-end justify-between gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-xs font-bold uppercase tracking-[0.2em] text-blue-600",
+							children: "MBOASHOP"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							className: "mt-2 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl",
+							children: "Mon panier"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							className: "mt-2 text-sm text-slate-500",
+							children: [cartCount, " article(s) dans votre panier"]
+						})
+					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						onClick: clearCart,
+						className: "text-xs font-semibold text-red-500 hover:text-red-700",
+						children: "Vider le panier"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mt-10 grid gap-8 lg:grid-cols-[1fr_360px]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+						className: "space-y-4",
+						children: cart.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+							className: "flex flex-col gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm sm:flex-row sm:items-center",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+									to: `/produit/${item.slug}`,
+									className: "flex h-28 w-full shrink-0 items-center justify-center rounded-xl bg-[#f7f8fa] p-3 sm:w-28",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: item.images?.[0] || "/images/placeholder.webp",
+										alt: item.name,
+										onError: (e) => {
+											e.currentTarget.src = "/images/placeholder.webp";
+										},
+										className: "h-full w-full object-contain"
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0 flex-1",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+											to: `/produit/${item.slug}`,
+											className: "font-bold text-slate-900 hover:text-blue-600",
+											children: item.name
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "mt-2 text-sm font-bold text-blue-600",
+											children: formatPrice(item.price)
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "mt-4 flex flex-wrap items-center gap-4",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-center rounded-lg border border-slate-200 p-1",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+														onClick: () => decreaseQuantity(item.id),
+														className: "flex h-8 w-8 items-center justify-center rounded-md hover:bg-slate-100",
+														"aria-label": "Diminuer la quantité",
+														children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { size: 14 })
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: "min-w-9 text-center text-sm font-bold",
+														children: item.quantity
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+														onClick: () => increaseQuantity(item.id),
+														disabled: item.quantity >= item.stock,
+														className: "flex h-8 w-8 items-center justify-center rounded-md hover:bg-slate-100 disabled:opacity-30",
+														"aria-label": "Augmenter la quantité",
+														children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { size: 14 })
+													})
+												]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+												onClick: () => removeFromCart(item.id),
+												className: "flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-700",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash, { size: 15 }), "Supprimer"]
+											})]
+										})
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "text-left sm:text-right",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[10px] font-medium uppercase tracking-wider text-slate-400",
+										children: "Sous-total"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-1 text-lg font-extrabold text-slate-950",
+										children: formatPrice(item.price * item.quantity)
+									})]
+								})
+							]
+						}, item.id))
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
+						className: "h-fit rounded-2xl border border-slate-100 bg-white p-6 shadow-sm lg:sticky lg:top-8",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								className: "text-xl font-extrabold text-slate-950",
+								children: "Résumé de la commande"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-7 flex justify-between text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-slate-500",
+									children: "Articles"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-semibold",
+									children: cartCount
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-4 flex justify-between text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-slate-500",
+									children: "Sous-total"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-semibold",
+									children: formatPrice(cartTotal)
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-4 flex justify-between text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-slate-500",
+									children: "Livraison"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-xs font-medium text-slate-400",
+									children: "À confirmer"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-6 border-t border-slate-100" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-bold text-slate-900",
+									children: "Total"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-xl font-extrabold text-blue-600",
+									children: formatPrice(cartTotal)
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+								onClick: handleCheckout,
+								className: "mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-green-600 py-4 text-sm font-bold text-white transition hover:bg-green-700",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { size: 19 }), "Commander sur WhatsApp"]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-4 text-center text-[10px] leading-5 text-slate-400",
+								children: "Les frais de livraison seront confirmés avec notre équipe. Vous pourrez vérifier votre commande avant de l'envoyer."
+							})
+						]
+					})]
+				})
+			]
+		})
+	});
+}
+
 // src/App.jsx
 function App() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [
@@ -16556,9 +16945,13 @@ function App() {
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 			path: "/produit/:slug",
 			element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductDetails, {})
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+			path: "/cart",
+			element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cart, {})
 		})
 	] });
 }
 
 // src/main.jsx
-(0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(App, {}) }) }));
+(0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(App, {}) }) }) }));
