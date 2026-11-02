@@ -2,38 +2,57 @@
 export const products = [
   {
     id: 1,
-    slug: "montre-rolex-pro",
-    name: "Montre Rolex Pro",
-    category: "Accessoires",
-    shortDescription: "Une montre élégante et fiable pour tous les jours.",
-    description:
-      "Découvrez la montre Rolex Pro, un symbole d'excellence et d'élégance dans chaque détail.",
-    price: 12999,
-    oldPrice: 18000,
-    currency: "XAF",
-    images: [
-      "/images/products/montres/m1.jpg",
-      "/images/products/montres/mm1.jpg",
-      "/images/products/montres/mm2.jpg",
-      "/images/products/montres/mm3.png",
-    ],
-    specifications: [
-      { label: "Connexion", value: "Bluetooth 5.3" },
-      { label: "Autonomie", value: "Jusqu'à 30 heures" },
-      { label: "Recharge", value: "USB-C" },
-    ],
-    variants: {
-      colors: ["Noir", "Blanc"],
-      sizes: [],
-    },
-    stock: 15,
-    rating: 4.8,
-    reviewsCount: 120,
-    badge: "BESTSELLER",
-    featured: true,
-    isNew: false,
-    isPublished: true,
-    tags: ["casque", "bluetooth", "audio"],
+  slug: "montre-elegance-premium",
+  name: "Montre Élégance Premium",
+  category: "Accessoires",
+
+  shortDescription:
+    "Une montre raffinée pour affirmer votre style au quotidien.",
+
+  description:
+    "Découvrez notre montre Élégance Premium. Avec son bracelet en acier inoxydable, son cadran raffiné et son design intemporel, elle apporte une touche de sophistication à toutes vos tenues. Idéale pour le travail, les sorties et les occasions spéciales.",
+
+  price: 12999,
+  oldPrice: 18000,
+  currency: "XAF",
+
+  images: [
+    "/images/products/montres/m1.jpg",
+    "/images/products/montres/m2.jpg",
+    "/images/products/montres/m3.jpg",
+    "/images/products/montres/m4.jpg",
+  ],
+
+  specifications: [
+    { label: "Matière", value: "Acier inoxydable" },
+    { label: "Mouvement", value: "Quartz" },
+    { label: "Affichage", value: "Analogique" },
+    { label: "Bracelet", value: "Acier ajustable" },
+    { label: "Fermeture", value: "Boucle déployante" },
+    { label: "Style", value: "Élégant et moderne" },
+  ],
+
+  variants: {
+    colors: ["Noir et or", "Argent", "Or"],
+    sizes: [],
+  },
+
+  stock: 15,
+  rating: 4.8,
+  reviewsCount: 120,
+
+  badge: "BESTSELLER",
+  featured: true,
+  isNew: false,
+  isPublished: true,
+
+  tags: [
+    "montre",
+    "accessoire",
+    "élégance",
+    "homme",
+    "cadeau",
+  ],
   },
   {
     id: 2,
@@ -45,7 +64,7 @@ export const products = [
       "Un mini-projecteur compact pour profiter de vos films, séries et présentations sur grand écran.",
     price: 15999,
     oldPrice: 22000,
-    currency: "XAF",
+    currency: "FCFA",
     images: [
       "/images/products/montres/m2.jpg",
       "/images/products/montres/m2.jpg",
@@ -77,7 +96,7 @@ export const products = [
       "Un chargeur compact conçu pour accompagner vos appareils compatibles au quotidien.",
     price: 9999,
     oldPrice: 14000,
-    currency: "XAF",
+    currency: "FCFA",
     images: [
       "/images/products/chargeurs/c1.jpg",
       "/images/products/chargeurs/c1.jpg",
@@ -109,7 +128,7 @@ export const products = [
       "Une montre connectée au design moderne pour consulter vos notifications et suivre certaines activités.",
     price: 12500,
     oldPrice: 16000,
-    currency: "XAF",
+    currency: "FCFA",
     images: [
       "/images/products/montres/m2.jpg",
       "/images/products/montres/m2.jpg",
@@ -141,7 +160,7 @@ export const products = [
       "Une enceinte portable pratique pour écouter votre musique à la maison ou en déplacement.",
     price: 8500,
     oldPrice: 11000,
-    currency: "XAF",
+    currency: "FCFA",
     images: [
       "/images/products/bluetooth/1.webp",
       "/images/products/bluetooth/3.webp",
@@ -172,7 +191,7 @@ export const products = [
       "Une manette ergonomique pensée pour des sessions de jeu confortables.",
     price: 11500,
     oldPrice: 15000,
-    currency: "XAF",
+    currency: "FCFA",
     images: [
       "/images/products/manette-gaming/1.webp",
       "/images/products/manette-gaming/2.webp",

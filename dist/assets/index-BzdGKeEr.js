@@ -11428,9 +11428,1063 @@ var require_client = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_dom_client_production();
 }));
 
-// src/index.css
+// node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs
+var toKebabCase = (string) => string?.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+
+// node_modules/lucide-react/dist/esm/shared/src/utils/toLucideIconData.mjs
+function toLucideIconData(iconName, iconNode, aliases = []) {
+	if (iconNode == null) throw new Error("[lucide]: iconNode is required when icon name is used");
+	return {
+		name: toKebabCase(iconName),
+		size: 24,
+		node: iconNode,
+		...aliases.length > 0 ? { aliases } : {}
+	};
+}
+
+// node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs
+var toCamelCase = (string) => {
+	let out = "";
+	let upperNext = false;
+	for (const ch of string) {
+		if (ch === "-" || ch === "_" || ch <= " ") {
+			upperNext = out.length > 0;
+			continue;
+		}
+		if (out.length === 0) out += ch.toLowerCase();
+		else out += upperNext ? ch.toUpperCase() : ch;
+		upperNext = false;
+	}
+	return out;
+};
+
+// node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs
+var toPascalCase = (string) => {
+	const camelCase = toCamelCase(string);
+	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+
+// node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
+var mergeClasses = (...classes) => classes.filter((className, index, array) => {
+	return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+
+// node_modules/lucide-react/dist/esm/shared/src/build/defaultAttributes.mjs
+var defaultAttributes = {
+	xmlns: "http://www.w3.org/2000/svg",
+	width: 24,
+	height: 24,
+	viewBox: "0 0 24 24",
+	fill: "none",
+	stroke: "currentColor",
+	"stroke-width": 2,
+	"stroke-linecap": "round",
+	"stroke-linejoin": "round"
+};
+
+// node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconNode.mjs
+function isDefined(value) {
+	return value !== null && value !== void 0;
+}
+function buildLucideIconNode(icon, params = {}) {
+	const attributeNames = params.attributeNames ?? {};
+	const getAttributeName = (attributeName) => attributeNames[attributeName] ?? attributeName;
+	const viewBoxWidth = icon.size ?? icon.width ?? defaultAttributes["width"];
+	const viewBoxHeight = icon.size ?? icon.height ?? defaultAttributes["height"];
+	const aliasClassNames = icon.aliases?.filter((alias) => typeof alias === "string" && alias.trim() !== "").map((alias) => `lucide-${alias}`) ?? [];
+	const iconClassNames = [...icon.name ? [`lucide-${icon.name}`] : [], ...aliasClassNames];
+	const classNamesFromClassName = params.className?.split(" ").filter(Boolean) ?? [];
+	const className = params.includeDefaultClasses === false ? mergeClasses(...classNamesFromClassName) : mergeClasses("lucide", ...iconClassNames, ...classNamesFromClassName);
+	const calculatedStrokeWidth = params.absoluteStrokeWidth ? Number(params.strokeWidth ?? defaultAttributes["stroke-width"]) * Number(icon.size ?? icon.width ?? defaultAttributes["width"]) / Number(params.size ?? params.width ?? defaultAttributes["width"]) : params.strokeWidth ?? defaultAttributes["stroke-width"];
+	return [
+		"svg",
+		{
+			...Object.entries(defaultAttributes).reduce((attrs, [attrName, value]) => {
+				attrs[getAttributeName(attrName)] = value;
+				return attrs;
+			}, {}),
+			..."color" in params && params.color && { [getAttributeName("stroke")]: params.color },
+			..."size" in params && isDefined(params.size) && {
+				[getAttributeName("width")]: params.size,
+				[getAttributeName("height")]: params.size
+			},
+			..."width" in params && isDefined(params.width) && { [getAttributeName("width")]: params.width },
+			..."height" in params && isDefined(params.height) && { [getAttributeName("height")]: params.height },
+			[getAttributeName("stroke-width")]: calculatedStrokeWidth,
+			...className && { [getAttributeName("class")]: className },
+			[getAttributeName("viewBox")]: `0 0 ${viewBoxWidth} ${viewBoxHeight}`,
+			...params.hasA11yProp === false ? { [getAttributeName("aria-hidden")]: "true" } : {},
+			..."attributes" in params && params.attributes
+		},
+		icon.node.map((child) => {
+			const [name, attrs, children] = child;
+			const nextAttrs = params.nonScalingStroke ? {
+				[getAttributeName("vector-effect")]: "non-scaling-stroke",
+				...attrs
+			} : attrs;
+			return children ? [
+				name,
+				nextAttrs,
+				children
+			] : [name, nextAttrs];
+		})
+	];
+}
+
+// node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconForReact.mjs
+function buildLucideIconForReact(icon, params = {}) {
+	return buildLucideIconNode(icon, {
+		...params,
+		attributeNames: {
+			...params.attributeNames,
+			class: "className",
+			"stroke-width": "strokeWidth",
+			"stroke-linecap": "strokeLinecap",
+			"stroke-linejoin": "strokeLinejoin",
+			"vector-effect": "vectorEffect"
+		}
+	});
+}
+
+// node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs
+var hasA11yProp = (props) => {
+	for (const prop in props) if (prop.startsWith("aria-") || prop === "role" || prop === "title") return true;
+	return false;
+};
+
+// node_modules/lucide-react/dist/esm/context.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
+var LucideContext = (0, import_react.createContext)({});
+var useLucideContext = () => (0, import_react.useContext)(LucideContext);
+
+// node_modules/lucide-react/dist/esm/Icon.mjs
+var Icon = (0, import_react.forwardRef)(({ color, size, width, height, strokeWidth, absoluteStrokeWidth, nonScalingStroke, className = "", children, iconNode = [], icon = {
+	node: iconNode,
+	aliases: [],
+	size: 24
+}, ...rest }, ref) => {
+	const { size: contextSize = 24, strokeWidth: contextStrokeWidth = 2, absoluteStrokeWidth: contextAbsoluteStrokeWidth = false, nonScalingStroke: contextNonScalingStroke = false, color: contextColor = "currentColor", className: contextClass = "" } = useLucideContext() ?? {};
+	const hasAccessibleProp = Boolean(children) || hasA11yProp(rest);
+	const [name, svgAttributes, builtIconNode = []] = buildLucideIconForReact(icon, {
+		color: color ?? contextColor,
+		width: width ?? size ?? contextSize,
+		height: height ?? size ?? contextSize,
+		strokeWidth: strokeWidth ?? contextStrokeWidth,
+		absoluteStrokeWidth: absoluteStrokeWidth ?? contextAbsoluteStrokeWidth,
+		nonScalingStroke: nonScalingStroke ?? contextNonScalingStroke,
+		className: mergeClasses(contextClass, className),
+		hasA11yProp: hasAccessibleProp,
+		attributes: rest
+	});
+	return (0, import_react.createElement)(name, {
+		ref,
+		...svgAttributes
+	}, [...builtIconNode.map(([tag, attrs]) => (0, import_react.createElement)(tag, attrs)), ...Array.isArray(children) ? children : [children]]);
+});
+
+// node_modules/lucide-react/dist/esm/createLucideIcon.mjs
+function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
+	const iconData = typeof iconDataOrName === "string" ? toLucideIconData(iconDataOrName, iconNode, aliases) : iconDataOrName;
+	const Component = (0, import_react.forwardRef)(({ className, ...props }, ref) => (0, import_react.createElement)(Icon, {
+		ref,
+		icon: iconData,
+		className,
+		...props
+	}));
+	if (iconData.name) Component.displayName = toPascalCase(iconData.name);
+	return Component;
+}
+
+// node_modules/lucide-react/dist/esm/icons/arrow-down-wide-narrow.mjs
+var __iconData$33 = {
+	name: "arrow-down-wide-narrow",
+	size: 24,
+	node: [
+		["path", {
+			d: "m3 16 4 4 4-4",
+			key: "1co6wj"
+		}],
+		["path", {
+			d: "M7 20V4",
+			key: "1yoxec"
+		}],
+		["path", {
+			d: "M11 4h10",
+			key: "1w87gc"
+		}],
+		["path", {
+			d: "M11 8h7",
+			key: "djye34"
+		}],
+		["path", {
+			d: "M11 12h4",
+			key: "q8tih4"
+		}]
+	],
+	aliases: ["sort-desc"]
+};
+__iconData$33.node;
+var ArrowDownWideNarrow = createLucideIcon(__iconData$33);
+
+// node_modules/lucide-react/dist/esm/icons/arrow-left.mjs
+var __iconData$32 = {
+	name: "arrow-left",
+	size: 24,
+	node: [["path", {
+		d: "m12 19-7-7 7-7",
+		key: "1l729n"
+	}], ["path", {
+		d: "M19 12H5",
+		key: "x3x0zl"
+	}]]
+};
+__iconData$32.node;
+var ArrowLeft = createLucideIcon(__iconData$32);
+
+// node_modules/lucide-react/dist/esm/icons/arrow-right.mjs
+var __iconData$31 = {
+	name: "arrow-right",
+	size: 24,
+	node: [["path", {
+		d: "M5 12h14",
+		key: "1ays0h"
+	}], ["path", {
+		d: "m12 5 7 7-7 7",
+		key: "xquz4c"
+	}]]
+};
+__iconData$31.node;
+var ArrowRight = createLucideIcon(__iconData$31);
+
+// node_modules/lucide-react/dist/esm/icons/arrow-up-down.mjs
+var __iconData$30 = {
+	name: "arrow-up-down",
+	size: 24,
+	node: [
+		["path", {
+			d: "m21 16-4 4-4-4",
+			key: "f6ql7i"
+		}],
+		["path", {
+			d: "M17 20V4",
+			key: "1ejh1v"
+		}],
+		["path", {
+			d: "m3 8 4-4 4 4",
+			key: "11wl7u"
+		}],
+		["path", {
+			d: "M7 4v16",
+			key: "1glfcx"
+		}]
+	]
+};
+__iconData$30.node;
+var ArrowUpDown = createLucideIcon(__iconData$30);
+
+// node_modules/lucide-react/dist/esm/icons/check.mjs
+var __iconData$29 = {
+	name: "check",
+	size: 24,
+	node: [["path", {
+		d: "M20 6 9 17l-5-5",
+		key: "1gmf2c"
+	}]]
+};
+__iconData$29.node;
+var Check = createLucideIcon(__iconData$29);
+
+// node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
+var __iconData$28 = {
+	name: "chevron-left",
+	size: 24,
+	node: [["path", {
+		d: "m15 18-6-6 6-6",
+		key: "1wnfg3"
+	}]]
+};
+__iconData$28.node;
+var ChevronLeft = createLucideIcon(__iconData$28);
+
+// node_modules/lucide-react/dist/esm/icons/chevron-right.mjs
+var __iconData$27 = {
+	name: "chevron-right",
+	size: 24,
+	node: [["path", {
+		d: "m9 18 6-6-6-6",
+		key: "mthhwq"
+	}]]
+};
+__iconData$27.node;
+var ChevronRight = createLucideIcon(__iconData$27);
+
+// node_modules/lucide-react/dist/esm/icons/circle-check.mjs
+var __iconData$26 = {
+	name: "circle-check",
+	size: 24,
+	node: [["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}], ["path", {
+		d: "m16 9-5.5 5.5L8 12",
+		key: "xofnsj"
+	}]],
+	aliases: ["check-circle-2"]
+};
+__iconData$26.node;
+var CircleCheck = createLucideIcon(__iconData$26);
+
+// node_modules/lucide-react/dist/esm/icons/drone.mjs
+var __iconData$25 = {
+	name: "drone",
+	size: 24,
+	node: [
+		["path", {
+			d: "M10 10 7 7",
+			key: "zp14k7"
+		}],
+		["path", {
+			d: "m10 14-3 3",
+			key: "1jrpxk"
+		}],
+		["path", {
+			d: "m14 10 3-3",
+			key: "7tigam"
+		}],
+		["path", {
+			d: "m14 14 3 3",
+			key: "vm23p3"
+		}],
+		["path", {
+			d: "M14.205 4.139a4 4 0 1 1 5.439 5.863",
+			key: "1tm5p2"
+		}],
+		["path", {
+			d: "M19.637 14a4 4 0 1 1-5.432 5.868",
+			key: "16egi2"
+		}],
+		["path", {
+			d: "M4.367 10a4 4 0 1 1 5.438-5.862",
+			key: "1wta6a"
+		}],
+		["path", {
+			d: "M9.795 19.862a4 4 0 1 1-5.429-5.873",
+			key: "q39hpv"
+		}],
+		["rect", {
+			x: "10",
+			y: "8",
+			width: "4",
+			height: "8",
+			rx: "1",
+			key: "phrjt1"
+		}]
+	]
+};
+__iconData$25.node;
+var Drone = createLucideIcon(__iconData$25);
+
+// node_modules/lucide-react/dist/esm/icons/gamepad-2.mjs
+var __iconData$24 = {
+	name: "gamepad-2",
+	size: 24,
+	node: [
+		["line", {
+			x1: "6",
+			x2: "10",
+			y1: "11",
+			y2: "11",
+			key: "1gktln"
+		}],
+		["line", {
+			x1: "8",
+			x2: "8",
+			y1: "9",
+			y2: "13",
+			key: "qnk9ow"
+		}],
+		["line", {
+			x1: "15",
+			x2: "15.01",
+			y1: "12",
+			y2: "12",
+			key: "krot7o"
+		}],
+		["line", {
+			x1: "18",
+			x2: "18.01",
+			y1: "10",
+			y2: "10",
+			key: "1lcuu1"
+		}],
+		["path", {
+			d: "M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z",
+			key: "mfqc10"
+		}]
+	]
+};
+__iconData$24.node;
+var Gamepad2 = createLucideIcon(__iconData$24);
+
+// node_modules/lucide-react/dist/esm/icons/headphones.mjs
+var __iconData$23 = {
+	name: "headphones",
+	size: 24,
+	node: [["path", {
+		d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
+		key: "1xhozi"
+	}]]
+};
+__iconData$23.node;
+var Headphones = createLucideIcon(__iconData$23);
+
+// node_modules/lucide-react/dist/esm/icons/heart.mjs
+var __iconData$22 = {
+	name: "heart",
+	size: 24,
+	node: [["path", {
+		d: "M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5",
+		key: "mvr1a0"
+	}]]
+};
+__iconData$22.node;
+var Heart = createLucideIcon(__iconData$22);
+
+// node_modules/lucide-react/dist/esm/icons/house.mjs
+var __iconData$21 = {
+	name: "house",
+	size: 24,
+	node: [["path", {
+		d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8",
+		key: "5wwlr5"
+	}], ["path", {
+		d: "M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+		key: "r6nss1"
+	}]],
+	aliases: ["home"]
+};
+__iconData$21.node;
+var House = createLucideIcon(__iconData$21);
+
+// node_modules/lucide-react/dist/esm/icons/laptop.mjs
+var __iconData$20 = {
+	name: "laptop",
+	size: 24,
+	node: [["path", {
+		d: "M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z",
+		key: "1pdavp"
+	}], ["path", {
+		d: "M20.054 15.987H3.946",
+		key: "14rxg9"
+	}]]
+};
+__iconData$20.node;
+var Laptop = createLucideIcon(__iconData$20);
+
+// node_modules/lucide-react/dist/esm/icons/message-circle.mjs
+var __iconData$19 = {
+	name: "message-circle",
+	size: 24,
+	node: [["path", {
+		d: "M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719",
+		key: "1sd12s"
+	}]]
+};
+__iconData$19.node;
+var MessageCircle = createLucideIcon(__iconData$19);
+
+// node_modules/lucide-react/dist/esm/icons/minus.mjs
+var __iconData$18 = {
+	name: "minus",
+	size: 24,
+	node: [["path", {
+		d: "M5 12h14",
+		key: "1ays0h"
+	}]]
+};
+__iconData$18.node;
+var Minus = createLucideIcon(__iconData$18);
+
+// node_modules/lucide-react/dist/esm/icons/package-check.mjs
+var __iconData$17 = {
+	name: "package-check",
+	size: 24,
+	node: [
+		["path", {
+			d: "M12 22V12",
+			key: "d0xqtd"
+		}],
+		["path", {
+			d: "m16 17 2 2 4-4",
+			key: "uh5qu3"
+		}],
+		["path", {
+			d: "M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753",
+			key: "kpkbpo"
+		}],
+		["path", {
+			d: "M3.29 7 12 12l8.71-5",
+			key: "19ckod"
+		}],
+		["path", {
+			d: "m7.5 4.27 8.997 5.148",
+			key: "9yrvtv"
+		}]
+	]
+};
+__iconData$17.node;
+var PackageCheck = createLucideIcon(__iconData$17);
+
+// node_modules/lucide-react/dist/esm/icons/package-search.mjs
+var __iconData$16 = {
+	name: "package-search",
+	size: 24,
+	node: [
+		["path", {
+			d: "M12 22V12",
+			key: "d0xqtd"
+		}],
+		["path", {
+			d: "M20.27 18.27 22 20",
+			key: "er2am"
+		}],
+		["path", {
+			d: "M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559",
+			key: "tok1h1"
+		}],
+		["path", {
+			d: "M3.29 7 12 12l8.71-5",
+			key: "19ckod"
+		}],
+		["path", {
+			d: "m7.5 4.27 8.997 5.148",
+			key: "9yrvtv"
+		}],
+		["circle", {
+			cx: "18.5",
+			cy: "16.5",
+			r: "2.5",
+			key: "ke13xx"
+		}]
+	]
+};
+__iconData$16.node;
+var PackageSearch = createLucideIcon(__iconData$16);
+
+// node_modules/lucide-react/dist/esm/icons/plus.mjs
+var __iconData$15 = {
+	name: "plus",
+	size: 24,
+	node: [["path", {
+		d: "M5 12h14",
+		key: "1ays0h"
+	}], ["path", {
+		d: "M12 5v14",
+		key: "s699le"
+	}]]
+};
+__iconData$15.node;
+var Plus = createLucideIcon(__iconData$15);
+
+// node_modules/lucide-react/dist/esm/icons/search.mjs
+var __iconData$14 = {
+	name: "search",
+	size: 24,
+	node: [["path", {
+		d: "m21 21-4.34-4.34",
+		key: "14j7rj"
+	}], ["circle", {
+		cx: "11",
+		cy: "11",
+		r: "8",
+		key: "4ej97u"
+	}]]
+};
+__iconData$14.node;
+var Search = createLucideIcon(__iconData$14);
+
+// node_modules/lucide-react/dist/esm/icons/share-2.mjs
+var __iconData$13 = {
+	name: "share-2",
+	size: 24,
+	node: [
+		["circle", {
+			cx: "18",
+			cy: "5",
+			r: "3",
+			key: "gq8acd"
+		}],
+		["circle", {
+			cx: "6",
+			cy: "12",
+			r: "3",
+			key: "w7nqdw"
+		}],
+		["circle", {
+			cx: "18",
+			cy: "19",
+			r: "3",
+			key: "1xt0gg"
+		}],
+		["line", {
+			x1: "8.59",
+			x2: "15.42",
+			y1: "13.51",
+			y2: "17.49",
+			key: "47mynk"
+		}],
+		["line", {
+			x1: "15.41",
+			x2: "8.59",
+			y1: "6.51",
+			y2: "10.49",
+			key: "1n3mei"
+		}]
+	]
+};
+__iconData$13.node;
+var Share2 = createLucideIcon(__iconData$13);
+
+// node_modules/lucide-react/dist/esm/icons/shield-check.mjs
+var __iconData$12 = {
+	name: "shield-check",
+	size: 24,
+	node: [["path", {
+		d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+		key: "oel41y"
+	}], ["path", {
+		d: "m9 12 2 2 4-4",
+		key: "dzmm74"
+	}]]
+};
+__iconData$12.node;
+var ShieldCheck = createLucideIcon(__iconData$12);
+
+// node_modules/lucide-react/dist/esm/icons/shopping-bag.mjs
+var __iconData$11 = {
+	name: "shopping-bag",
+	size: 24,
+	node: [
+		["path", {
+			d: "M16 10a4 4 0 0 1-8 0",
+			key: "1ltviw"
+		}],
+		["path", {
+			d: "M3.103 6.034h17.794",
+			key: "awc11p"
+		}],
+		["path", {
+			d: "M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z",
+			key: "o988cm"
+		}]
+	]
+};
+__iconData$11.node;
+var ShoppingBag = createLucideIcon(__iconData$11);
+
+// node_modules/lucide-react/dist/esm/icons/shopping-cart.mjs
+var __iconData$10 = {
+	name: "shopping-cart",
+	size: 24,
+	node: [
+		["path", {
+			d: "m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18",
+			key: "uebgi3"
+		}],
+		["path", {
+			d: "M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25",
+			key: "1j7c9p"
+		}],
+		["circle", {
+			cx: "18",
+			cy: "20",
+			r: "2",
+			key: "t9985n"
+		}],
+		["circle", {
+			cx: "8",
+			cy: "20",
+			r: "2",
+			key: "ckkr5m"
+		}]
+	]
+};
+__iconData$10.node;
+var ShoppingCart = createLucideIcon(__iconData$10);
+
+// node_modules/lucide-react/dist/esm/icons/sliders-horizontal.mjs
+var __iconData$9 = {
+	name: "sliders-horizontal",
+	size: 24,
+	node: [
+		["path", {
+			d: "M10 5H3",
+			key: "1qgfaw"
+		}],
+		["path", {
+			d: "M12 19H3",
+			key: "yhmn1j"
+		}],
+		["path", {
+			d: "M14 3v4",
+			key: "1sua03"
+		}],
+		["path", {
+			d: "M16 17v4",
+			key: "1q0r14"
+		}],
+		["path", {
+			d: "M21 12h-9",
+			key: "1o4lsq"
+		}],
+		["path", {
+			d: "M21 19h-5",
+			key: "1rlt1p"
+		}],
+		["path", {
+			d: "M21 5h-7",
+			key: "1oszz2"
+		}],
+		["path", {
+			d: "M8 10v4",
+			key: "tgpxqk"
+		}],
+		["path", {
+			d: "M8 12H3",
+			key: "a7s4jb"
+		}]
+	]
+};
+__iconData$9.node;
+var SlidersHorizontal = createLucideIcon(__iconData$9);
+
+// node_modules/lucide-react/dist/esm/icons/smartphone.mjs
+var __iconData$8 = {
+	name: "smartphone",
+	size: 24,
+	node: [["rect", {
+		width: "14",
+		height: "20",
+		x: "5",
+		y: "2",
+		rx: "2",
+		ry: "2",
+		key: "1yt0o3"
+	}], ["path", {
+		d: "M12 18h.01",
+		key: "mhygvu"
+	}]]
+};
+__iconData$8.node;
+var Smartphone = createLucideIcon(__iconData$8);
+
+// node_modules/lucide-react/dist/esm/icons/sparkles.mjs
+var __iconData$7 = {
+	name: "sparkles",
+	size: 24,
+	node: [
+		["path", {
+			d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
+			key: "1s2grr"
+		}],
+		["path", {
+			d: "M20 2v4",
+			key: "1rf3ol"
+		}],
+		["path", {
+			d: "M22 4h-4",
+			key: "gwowj6"
+		}],
+		["circle", {
+			cx: "4",
+			cy: "20",
+			r: "2",
+			key: "6kqj1y"
+		}]
+	],
+	aliases: ["stars"]
+};
+__iconData$7.node;
+var Sparkles = createLucideIcon(__iconData$7);
+
+// node_modules/lucide-react/dist/esm/icons/star.mjs
+var __iconData$6 = {
+	name: "star",
+	size: 24,
+	node: [["path", {
+		d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
+		key: "r04s7s"
+	}]]
+};
+__iconData$6.node;
+var Star = createLucideIcon(__iconData$6);
+
+// node_modules/lucide-react/dist/esm/icons/store.mjs
+var __iconData$5 = {
+	name: "store",
+	size: 24,
+	node: [
+		["path", {
+			d: "M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5",
+			key: "slp6dd"
+		}],
+		["path", {
+			d: "M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244",
+			key: "o0xfot"
+		}],
+		["path", {
+			d: "M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05",
+			key: "wn3emo"
+		}]
+	]
+};
+__iconData$5.node;
+var Store = createLucideIcon(__iconData$5);
+
+// node_modules/lucide-react/dist/esm/icons/tag.mjs
+var __iconData$4 = {
+	name: "tag",
+	size: 24,
+	node: [["path", {
+		d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+		key: "vktsd0"
+	}], ["circle", {
+		cx: "7.5",
+		cy: "7.5",
+		r: ".5",
+		fill: "currentColor",
+		key: "kqv944"
+	}]]
+};
+__iconData$4.node;
+var Tag = createLucideIcon(__iconData$4);
+
+// node_modules/lucide-react/dist/esm/icons/trash.mjs
+var __iconData$3 = {
+	name: "trash",
+	size: 24,
+	node: [
+		["path", {
+			d: "M10 11v6",
+			key: "nco0om"
+		}],
+		["path", {
+			d: "M14 11v6",
+			key: "outv1u"
+		}],
+		["path", {
+			d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6",
+			key: "miytrc"
+		}],
+		["path", {
+			d: "M3 6h18",
+			key: "d0wm0j"
+		}],
+		["path", {
+			d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
+			key: "e791ji"
+		}]
+	],
+	aliases: ["trash-2"]
+};
+__iconData$3.node;
+var Trash = createLucideIcon(__iconData$3);
+
+// node_modules/lucide-react/dist/esm/icons/truck.mjs
+var __iconData$2 = {
+	name: "truck",
+	size: 24,
+	node: [
+		["path", {
+			d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2",
+			key: "wrbu53"
+		}],
+		["path", {
+			d: "M15 18H9",
+			key: "1lyqi6"
+		}],
+		["path", {
+			d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
+			key: "lysw3i"
+		}],
+		["circle", {
+			cx: "17",
+			cy: "18",
+			r: "2",
+			key: "332jqn"
+		}],
+		["circle", {
+			cx: "7",
+			cy: "18",
+			r: "2",
+			key: "19iecd"
+		}]
+	]
+};
+__iconData$2.node;
+var Truck = createLucideIcon(__iconData$2);
+
+// node_modules/lucide-react/dist/esm/icons/x.mjs
+var __iconData$1 = {
+	name: "x",
+	size: 24,
+	node: [["path", {
+		d: "M18 6 6 18",
+		key: "1bl5f8"
+	}], ["path", {
+		d: "m6 6 12 12",
+		key: "d8bk6v"
+	}]]
+};
+__iconData$1.node;
+var X = createLucideIcon(__iconData$1);
+
+// node_modules/lucide-react/dist/esm/icons/zoom-in.mjs
+var __iconData = {
+	name: "zoom-in",
+	size: 24,
+	node: [
+		["circle", {
+			cx: "11",
+			cy: "11",
+			r: "8",
+			key: "4ej97u"
+		}],
+		["line", {
+			x1: "21",
+			x2: "16.65",
+			y1: "21",
+			y2: "16.65",
+			key: "13gj7c"
+		}],
+		["line", {
+			x1: "11",
+			x2: "11",
+			y1: "8",
+			y2: "14",
+			key: "1vmskp"
+		}],
+		["line", {
+			x1: "8",
+			x2: "14",
+			y1: "11",
+			y2: "11",
+			key: "durymu"
+		}]
+	]
+};
+__iconData.node;
+var ZoomIn = createLucideIcon(__iconData);
+
+// node_modules/react/cjs/react-jsx-runtime.production.js
+var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((exports) => {
+	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element");
+	var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
+	function jsxProd(type, config, maybeKey) {
+		var key = null;
+		void 0 !== maybeKey && (key = "" + maybeKey);
+		void 0 !== config.key && (key = "" + config.key);
+		if ("key" in config) {
+			maybeKey = {};
+			for (var propName in config) "key" !== propName && (maybeKey[propName] = config[propName]);
+		} else maybeKey = config;
+		config = maybeKey.ref;
+		return {
+			$$typeof: REACT_ELEMENT_TYPE,
+			type,
+			key,
+			ref: void 0 !== config ? config : null,
+			props: maybeKey
+		};
+	}
+	exports.Fragment = REACT_FRAGMENT_TYPE;
+	exports.jsx = jsxProd;
+	exports.jsxs = jsxProd;
+}));
+
+// node_modules/react/jsx-runtime.js
+var require_jsx_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	module.exports = require_react_jsx_runtime_production();
+}));
+
+// src/context/ToastContext.jsx
 var import_client = require_client();
+var import_jsx_runtime = require_jsx_runtime();
+var ToastContext = (0, import_react.createContext)(null);
+function ToastProvider({ children }) {
+	const [toast, setToast] = (0, import_react.useState)(null);
+	const [visible, setVisible] = (0, import_react.useState)(false);
+	const showToast = (message) => {
+		setToast({
+			id: Date.now(),
+			message
+		});
+		setVisible(true);
+	};
+	(0, import_react.useEffect)(() => {
+		if (!toast) return;
+		const hideTimer = setTimeout(() => {
+			setVisible(false);
+		}, 2600);
+		const removeTimer = setTimeout(() => {
+			setToast(null);
+		}, 3e3);
+		return () => {
+			clearTimeout(hideTimer);
+			clearTimeout(removeTimer);
+		};
+	}, [toast]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(ToastContext.Provider, {
+		value: { showToast },
+		children: [children, toast && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: `fixed bottom-24 left-1/2 z-[200] w-[calc(100%-32px)] max-w-sm -translate-x-1/2 transition-all duration-300 sm:bottom-8 ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`,
+			role: "status",
+			"aria-live": "polite",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-3 rounded-2xl border border-green-100 bg-white p-4 shadow-2xl shadow-gray-900/15",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-green-50 text-green-600",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { size: 25 })
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "min-w-0 flex-1",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-sm font-extrabold text-gray-900",
+							children: "Ajouté au panier !"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-0.5 truncate text-xs text-gray-500",
+							children: toast.message
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex shrink-0 items-center gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, {
+							size: 19,
+							className: "text-green-600"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => {
+								setVisible(false);
+								setTimeout(() => setToast(null), 250);
+							},
+							"aria-label": "Fermer la notification",
+							className: "rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 17 })
+						})]
+					})
+				]
+			})
+		})]
+	});
+}
+function useToast() {
+	const context = (0, import_react.useContext)(ToastContext);
+	if (!context) throw new Error("useToast doit être utilisé dans ToastProvider");
+	return context;
+}
 
 // node_modules/react-router/dist/development/chunk-6KYCQHYJ.mjs
 var ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|[\\/]{2})/i;
@@ -13681,970 +14735,7 @@ function useViewTransitionState(to, { relative } = {}) {
 	return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
 }
 
-// node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs
-var toKebabCase = (string) => string?.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-
-// node_modules/lucide-react/dist/esm/shared/src/utils/toLucideIconData.mjs
-function toLucideIconData(iconName, iconNode, aliases = []) {
-	if (iconNode == null) throw new Error("[lucide]: iconNode is required when icon name is used");
-	return {
-		name: toKebabCase(iconName),
-		size: 24,
-		node: iconNode,
-		...aliases.length > 0 ? { aliases } : {}
-	};
-}
-
-// node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs
-var toCamelCase = (string) => {
-	let out = "";
-	let upperNext = false;
-	for (const ch of string) {
-		if (ch === "-" || ch === "_" || ch <= " ") {
-			upperNext = out.length > 0;
-			continue;
-		}
-		if (out.length === 0) out += ch.toLowerCase();
-		else out += upperNext ? ch.toUpperCase() : ch;
-		upperNext = false;
-	}
-	return out;
-};
-
-// node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs
-var toPascalCase = (string) => {
-	const camelCase = toCamelCase(string);
-	return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-};
-
-// node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
-var mergeClasses = (...classes) => classes.filter((className, index, array) => {
-	return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
-}).join(" ").trim();
-
-// node_modules/lucide-react/dist/esm/shared/src/build/defaultAttributes.mjs
-var defaultAttributes = {
-	xmlns: "http://www.w3.org/2000/svg",
-	width: 24,
-	height: 24,
-	viewBox: "0 0 24 24",
-	fill: "none",
-	stroke: "currentColor",
-	"stroke-width": 2,
-	"stroke-linecap": "round",
-	"stroke-linejoin": "round"
-};
-
-// node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconNode.mjs
-function isDefined(value) {
-	return value !== null && value !== void 0;
-}
-function buildLucideIconNode(icon, params = {}) {
-	const attributeNames = params.attributeNames ?? {};
-	const getAttributeName = (attributeName) => attributeNames[attributeName] ?? attributeName;
-	const viewBoxWidth = icon.size ?? icon.width ?? defaultAttributes["width"];
-	const viewBoxHeight = icon.size ?? icon.height ?? defaultAttributes["height"];
-	const aliasClassNames = icon.aliases?.filter((alias) => typeof alias === "string" && alias.trim() !== "").map((alias) => `lucide-${alias}`) ?? [];
-	const iconClassNames = [...icon.name ? [`lucide-${icon.name}`] : [], ...aliasClassNames];
-	const classNamesFromClassName = params.className?.split(" ").filter(Boolean) ?? [];
-	const className = params.includeDefaultClasses === false ? mergeClasses(...classNamesFromClassName) : mergeClasses("lucide", ...iconClassNames, ...classNamesFromClassName);
-	const calculatedStrokeWidth = params.absoluteStrokeWidth ? Number(params.strokeWidth ?? defaultAttributes["stroke-width"]) * Number(icon.size ?? icon.width ?? defaultAttributes["width"]) / Number(params.size ?? params.width ?? defaultAttributes["width"]) : params.strokeWidth ?? defaultAttributes["stroke-width"];
-	return [
-		"svg",
-		{
-			...Object.entries(defaultAttributes).reduce((attrs, [attrName, value]) => {
-				attrs[getAttributeName(attrName)] = value;
-				return attrs;
-			}, {}),
-			..."color" in params && params.color && { [getAttributeName("stroke")]: params.color },
-			..."size" in params && isDefined(params.size) && {
-				[getAttributeName("width")]: params.size,
-				[getAttributeName("height")]: params.size
-			},
-			..."width" in params && isDefined(params.width) && { [getAttributeName("width")]: params.width },
-			..."height" in params && isDefined(params.height) && { [getAttributeName("height")]: params.height },
-			[getAttributeName("stroke-width")]: calculatedStrokeWidth,
-			...className && { [getAttributeName("class")]: className },
-			[getAttributeName("viewBox")]: `0 0 ${viewBoxWidth} ${viewBoxHeight}`,
-			...params.hasA11yProp === false ? { [getAttributeName("aria-hidden")]: "true" } : {},
-			..."attributes" in params && params.attributes
-		},
-		icon.node.map((child) => {
-			const [name, attrs, children] = child;
-			const nextAttrs = params.nonScalingStroke ? {
-				[getAttributeName("vector-effect")]: "non-scaling-stroke",
-				...attrs
-			} : attrs;
-			return children ? [
-				name,
-				nextAttrs,
-				children
-			] : [name, nextAttrs];
-		})
-	];
-}
-
-// node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconForReact.mjs
-function buildLucideIconForReact(icon, params = {}) {
-	return buildLucideIconNode(icon, {
-		...params,
-		attributeNames: {
-			...params.attributeNames,
-			class: "className",
-			"stroke-width": "strokeWidth",
-			"stroke-linecap": "strokeLinecap",
-			"stroke-linejoin": "strokeLinejoin",
-			"vector-effect": "vectorEffect"
-		}
-	});
-}
-
-// node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs
-var hasA11yProp = (props) => {
-	for (const prop in props) if (prop.startsWith("aria-") || prop === "role" || prop === "title") return true;
-	return false;
-};
-
-// node_modules/lucide-react/dist/esm/context.mjs
-var LucideContext = (0, import_react.createContext)({});
-var useLucideContext = () => (0, import_react.useContext)(LucideContext);
-
-// node_modules/lucide-react/dist/esm/Icon.mjs
-var Icon = (0, import_react.forwardRef)(({ color, size, width, height, strokeWidth, absoluteStrokeWidth, nonScalingStroke, className = "", children, iconNode = [], icon = {
-	node: iconNode,
-	aliases: [],
-	size: 24
-}, ...rest }, ref) => {
-	const { size: contextSize = 24, strokeWidth: contextStrokeWidth = 2, absoluteStrokeWidth: contextAbsoluteStrokeWidth = false, nonScalingStroke: contextNonScalingStroke = false, color: contextColor = "currentColor", className: contextClass = "" } = useLucideContext() ?? {};
-	const hasAccessibleProp = Boolean(children) || hasA11yProp(rest);
-	const [name, svgAttributes, builtIconNode = []] = buildLucideIconForReact(icon, {
-		color: color ?? contextColor,
-		width: width ?? size ?? contextSize,
-		height: height ?? size ?? contextSize,
-		strokeWidth: strokeWidth ?? contextStrokeWidth,
-		absoluteStrokeWidth: absoluteStrokeWidth ?? contextAbsoluteStrokeWidth,
-		nonScalingStroke: nonScalingStroke ?? contextNonScalingStroke,
-		className: mergeClasses(contextClass, className),
-		hasA11yProp: hasAccessibleProp,
-		attributes: rest
-	});
-	return (0, import_react.createElement)(name, {
-		ref,
-		...svgAttributes
-	}, [...builtIconNode.map(([tag, attrs]) => (0, import_react.createElement)(tag, attrs)), ...Array.isArray(children) ? children : [children]]);
-});
-
-// node_modules/lucide-react/dist/esm/createLucideIcon.mjs
-function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
-	const iconData = typeof iconDataOrName === "string" ? toLucideIconData(iconDataOrName, iconNode, aliases) : iconDataOrName;
-	const Component = (0, import_react.forwardRef)(({ className, ...props }, ref) => (0, import_react.createElement)(Icon, {
-		ref,
-		icon: iconData,
-		className,
-		...props
-	}));
-	if (iconData.name) Component.displayName = toPascalCase(iconData.name);
-	return Component;
-}
-
-// node_modules/lucide-react/dist/esm/icons/arrow-down-wide-narrow.mjs
-var __iconData$32 = {
-	name: "arrow-down-wide-narrow",
-	size: 24,
-	node: [
-		["path", {
-			d: "m3 16 4 4 4-4",
-			key: "1co6wj"
-		}],
-		["path", {
-			d: "M7 20V4",
-			key: "1yoxec"
-		}],
-		["path", {
-			d: "M11 4h10",
-			key: "1w87gc"
-		}],
-		["path", {
-			d: "M11 8h7",
-			key: "djye34"
-		}],
-		["path", {
-			d: "M11 12h4",
-			key: "q8tih4"
-		}]
-	],
-	aliases: ["sort-desc"]
-};
-__iconData$32.node;
-var ArrowDownWideNarrow = createLucideIcon(__iconData$32);
-
-// node_modules/lucide-react/dist/esm/icons/arrow-left.mjs
-var __iconData$31 = {
-	name: "arrow-left",
-	size: 24,
-	node: [["path", {
-		d: "m12 19-7-7 7-7",
-		key: "1l729n"
-	}], ["path", {
-		d: "M19 12H5",
-		key: "x3x0zl"
-	}]]
-};
-__iconData$31.node;
-var ArrowLeft = createLucideIcon(__iconData$31);
-
-// node_modules/lucide-react/dist/esm/icons/arrow-right.mjs
-var __iconData$30 = {
-	name: "arrow-right",
-	size: 24,
-	node: [["path", {
-		d: "M5 12h14",
-		key: "1ays0h"
-	}], ["path", {
-		d: "m12 5 7 7-7 7",
-		key: "xquz4c"
-	}]]
-};
-__iconData$30.node;
-var ArrowRight = createLucideIcon(__iconData$30);
-
-// node_modules/lucide-react/dist/esm/icons/arrow-up-down.mjs
-var __iconData$29 = {
-	name: "arrow-up-down",
-	size: 24,
-	node: [
-		["path", {
-			d: "m21 16-4 4-4-4",
-			key: "f6ql7i"
-		}],
-		["path", {
-			d: "M17 20V4",
-			key: "1ejh1v"
-		}],
-		["path", {
-			d: "m3 8 4-4 4 4",
-			key: "11wl7u"
-		}],
-		["path", {
-			d: "M7 4v16",
-			key: "1glfcx"
-		}]
-	]
-};
-__iconData$29.node;
-var ArrowUpDown = createLucideIcon(__iconData$29);
-
-// node_modules/lucide-react/dist/esm/icons/check.mjs
-var __iconData$28 = {
-	name: "check",
-	size: 24,
-	node: [["path", {
-		d: "M20 6 9 17l-5-5",
-		key: "1gmf2c"
-	}]]
-};
-__iconData$28.node;
-var Check = createLucideIcon(__iconData$28);
-
-// node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
-var __iconData$27 = {
-	name: "chevron-left",
-	size: 24,
-	node: [["path", {
-		d: "m15 18-6-6 6-6",
-		key: "1wnfg3"
-	}]]
-};
-__iconData$27.node;
-var ChevronLeft = createLucideIcon(__iconData$27);
-
-// node_modules/lucide-react/dist/esm/icons/chevron-right.mjs
-var __iconData$26 = {
-	name: "chevron-right",
-	size: 24,
-	node: [["path", {
-		d: "m9 18 6-6-6-6",
-		key: "mthhwq"
-	}]]
-};
-__iconData$26.node;
-var ChevronRight = createLucideIcon(__iconData$26);
-
-// node_modules/lucide-react/dist/esm/icons/drone.mjs
-var __iconData$25 = {
-	name: "drone",
-	size: 24,
-	node: [
-		["path", {
-			d: "M10 10 7 7",
-			key: "zp14k7"
-		}],
-		["path", {
-			d: "m10 14-3 3",
-			key: "1jrpxk"
-		}],
-		["path", {
-			d: "m14 10 3-3",
-			key: "7tigam"
-		}],
-		["path", {
-			d: "m14 14 3 3",
-			key: "vm23p3"
-		}],
-		["path", {
-			d: "M14.205 4.139a4 4 0 1 1 5.439 5.863",
-			key: "1tm5p2"
-		}],
-		["path", {
-			d: "M19.637 14a4 4 0 1 1-5.432 5.868",
-			key: "16egi2"
-		}],
-		["path", {
-			d: "M4.367 10a4 4 0 1 1 5.438-5.862",
-			key: "1wta6a"
-		}],
-		["path", {
-			d: "M9.795 19.862a4 4 0 1 1-5.429-5.873",
-			key: "q39hpv"
-		}],
-		["rect", {
-			x: "10",
-			y: "8",
-			width: "4",
-			height: "8",
-			rx: "1",
-			key: "phrjt1"
-		}]
-	]
-};
-__iconData$25.node;
-var Drone = createLucideIcon(__iconData$25);
-
-// node_modules/lucide-react/dist/esm/icons/gamepad-2.mjs
-var __iconData$24 = {
-	name: "gamepad-2",
-	size: 24,
-	node: [
-		["line", {
-			x1: "6",
-			x2: "10",
-			y1: "11",
-			y2: "11",
-			key: "1gktln"
-		}],
-		["line", {
-			x1: "8",
-			x2: "8",
-			y1: "9",
-			y2: "13",
-			key: "qnk9ow"
-		}],
-		["line", {
-			x1: "15",
-			x2: "15.01",
-			y1: "12",
-			y2: "12",
-			key: "krot7o"
-		}],
-		["line", {
-			x1: "18",
-			x2: "18.01",
-			y1: "10",
-			y2: "10",
-			key: "1lcuu1"
-		}],
-		["path", {
-			d: "M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z",
-			key: "mfqc10"
-		}]
-	]
-};
-__iconData$24.node;
-var Gamepad2 = createLucideIcon(__iconData$24);
-
-// node_modules/lucide-react/dist/esm/icons/headphones.mjs
-var __iconData$23 = {
-	name: "headphones",
-	size: 24,
-	node: [["path", {
-		d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
-		key: "1xhozi"
-	}]]
-};
-__iconData$23.node;
-var Headphones = createLucideIcon(__iconData$23);
-
-// node_modules/lucide-react/dist/esm/icons/heart.mjs
-var __iconData$22 = {
-	name: "heart",
-	size: 24,
-	node: [["path", {
-		d: "M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5",
-		key: "mvr1a0"
-	}]]
-};
-__iconData$22.node;
-var Heart = createLucideIcon(__iconData$22);
-
-// node_modules/lucide-react/dist/esm/icons/house.mjs
-var __iconData$21 = {
-	name: "house",
-	size: 24,
-	node: [["path", {
-		d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8",
-		key: "5wwlr5"
-	}], ["path", {
-		d: "M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
-		key: "r6nss1"
-	}]],
-	aliases: ["home"]
-};
-__iconData$21.node;
-var House = createLucideIcon(__iconData$21);
-
-// node_modules/lucide-react/dist/esm/icons/laptop.mjs
-var __iconData$20 = {
-	name: "laptop",
-	size: 24,
-	node: [["path", {
-		d: "M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z",
-		key: "1pdavp"
-	}], ["path", {
-		d: "M20.054 15.987H3.946",
-		key: "14rxg9"
-	}]]
-};
-__iconData$20.node;
-var Laptop = createLucideIcon(__iconData$20);
-
-// node_modules/lucide-react/dist/esm/icons/message-circle.mjs
-var __iconData$19 = {
-	name: "message-circle",
-	size: 24,
-	node: [["path", {
-		d: "M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719",
-		key: "1sd12s"
-	}]]
-};
-__iconData$19.node;
-var MessageCircle = createLucideIcon(__iconData$19);
-
-// node_modules/lucide-react/dist/esm/icons/minus.mjs
-var __iconData$18 = {
-	name: "minus",
-	size: 24,
-	node: [["path", {
-		d: "M5 12h14",
-		key: "1ays0h"
-	}]]
-};
-__iconData$18.node;
-var Minus = createLucideIcon(__iconData$18);
-
-// node_modules/lucide-react/dist/esm/icons/package-check.mjs
-var __iconData$17 = {
-	name: "package-check",
-	size: 24,
-	node: [
-		["path", {
-			d: "M12 22V12",
-			key: "d0xqtd"
-		}],
-		["path", {
-			d: "m16 17 2 2 4-4",
-			key: "uh5qu3"
-		}],
-		["path", {
-			d: "M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753",
-			key: "kpkbpo"
-		}],
-		["path", {
-			d: "M3.29 7 12 12l8.71-5",
-			key: "19ckod"
-		}],
-		["path", {
-			d: "m7.5 4.27 8.997 5.148",
-			key: "9yrvtv"
-		}]
-	]
-};
-__iconData$17.node;
-var PackageCheck = createLucideIcon(__iconData$17);
-
-// node_modules/lucide-react/dist/esm/icons/package-search.mjs
-var __iconData$16 = {
-	name: "package-search",
-	size: 24,
-	node: [
-		["path", {
-			d: "M12 22V12",
-			key: "d0xqtd"
-		}],
-		["path", {
-			d: "M20.27 18.27 22 20",
-			key: "er2am"
-		}],
-		["path", {
-			d: "M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559",
-			key: "tok1h1"
-		}],
-		["path", {
-			d: "M3.29 7 12 12l8.71-5",
-			key: "19ckod"
-		}],
-		["path", {
-			d: "m7.5 4.27 8.997 5.148",
-			key: "9yrvtv"
-		}],
-		["circle", {
-			cx: "18.5",
-			cy: "16.5",
-			r: "2.5",
-			key: "ke13xx"
-		}]
-	]
-};
-__iconData$16.node;
-var PackageSearch = createLucideIcon(__iconData$16);
-
-// node_modules/lucide-react/dist/esm/icons/plus.mjs
-var __iconData$15 = {
-	name: "plus",
-	size: 24,
-	node: [["path", {
-		d: "M5 12h14",
-		key: "1ays0h"
-	}], ["path", {
-		d: "M12 5v14",
-		key: "s699le"
-	}]]
-};
-__iconData$15.node;
-var Plus = createLucideIcon(__iconData$15);
-
-// node_modules/lucide-react/dist/esm/icons/search.mjs
-var __iconData$14 = {
-	name: "search",
-	size: 24,
-	node: [["path", {
-		d: "m21 21-4.34-4.34",
-		key: "14j7rj"
-	}], ["circle", {
-		cx: "11",
-		cy: "11",
-		r: "8",
-		key: "4ej97u"
-	}]]
-};
-__iconData$14.node;
-var Search = createLucideIcon(__iconData$14);
-
-// node_modules/lucide-react/dist/esm/icons/share-2.mjs
-var __iconData$13 = {
-	name: "share-2",
-	size: 24,
-	node: [
-		["circle", {
-			cx: "18",
-			cy: "5",
-			r: "3",
-			key: "gq8acd"
-		}],
-		["circle", {
-			cx: "6",
-			cy: "12",
-			r: "3",
-			key: "w7nqdw"
-		}],
-		["circle", {
-			cx: "18",
-			cy: "19",
-			r: "3",
-			key: "1xt0gg"
-		}],
-		["line", {
-			x1: "8.59",
-			x2: "15.42",
-			y1: "13.51",
-			y2: "17.49",
-			key: "47mynk"
-		}],
-		["line", {
-			x1: "15.41",
-			x2: "8.59",
-			y1: "6.51",
-			y2: "10.49",
-			key: "1n3mei"
-		}]
-	]
-};
-__iconData$13.node;
-var Share2 = createLucideIcon(__iconData$13);
-
-// node_modules/lucide-react/dist/esm/icons/shield-check.mjs
-var __iconData$12 = {
-	name: "shield-check",
-	size: 24,
-	node: [["path", {
-		d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-		key: "oel41y"
-	}], ["path", {
-		d: "m9 12 2 2 4-4",
-		key: "dzmm74"
-	}]]
-};
-__iconData$12.node;
-var ShieldCheck = createLucideIcon(__iconData$12);
-
-// node_modules/lucide-react/dist/esm/icons/shopping-bag.mjs
-var __iconData$11 = {
-	name: "shopping-bag",
-	size: 24,
-	node: [
-		["path", {
-			d: "M16 10a4 4 0 0 1-8 0",
-			key: "1ltviw"
-		}],
-		["path", {
-			d: "M3.103 6.034h17.794",
-			key: "awc11p"
-		}],
-		["path", {
-			d: "M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z",
-			key: "o988cm"
-		}]
-	]
-};
-__iconData$11.node;
-var ShoppingBag = createLucideIcon(__iconData$11);
-
-// node_modules/lucide-react/dist/esm/icons/shopping-cart.mjs
-var __iconData$10 = {
-	name: "shopping-cart",
-	size: 24,
-	node: [
-		["path", {
-			d: "m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18",
-			key: "uebgi3"
-		}],
-		["path", {
-			d: "M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25",
-			key: "1j7c9p"
-		}],
-		["circle", {
-			cx: "18",
-			cy: "20",
-			r: "2",
-			key: "t9985n"
-		}],
-		["circle", {
-			cx: "8",
-			cy: "20",
-			r: "2",
-			key: "ckkr5m"
-		}]
-	]
-};
-__iconData$10.node;
-var ShoppingCart = createLucideIcon(__iconData$10);
-
-// node_modules/lucide-react/dist/esm/icons/sliders-horizontal.mjs
-var __iconData$9 = {
-	name: "sliders-horizontal",
-	size: 24,
-	node: [
-		["path", {
-			d: "M10 5H3",
-			key: "1qgfaw"
-		}],
-		["path", {
-			d: "M12 19H3",
-			key: "yhmn1j"
-		}],
-		["path", {
-			d: "M14 3v4",
-			key: "1sua03"
-		}],
-		["path", {
-			d: "M16 17v4",
-			key: "1q0r14"
-		}],
-		["path", {
-			d: "M21 12h-9",
-			key: "1o4lsq"
-		}],
-		["path", {
-			d: "M21 19h-5",
-			key: "1rlt1p"
-		}],
-		["path", {
-			d: "M21 5h-7",
-			key: "1oszz2"
-		}],
-		["path", {
-			d: "M8 10v4",
-			key: "tgpxqk"
-		}],
-		["path", {
-			d: "M8 12H3",
-			key: "a7s4jb"
-		}]
-	]
-};
-__iconData$9.node;
-var SlidersHorizontal = createLucideIcon(__iconData$9);
-
-// node_modules/lucide-react/dist/esm/icons/smartphone.mjs
-var __iconData$8 = {
-	name: "smartphone",
-	size: 24,
-	node: [["rect", {
-		width: "14",
-		height: "20",
-		x: "5",
-		y: "2",
-		rx: "2",
-		ry: "2",
-		key: "1yt0o3"
-	}], ["path", {
-		d: "M12 18h.01",
-		key: "mhygvu"
-	}]]
-};
-__iconData$8.node;
-var Smartphone = createLucideIcon(__iconData$8);
-
-// node_modules/lucide-react/dist/esm/icons/sparkles.mjs
-var __iconData$7 = {
-	name: "sparkles",
-	size: 24,
-	node: [
-		["path", {
-			d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
-			key: "1s2grr"
-		}],
-		["path", {
-			d: "M20 2v4",
-			key: "1rf3ol"
-		}],
-		["path", {
-			d: "M22 4h-4",
-			key: "gwowj6"
-		}],
-		["circle", {
-			cx: "4",
-			cy: "20",
-			r: "2",
-			key: "6kqj1y"
-		}]
-	],
-	aliases: ["stars"]
-};
-__iconData$7.node;
-var Sparkles = createLucideIcon(__iconData$7);
-
-// node_modules/lucide-react/dist/esm/icons/star.mjs
-var __iconData$6 = {
-	name: "star",
-	size: 24,
-	node: [["path", {
-		d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
-		key: "r04s7s"
-	}]]
-};
-__iconData$6.node;
-var Star = createLucideIcon(__iconData$6);
-
-// node_modules/lucide-react/dist/esm/icons/store.mjs
-var __iconData$5 = {
-	name: "store",
-	size: 24,
-	node: [
-		["path", {
-			d: "M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5",
-			key: "slp6dd"
-		}],
-		["path", {
-			d: "M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244",
-			key: "o0xfot"
-		}],
-		["path", {
-			d: "M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05",
-			key: "wn3emo"
-		}]
-	]
-};
-__iconData$5.node;
-var Store = createLucideIcon(__iconData$5);
-
-// node_modules/lucide-react/dist/esm/icons/tag.mjs
-var __iconData$4 = {
-	name: "tag",
-	size: 24,
-	node: [["path", {
-		d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
-		key: "vktsd0"
-	}], ["circle", {
-		cx: "7.5",
-		cy: "7.5",
-		r: ".5",
-		fill: "currentColor",
-		key: "kqv944"
-	}]]
-};
-__iconData$4.node;
-var Tag = createLucideIcon(__iconData$4);
-
-// node_modules/lucide-react/dist/esm/icons/trash.mjs
-var __iconData$3 = {
-	name: "trash",
-	size: 24,
-	node: [
-		["path", {
-			d: "M10 11v6",
-			key: "nco0om"
-		}],
-		["path", {
-			d: "M14 11v6",
-			key: "outv1u"
-		}],
-		["path", {
-			d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6",
-			key: "miytrc"
-		}],
-		["path", {
-			d: "M3 6h18",
-			key: "d0wm0j"
-		}],
-		["path", {
-			d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
-			key: "e791ji"
-		}]
-	],
-	aliases: ["trash-2"]
-};
-__iconData$3.node;
-var Trash = createLucideIcon(__iconData$3);
-
-// node_modules/lucide-react/dist/esm/icons/truck.mjs
-var __iconData$2 = {
-	name: "truck",
-	size: 24,
-	node: [
-		["path", {
-			d: "M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2",
-			key: "wrbu53"
-		}],
-		["path", {
-			d: "M15 18H9",
-			key: "1lyqi6"
-		}],
-		["path", {
-			d: "M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14",
-			key: "lysw3i"
-		}],
-		["circle", {
-			cx: "17",
-			cy: "18",
-			r: "2",
-			key: "332jqn"
-		}],
-		["circle", {
-			cx: "7",
-			cy: "18",
-			r: "2",
-			key: "19iecd"
-		}]
-	]
-};
-__iconData$2.node;
-var Truck = createLucideIcon(__iconData$2);
-
-// node_modules/lucide-react/dist/esm/icons/x.mjs
-var __iconData$1 = {
-	name: "x",
-	size: 24,
-	node: [["path", {
-		d: "M18 6 6 18",
-		key: "1bl5f8"
-	}], ["path", {
-		d: "m6 6 12 12",
-		key: "d8bk6v"
-	}]]
-};
-__iconData$1.node;
-var X = createLucideIcon(__iconData$1);
-
-// node_modules/lucide-react/dist/esm/icons/zoom-in.mjs
-var __iconData = {
-	name: "zoom-in",
-	size: 24,
-	node: [
-		["circle", {
-			cx: "11",
-			cy: "11",
-			r: "8",
-			key: "4ej97u"
-		}],
-		["line", {
-			x1: "21",
-			x2: "16.65",
-			y1: "21",
-			y2: "16.65",
-			key: "13gj7c"
-		}],
-		["line", {
-			x1: "11",
-			x2: "11",
-			y1: "8",
-			y2: "14",
-			key: "1vmskp"
-		}],
-		["line", {
-			x1: "8",
-			x2: "14",
-			y1: "11",
-			y2: "11",
-			key: "durymu"
-		}]
-	]
-};
-__iconData.node;
-var ZoomIn = createLucideIcon(__iconData);
-
-// node_modules/react/cjs/react-jsx-runtime.production.js
-var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((exports) => {
-	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element");
-	var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
-	function jsxProd(type, config, maybeKey) {
-		var key = null;
-		void 0 !== maybeKey && (key = "" + maybeKey);
-		void 0 !== config.key && (key = "" + config.key);
-		if ("key" in config) {
-			maybeKey = {};
-			for (var propName in config) "key" !== propName && (maybeKey[propName] = config[propName]);
-		} else maybeKey = config;
-		config = maybeKey.ref;
-		return {
-			$$typeof: REACT_ELEMENT_TYPE,
-			type,
-			key,
-			ref: void 0 !== config ? config : null,
-			props: maybeKey
-		};
-	}
-	exports.Fragment = REACT_FRAGMENT_TYPE;
-	exports.jsx = jsxProd;
-	exports.jsxs = jsxProd;
-}));
-
-// node_modules/react/jsx-runtime.js
-var require_jsx_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	module.exports = require_react_jsx_runtime_production();
-}));
-
 // src/composnents/Categories.jsx
-var import_jsx_runtime = require_jsx_runtime();
 var categories$1 = [
 	{
 		id: 1,
@@ -15363,81 +15454,103 @@ function Navbar() {
 // src/composnents/ProductCard.jsx
 function ProductCard({ product }) {
 	const { addToCart } = useCart();
+	const { showToast } = useToast();
 	const discount = product.oldPrice > product.price ? Math.round((product.oldPrice - product.price) / product.oldPrice * 100) : 0;
+	const handleAddToCart = () => {
+		if (product.stock <= 0) return;
+		addToCart(product);
+		showToast(`${product.name} a été ajouté à votre panier.`);
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
-		className: "group min-w-[155px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:min-w-0",
+		className: "group relative min-w-[155px] overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-900/10 sm:min-w-0",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 			to: `/produit/${product.slug}`,
-			className: "relative flex h-36 items-center justify-center bg-gray-50 p-3 sm:h-44",
+			className: "relative block aspect-square overflow-hidden bg-gray-50",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 					src: product.images?.[0] || "/images/placeholder.webp",
 					alt: product.name,
 					loading: "lazy",
 					decoding: "async",
-					onError: (e) => {
-						e.currentTarget.src = "/images/placeholder.webp";
+					onError: (event) => {
+						event.currentTarget.onerror = null;
+						event.currentTarget.src = "/images/placeholder.webp";
 					},
-					className: "h-full w-full object-contain transition duration-300 group-hover:scale-105"
+					className: "h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
 				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.03]" }),
 				product.badge && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute left-2 top-2 rounded-full bg-blue-700 px-2 py-1 text-[8px] font-bold text-white",
+					className: "absolute left-3 top-3 rounded-full bg-blue-700 px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-wide text-white shadow-lg",
 					children: product.badge
 				}),
 				discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "absolute right-2 top-2 rounded-full bg-red-500 px-2 py-1 text-[8px] font-bold text-white",
+					className: "absolute right-3 top-3 rounded-full bg-red-500 px-2.5 py-1.5 text-[10px] font-extrabold text-white shadow-lg",
 					children: [
 						"-",
 						discount,
 						"%"
 					]
+				}),
+				product.stock <= 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "absolute inset-0 flex items-center justify-center bg-black/45",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "rounded-full bg-white px-4 py-2 text-xs font-bold text-gray-900",
+						children: "Rupture de stock"
+					})
 				})
 			]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "p-2.5 sm:p-3",
+			className: "p-3 sm:p-4",
 			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mb-1 truncate text-[9px] font-bold uppercase tracking-[1.5px] text-blue-600",
+					children: product.category
+				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 					to: `/produit/${product.slug}`,
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "line-clamp-2 min-h-8 text-[11px] font-semibold leading-4 text-gray-800 hover:text-blue-600 sm:text-xs",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "line-clamp-2 min-h-10 text-xs font-bold leading-5 text-gray-900 transition-colors group-hover:text-blue-700 sm:text-sm",
 						children: product.name
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-2 flex items-center gap-1 text-[10px] text-gray-500",
+					className: "mt-2 flex items-center gap-1.5",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, {
-							size: 12,
+							size: 13,
 							className: "fill-yellow-400 text-yellow-400"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-semibold text-gray-700",
-							children: product.rating
+							className: "text-[10px] font-bold text-gray-700",
+							children: product.rating ?? "Nouveau"
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-							"(",
-							product.reviewsCount,
-							")"
-						] })
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "text-[10px] text-gray-400",
+							children: [
+								"(",
+								product.reviewsCount ?? 0,
+								" avis)"
+							]
+						})
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-2 flex flex-wrap items-center gap-1.5",
+					className: "mt-3 flex min-h-9 flex-wrap items-center gap-x-2 gap-y-1",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-sm font-extrabold text-gray-950",
-						children: [product.price.toLocaleString("fr-FR"), " FCFA"]
-					}), product.oldPrice > product.price && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-[10px] text-gray-400 line-through",
-						children: [product.oldPrice.toLocaleString("fr-FR"), " FCFA"]
+						className: "text-sm font-black tracking-tight text-gray-950 sm:text-base",
+						children: [Number(product.price).toLocaleString("fr-FR"), " FCFA"]
+					}), discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "text-[10px] font-medium text-gray-400 line-through",
+						children: [Number(product.oldPrice).toLocaleString("fr-FR"), " FCFA"]
 					})]
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 					type: "button",
 					disabled: product.stock <= 0,
-					onClick: () => addToCart(product),
+					onClick: handleAddToCart,
 					"aria-label": `Ajouter ${product.name} au panier`,
-					className: "mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 py-2 text-[10px] font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 14 }), product.stock > 0 ? "Ajouter au panier" : "Épuisé"]
+					className: "mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gray-950 py-3 text-[10px] font-extrabold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:bg-gray-300",
+					children: product.stock > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 15 }), "Ajouter au panier"] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { size: 15 }), "Indisponible"] })
 				})
 			]
 		})]
@@ -15448,36 +15561,52 @@ function ProductCard({ product }) {
 var products = [
 	{
 		id: 1,
-		slug: "montre-rolex-pro",
-		name: "Montre Rolex Pro",
+		slug: "montre-elegance-premium",
+		name: "Montre Élégance Premium",
 		category: "Accessoires",
-		shortDescription: "Une montre élégante et fiable pour tous les jours.",
-		description: "Découvrez la montre Rolex Pro, un symbole d'excellence et d'élégance dans chaque détail.",
+		shortDescription: "Une montre raffinée pour affirmer votre style au quotidien.",
+		description: "Découvrez notre montre Élégance Premium. Avec son bracelet en acier inoxydable, son cadran raffiné et son design intemporel, elle apporte une touche de sophistication à toutes vos tenues. Idéale pour le travail, les sorties et les occasions spéciales.",
 		price: 12999,
 		oldPrice: 18e3,
 		currency: "XAF",
 		images: [
 			"/images/products/montres/m1.jpg",
-			"/images/products/montres/mm1.jpg",
-			"/images/products/montres/mm2.jpg",
-			"/images/products/montres/mm3.png"
+			"/images/products/montres/m2.jpg",
+			"/images/products/montres/m3.jpg",
+			"/images/products/montres/m4.jpg"
 		],
 		specifications: [
 			{
-				label: "Connexion",
-				value: "Bluetooth 5.3"
+				label: "Matière",
+				value: "Acier inoxydable"
 			},
 			{
-				label: "Autonomie",
-				value: "Jusqu'à 30 heures"
+				label: "Mouvement",
+				value: "Quartz"
 			},
 			{
-				label: "Recharge",
-				value: "USB-C"
+				label: "Affichage",
+				value: "Analogique"
+			},
+			{
+				label: "Bracelet",
+				value: "Acier ajustable"
+			},
+			{
+				label: "Fermeture",
+				value: "Boucle déployante"
+			},
+			{
+				label: "Style",
+				value: "Élégant et moderne"
 			}
 		],
 		variants: {
-			colors: ["Noir", "Blanc"],
+			colors: [
+				"Noir et or",
+				"Argent",
+				"Or"
+			],
 			sizes: []
 		},
 		stock: 15,
@@ -15488,9 +15617,11 @@ var products = [
 		isNew: false,
 		isPublished: true,
 		tags: [
-			"casque",
-			"bluetooth",
-			"audio"
+			"montre",
+			"accessoire",
+			"élégance",
+			"homme",
+			"cadeau"
 		]
 	},
 	{
@@ -15502,7 +15633,7 @@ var products = [
 		description: "Un mini-projecteur compact pour profiter de vos films, séries et présentations sur grand écran.",
 		price: 15999,
 		oldPrice: 22e3,
-		currency: "XAF",
+		currency: "FCFA",
 		images: [
 			"/images/products/montres/m2.jpg",
 			"/images/products/montres/m2.jpg",
@@ -15549,7 +15680,7 @@ var products = [
 		description: "Un chargeur compact conçu pour accompagner vos appareils compatibles au quotidien.",
 		price: 9999,
 		oldPrice: 14e3,
-		currency: "XAF",
+		currency: "FCFA",
 		images: [
 			"/images/products/chargeurs/c1.jpg",
 			"/images/products/chargeurs/c1.jpg",
@@ -15596,7 +15727,7 @@ var products = [
 		description: "Une montre connectée au design moderne pour consulter vos notifications et suivre certaines activités.",
 		price: 12500,
 		oldPrice: 16e3,
-		currency: "XAF",
+		currency: "FCFA",
 		images: [
 			"/images/products/montres/m2.jpg",
 			"/images/products/montres/m2.jpg",
@@ -15647,7 +15778,7 @@ var products = [
 		description: "Une enceinte portable pratique pour écouter votre musique à la maison ou en déplacement.",
 		price: 8500,
 		oldPrice: 11e3,
-		currency: "XAF",
+		currency: "FCFA",
 		images: [
 			"/images/products/bluetooth/1.webp",
 			"/images/products/bluetooth/3.webp",
@@ -15697,7 +15828,7 @@ var products = [
 		description: "Une manette ergonomique pensée pour des sessions de jeu confortables.",
 		price: 11500,
 		oldPrice: 15e3,
-		currency: "XAF",
+		currency: "FCFA",
 		images: [
 			"/images/products/manette-gaming/1.webp",
 			"/images/products/manette-gaming/2.webp",
@@ -17413,4 +17544,4 @@ function App() {
 }
 
 // src/main.jsx
-(0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(App, {}) }) }) }));
+(0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(App, {}) }) }) }) }));

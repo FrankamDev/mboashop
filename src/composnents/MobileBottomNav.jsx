@@ -68,11 +68,10 @@ export default function MobileBottomNav() {
     <>
       {/* RECHERCHE INSTANTANÉE */}
       <div
-        className={`fixed inset-x-0 bottom-[76px] z-[70] px-3 transition-all duration-300 md:hidden ${
-          searchOpen
+        className={`fixed inset-x-0 bottom-[76px] z-[70] px-3 transition-all duration-300 md:hidden ${searchOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible translate-y-5 opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         <div className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15">
 
@@ -201,9 +200,8 @@ export default function MobileBottomNav() {
         type="button"
         aria-label="Fermer la recherche"
         onClick={closeSearch}
-        className={`fixed inset-0 z-[60] bg-black/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${
-          searchOpen ? "visible opacity-100" : "invisible opacity-0"
-        }`}
+        className={`fixed inset-0 z-[60] bg-black/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${searchOpen ? "visible opacity-100" : "invisible opacity-0"
+          }`}
       />
 
       {/* MENU MOBILE */}
@@ -220,13 +218,11 @@ export default function MobileBottomNav() {
                   type="button"
                   onClick={() => setSearchOpen(!searchOpen)}
                   aria-expanded={searchOpen}
-                  className={`relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${
-                    searchOpen ? "text-blue-700" : "text-gray-400"
-                  }`}
+                  className={`relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${searchOpen ? "text-blue-700" : "text-gray-400"
+                    }`}
                 >
-                  <span className={`flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${
-                    searchOpen ? "scale-105 bg-blue-50" : "active:scale-90"
-                  }`}>
+                  <span className={`flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${searchOpen ? "scale-105 bg-blue-50" : "active:scale-90"
+                    }`}>
                     {searchOpen ? <X size={21} /> : <Icon size={21} />}
                   </span>
                   <span className="text-[10px] font-semibold">
@@ -246,16 +242,14 @@ export default function MobileBottomNav() {
                 end={item.end}
                 onClick={() => setSearchOpen(false)}
                 className={({ isActive }) =>
-                  `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${
-                    isActive ? "text-blue-700" : "text-gray-400"
+                  `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${isActive ? "text-blue-700" : "text-gray-400"
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <span className={`relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${
-                      isActive ? "scale-105 bg-blue-50" : "active:scale-90"
-                    }`}>
+                    <span className={`relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${isActive ? "scale-105 bg-blue-50" : "active:scale-90"
+                      }`}>
                       <Icon size={21} />
 
                       {item.label === "Panier" && cartCount > 0 && (
