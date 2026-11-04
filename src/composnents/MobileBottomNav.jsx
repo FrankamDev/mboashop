@@ -1,5 +1,5 @@
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import {
   House,
@@ -9,8 +9,19 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
+
 import { useCart } from "../context/CartContext";
 import { products } from "../data/products";
+
+const normalize = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+
+const formatPrice = (price) =>
+  `${Number(price || 0).toLocaleString("fr-FR")} FCFA`;
 
 export default function MobileBottomNav() {
   const { cartCount } = useCart();
@@ -18,15 +29,6 @@ export default function MobileBottomNav() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  // Normaliser le texte : accents, majuscules, espaces
-  const normalize = (value = "") =>
-    String(value)
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-
-  // Recherche instantanée dans les produits
   const results = useMemo(() => {
     const query = normalize(searchValue);
 
@@ -36,26 +38,39 @@ export default function MobileBottomNav() {
       .filter((product) => {
         if (product.isPublished === false) return false;
 
-        const searchableText = normalize([
-          product.name,
-          product.category,
-          product.shortDescription,
-          product.description,
-          ...(product.tags || []),
-        ].join(" "));
+        const searchableText = normalize(
+          [
+            product.name,
+            product.category,
+            product.shortDescription,
+            product.description,
+            ...(product.tags || []),
+          ].join(" ")
+        );
 
         return searchableText.includes(query);
       })
       .slice(0, 6);
   }, [searchValue]);
 
-  const formatPrice = (price) =>
-    `${Number(price || 0).toLocaleString("fr-FR")} FCFA`;
-
   const closeSearch = () => {
     setSearchOpen(false);
     setSearchValue("");
   };
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeSearch();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   const navItems = [
     { label: "Accueil", path: "/", icon: House, end: true },
@@ -68,16 +83,22 @@ export default function MobileBottomNav() {
     <>
       {/* RECHERCHE INSTANTANÉE */}
       <div
-        className={`fixed inset-x-0 bottom-[76px] z-[70] px-3 transition-all duration-300 md:hidden ${searchOpen
-          ? "visible translate-y-0 opacity-100"
-          : "invisible translate-y-5 opacity-0 pointer-events-none"
-          }`}
+        role="search"
+        aria-hidden={!searchOpen}
+        className={`fixed inset-x-0 bottom-[calc(82px+env(safe-area-inset-bottom))] z-[70] px-3 transition-all duration-300 md:hidden ${
+          searchOpen
+            ? "visible translate-y-0 opacity-100"
+            : "invisible pointer-events-none translate-y-5 opacity-0"
+        }`}
       >
-        <div className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15">
-
+        <div className="mx-auto max-w-lg overflow-hidden rounded-[20px] border border-slate-100 bg-white shadow-[0_16px_50px_rgba(15,23,42,0.14)]">
           {/* CHAMP DE RECHERCHE */}
-          <div className="flex items-center gap-3 border-b border-gray-100 p-3">
-            <Search size={20} className="shrink-0 text-blue-600" />
+          <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3.5">
+            <Search
+              size={19}
+              strokeWidth={2}
+              className="shrink-0 text-blue-600"
+            />
 
             <input
               type="search"
@@ -85,60 +106,68 @@ export default function MobileBottomNav() {
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
               placeholder="Rechercher un produit..."
-              className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400"
+              className="min-w-0 flex-1 bg-transparent text-[13px] font-medium tracking-[-0.01em] text-slate-800 outline-none placeholder:font-normal placeholder:text-slate-400"
             />
 
             {searchValue && (
               <button
+                type="button"
                 onClick={() => setSearchValue("")}
                 aria-label="Effacer la recherche"
-                className="rounded-full p-1 text-gray-400 hover:bg-gray-100"
+                className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
               >
-                <X size={17} />
+                <X size={16} />
               </button>
             )}
 
             <button
+              type="button"
               onClick={closeSearch}
               aria-label="Fermer la recherche"
-              className="rounded-full p-1 text-gray-500 hover:bg-gray-100"
+              className="rounded-full p-1.5 text-slate-500 transition hover:bg-slate-100"
             >
-              <X size={19} />
+              <X size={18} />
             </button>
           </div>
 
           {/* RÉSULTATS */}
           <div className="max-h-[55vh] overflow-y-auto p-3">
-
             {!searchValue.trim() ? (
-              <div className="py-7 text-center">
-                <Search size={30} className="mx-auto mb-2 text-gray-300" />
-                <p className="text-sm font-semibold text-gray-700">
+              <div className="py-8 text-center">
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50">
+                  <Search size={21} className="text-slate-400" />
+                </div>
+
+                <p className="text-[13px] font-semibold tracking-[-0.02em] text-slate-800">
                   Que recherchez-vous ?
                 </p>
-                <p className="mt-1 text-xs text-gray-400">
+
+                <p className="mt-1.5 text-[11px] font-normal text-slate-400">
                   Les produits apparaîtront pendant votre saisie.
                 </p>
               </div>
             ) : results.length > 0 ? (
               <>
-                <div className="mb-3 flex items-center justify-between">
-                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                <div className="mb-3 flex items-center justify-between gap-2 px-1">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400">
                     Résultats de recherche
                   </p>
-                  <span className="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-700">
-                    {results.length} résultat(s) affiché(s)
+
+                  <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold text-blue-700">
+                    {results.length} résultat(s)
                   </span>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {results.map((product, index) => (
                     <Link
-                      key={product.id}
+                      key={product.id ?? product.slug}
                       to={`/produit/${product.slug}`}
                       onClick={closeSearch}
-                      style={{ animationDelay: `${index * 50}ms` }}
-                      className="flex animate-in fade-in slide-in-from-bottom-2 items-center gap-3 rounded-xl p-2 transition duration-200 hover:bg-blue-50"
+                      style={{
+                        animationDelay: `${index * 40}ms`,
+                      }}
+                      className="flex animate-in fade-in slide-in-from-bottom-2 items-center gap-3 rounded-xl p-2 transition-colors duration-200 hover:bg-slate-50 active:bg-blue-50"
                     >
                       <img
                         src={
@@ -146,47 +175,54 @@ export default function MobileBottomNav() {
                           "/images/placeholder.webp"
                         }
                         alt={product.name}
-                        className="h-14 w-14 shrink-0 rounded-lg bg-gray-100 object-cover"
+                        loading="lazy"
+                        className="h-14 w-14 shrink-0 rounded-xl bg-slate-100 object-cover"
                       />
 
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold text-gray-800">
+                        <p className="truncate text-[12px] font-semibold tracking-[-0.02em] text-slate-800">
                           {product.name}
                         </p>
 
-                        <p className="mt-1 text-xs text-gray-400">
+                        <p className="mt-1 truncate text-[10px] font-medium text-slate-400">
                           {product.category}
                         </p>
 
-                        <p className="mt-1 text-sm font-extrabold text-blue-700">
+                        <p className="mt-1 text-[12px] font-bold tracking-[-0.02em] text-blue-700">
                           {formatPrice(product.price)}
                         </p>
                       </div>
 
                       <ArrowRight
-                        size={17}
-                        className="shrink-0 text-gray-400"
+                        size={16}
+                        className="shrink-0 text-slate-300"
                       />
                     </Link>
                   ))}
                 </div>
 
                 <Link
-                  to={`/all-products?search=${encodeURIComponent(searchValue.trim())}`}
+                  to={`/all-products?search=${encodeURIComponent(
+                    searchValue.trim()
+                  )}`}
                   onClick={closeSearch}
-                  className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-700 py-3 text-xs font-bold text-white transition hover:bg-blue-800"
+                  className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-700 py-3 text-[11px] font-semibold tracking-[-0.01em] text-white transition hover:bg-blue-800 active:scale-[0.98]"
                 >
                   Voir tous les résultats
-                  <ArrowRight size={15} />
+                  <ArrowRight size={14} />
                 </Link>
               </>
             ) : (
               <div className="py-8 text-center">
-                <Search size={30} className="mx-auto mb-2 text-gray-300" />
-                <p className="text-sm font-bold text-gray-700">
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50">
+                  <Search size={21} className="text-slate-400" />
+                </div>
+
+                <p className="text-[13px] font-semibold text-slate-800">
                   Aucun produit trouvé
                 </p>
-                <p className="mt-1 text-xs text-gray-400">
+
+                <p className="mt-1.5 text-[11px] text-slate-400">
                   Essayez un autre nom ou une autre catégorie.
                 </p>
               </div>
@@ -199,15 +235,18 @@ export default function MobileBottomNav() {
       <button
         type="button"
         aria-label="Fermer la recherche"
+        tabIndex={searchOpen ? 0 : -1}
         onClick={closeSearch}
-        className={`fixed inset-0 z-[60] bg-black/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${searchOpen ? "visible opacity-100" : "invisible opacity-0"
-          }`}
+        className={`fixed inset-0 z-[60] bg-slate-950/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${
+          searchOpen
+            ? "visible opacity-100"
+            : "invisible pointer-events-none opacity-0"
+        }`}
       />
 
-      {/* MENU MOBILE */}
-      <nav className="fixed bottom-0 left-0 z-[80] w-full border-t border-gray-100 bg-white/95 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] backdrop-blur-xl md:hidden">
-        <div className="mx-auto flex h-[72px] max-w-lg items-center justify-around px-2 pb-[env(safe-area-inset-bottom)]">
-
+      {/* NAVIGATION MOBILE */}
+      <nav className="fixed bottom-0 left-0 z-[80] w-full border-t border-slate-100 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl md:hidden">
+        <div className="mx-auto flex h-[68px] max-w-lg items-center justify-around px-2">
           {navItems.map((item) => {
             const Icon = item.icon;
 
@@ -216,18 +255,33 @@ export default function MobileBottomNav() {
                 <button
                   key={item.label}
                   type="button"
-                  onClick={() => setSearchOpen(!searchOpen)}
+                  onClick={() =>
+                    searchOpen ? closeSearch() : setSearchOpen(true)
+                  }
                   aria-expanded={searchOpen}
-                  className={`relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${searchOpen ? "text-blue-700" : "text-gray-400"
-                    }`}
+                  aria-label="Ouvrir la recherche"
+                  className={`relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-colors duration-200 ${
+                    searchOpen ? "text-blue-700" : "text-slate-400"
+                  }`}
                 >
-                  <span className={`flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${searchOpen ? "scale-105 bg-blue-50" : "active:scale-90"
-                    }`}>
-                    {searchOpen ? <X size={21} /> : <Icon size={21} />}
+                  <span
+                    className={`flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-200 ${
+                      searchOpen
+                        ? "scale-105 bg-blue-50"
+                        : "active:scale-90"
+                    }`}
+                  >
+                    {searchOpen ? (
+                      <X size={21} strokeWidth={2} />
+                    ) : (
+                      <Icon size={21} strokeWidth={1.9} />
+                    )}
                   </span>
-                  <span className="text-[10px] font-semibold">
+
+                  <span className="text-[10px] font-semibold tracking-[-0.02em]">
                     Recherche
                   </span>
+
                   {searchOpen && (
                     <span className="absolute top-0 h-[3px] w-7 rounded-full bg-blue-600" />
                   )}
@@ -240,17 +294,25 @@ export default function MobileBottomNav() {
                 key={item.label}
                 to={item.path}
                 end={item.end}
-                onClick={() => setSearchOpen(false)}
+                onClick={() => {
+                  if (searchOpen) closeSearch();
+                }}
                 className={({ isActive }) =>
-                  `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-all duration-300 ${isActive ? "text-blue-700" : "text-gray-400"
+                  `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-colors duration-200 ${
+                    isActive ? "text-blue-700" : "text-slate-400"
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <span className={`relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${isActive ? "scale-105 bg-blue-50" : "active:scale-90"
-                      }`}>
-                      <Icon size={21} />
+                    <span
+                      className={`relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-200 ${
+                        isActive
+                          ? "scale-105 bg-blue-50"
+                          : "active:scale-90"
+                      }`}
+                    >
+                      <Icon size={21} strokeWidth={1.9} />
 
                       {item.label === "Panier" && cartCount > 0 && (
                         <span className="absolute -right-1 -top-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white ring-2 ring-white">
@@ -259,7 +321,7 @@ export default function MobileBottomNav() {
                       )}
                     </span>
 
-                    <span className="text-[10px] font-semibold">
+                    <span className="text-[10px] font-semibold tracking-[-0.02em]">
                       {item.label}
                     </span>
 

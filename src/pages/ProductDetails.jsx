@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Heart,
@@ -22,6 +22,9 @@ import {
 } from "lucide-react";
 
 import { products, formatPrice } from "../data/products";
+
+const WHATSAPP_NUMBER = "237690372977";
+const PLACEHOLDER = "/images/placeholder.webp";
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -47,71 +50,86 @@ export default function ProductDetails() {
   });
 
   const imageRef = useRef(null);
-  const galleryRef = useRef(null);
+  const touchStartX = useRef(null);
 
-  const images = product?.images?.length
-    ? product.images
-    : ["/images/placeholder.webp"];
+  const images = useMemo(
+    () =>
+      product?.images?.length
+        ? product.images
+        : [PLACEHOLDER],
+    [product]
+  );
 
+  const specifications = product?.specifications || [];
+  const stock = Number(product?.stock ?? 0);
+  const isAvailable = stock > 0;
+
+  const discount =
+    product?.oldPrice > product?.price
+      ? Math.round(
+          ((product.oldPrice - product.price) / product.oldPrice) * 100
+        )
+      : 0;
+
+  const total = (product?.price || 0) * quantity;
+
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+
+    return products
+      .filter(
+        (item) =>
+          item.id !== product.id &&
+          item.category === product.category &&
+          item.isPublished
+      )
+      .slice(0, 4);
+  }, [product]);
+
+  // Réinitialiser les options lorsqu'on change de produit.
   useEffect(() => {
     setActiveImage(0);
     setQuantity(1);
     setSelectedColor(product?.variants?.colors?.[0] || "");
+    setFavorite(false);
+    setActiveTab("description");
   }, [slug]);
 
+  // Fermer les fenêtres avec la touche Échap.
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setZoomOpen(false);
         setOrderOpen(false);
       }
+
+      if (event.key === "ArrowLeft" && zoomOpen) {
+        changeImage(-1);
+      }
+
+      if (event.key === "ArrowRight" && zoomOpen) {
+        changeImage(1);
+      }
     };
 
     window.addEventListener("keydown", handleEscape);
 
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, []);
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [zoomOpen, images.length]);
 
-  if (!product) {
-    return (
-      <main className="flex min-h-[70vh] flex-col items-center justify-center px-5 text-center">
-        <PackageCheck size={48} className="text-slate-300" />
+  // Empêcher le défilement de la page derrière les fenêtres modales.
+  useEffect(() => {
+    if (!zoomOpen && !orderOpen) return;
 
-        <h1 className="mt-5 text-3xl font-bold text-slate-900">
-          Produit introuvable
-        </h1>
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-        <p className="mt-3 text-slate-500">
-          Ce produit n'est pas disponible actuellement.
-        </p>
-
-        <Link
-          to="/all-products"
-          className="mt-7 rounded-full bg-slate-950 px-7 py-3 text-sm font-semibold text-white"
-        >
-          Découvrir nos produits
-        </Link>
-      </main>
-    );
-  }
-
-  const discount =
-    product.oldPrice > product.price
-      ? Math.round(
-          ((product.oldPrice - product.price) / product.oldPrice) * 100
-        )
-      : 0;
-
-  const total = product.price * quantity;
-
-  const relatedProducts = products
-    .filter(
-      (item) =>
-        item.id !== product.id &&
-        item.category === product.category &&
-        item.isPublished
-    )
-    .slice(0, 4);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [zoomOpen, orderOpen]);
 
   const changeImage = (direction) => {
     setActiveImage((current) => {
@@ -119,6 +137,12 @@ export default function ProductDetails() {
     });
   };
 
+  const handleImageError = (event) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = PLACEHOLDER;
+  };
+
+  // Effet de perspective sur ordinateur.
   const handleMouseMove = (event) => {
     if (!imageRef.current || window.innerWidth < 1024) return;
 
@@ -127,11 +151,11 @@ export default function ProductDetails() {
     const x = (event.clientX - rect.left) / rect.width;
     const y = (event.clientY - rect.top) / rect.height;
 
-    const rotateY = (x - 0.5) * 8;
-    const rotateX = (0.5 - y) * 8;
+    const rotateY = (x - 0.5) * 5;
+    const rotateX = (0.5 - y) * 5;
 
     imageRef.current.style.transform = `
-      perspective(1100px)
+      perspective(1000px)
       rotateX(${rotateX}deg)
       rotateY(${rotateY}deg)
       scale3d(1.025, 1.025, 1.025)
@@ -141,10 +165,29 @@ export default function ProductDetails() {
   const resetImagePosition = () => {
     if (imageRef.current) {
       imageRef.current.style.transform =
-        "perspective(1100px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
     }
   };
 
+  // Navigation tactile dans la galerie.
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+
+    const difference =
+      touchStartX.current - event.changedTouches[0].clientX;
+
+    if (Math.abs(difference) > 50 && images.length > 1) {
+      changeImage(difference > 0 ? 1 : -1);
+    }
+
+    touchStartX.current = null;
+  };
+
+  // Partager le produit.
   const handleShare = async () => {
     const url = window.location.href;
 
@@ -155,18 +198,26 @@ export default function ProductDetails() {
           text: `Découvre ${product.name} sur MBOASHOP`,
           url,
         });
-      } else {
+      } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
         setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+
+        window.setTimeout(() => {
+          setCopied(false);
+        }, 2500);
+      } else {
+        window.prompt("Copiez le lien du produit :", url);
       }
-    } catch {
-      // L'utilisateur peut simplement annuler le partage.
+    } catch (error) {
+      // L'utilisateur peut annuler le partage.
     }
   };
 
+  // Préparer la commande WhatsApp.
   const handleOrder = (event) => {
     event.preventDefault();
+
+    if (!customer.name.trim() || !customer.phone.trim()) return;
 
     const message = `
 Bonjour MBOASHOP, je souhaite passer une commande.
@@ -184,43 +235,81 @@ Quartier : ${customer.neighborhood}
 Téléphone : ${customer.phone}
 
 Merci de me confirmer la disponibilité et les modalités de livraison.
-    `;
+    `.trim();
 
-    const whatsappUrl = `https://wa.me/237690372977?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      message
+    )}`;
 
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setOrderOpen(false);
   };
 
-  return (
-    <main className="min-h-screen bg-[#f7f8fa] text-[#15171c]">
+  const updateCustomer = (event) => {
+    const { name, value } = event.target;
 
-      {/* Fil d'Ariane */}
-      <div className="mx-auto max-w-[1440px] px-4 pt-6 sm:px-8 lg:px-12">
+    setCustomer((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  // Produit introuvable.
+  if (!product) {
+    return (
+      <main className="flex min-h-[75vh] flex-col items-center justify-center bg-[#f8f9fb] px-5 text-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-sm">
+          <PackageCheck size={34} className="text-slate-300" />
+        </div>
+
+        <h1 className="mt-6 text-2xl font-bold tracking-[-0.04em] text-slate-900 sm:text-3xl">
+          Produit introuvable
+        </h1>
+
+        <p className="mt-3 max-w-sm text-sm leading-6 text-slate-500">
+          Ce produit n'est pas disponible actuellement.
+        </p>
+
+        <Link
+          to="/all-products"
+          className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-800"
+        >
+          Découvrir nos produits
+          <ArrowRight size={17} />
+        </Link>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#f8f9fb] font-sans text-[#15171c]">
+      {/* FIL D'ARIANE */}
+      <div className="mx-auto max-w-[1440px] px-4 pt-5 sm:px-8 sm:pt-7 lg:px-12">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <Link to="/" className="transition hover:text-blue-600">
+          <div className="flex min-w-0 items-center gap-2 text-[11px] font-medium text-slate-400 sm:text-xs">
+            <Link to="/" className="shrink-0 transition hover:text-blue-700">
               Accueil
             </Link>
 
-            <ChevronRight size={13} />
+            <ChevronRight size={13} className="shrink-0" />
 
             <Link
               to="/all-products"
-              className="transition hover:text-blue-600"
+              className="shrink-0 transition hover:text-blue-700"
             >
               Boutique
             </Link>
 
-            <ChevronRight size={13} />
+            <ChevronRight size={13} className="shrink-0" />
 
-            <span className="max-w-[150px] truncate font-semibold text-slate-700">
+            <span className="max-w-[130px] truncate font-semibold text-slate-700 sm:max-w-xs">
               {product.name}
             </span>
           </div>
 
           <Link
             to="/all-products"
-            className="hidden items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-600 sm:flex"
+            className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-700 sm:flex"
           >
             <ArrowLeft size={15} />
             Retour à la boutique
@@ -228,51 +317,47 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
         </div>
       </div>
 
-      {/* Zone principale */}
-      <section className="mx-auto max-w-[1440px] px-4 pb-16 pt-7 sm:px-8 sm:pt-10 lg:px-12 lg:pt-14">
-        <div className="grid gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
-
+      {/* ZONE PRINCIPALE */}
+      <section className="mx-auto max-w-[1440px] px-4 pb-14 pt-6 sm:px-8 sm:pt-9 lg:px-12 lg:pb-20 lg:pt-12">
+        <div className="grid items-start gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 xl:gap-20">
           {/* GALERIE */}
           <div className="min-w-0">
-
             <div className="relative">
-
-              {/* Grande image */}
-              <div
-                ref={galleryRef}
-                className="relative overflow-hidden rounded-[28px] border border-white bg-white shadow-[0_25px_80px_-40px_rgba(15,23,42,0.25)] sm:rounded-[36px]"
-              >
-                {/* Décoration de fond */}
+              <div className="relative overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] sm:rounded-[30px]">
+                {/* Fond décoratif */}
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-blue-100/70 blur-3xl" />
-                  <div className="absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-indigo-100/60 blur-3xl" />
+                  <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-100/60 blur-3xl sm:h-80 sm:w-80" />
+
+                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
 
                   <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px]" />
                 </div>
 
-                {/* Étiquette */}
+                {/* Badge produit */}
                 {product.badge && (
-                  <div className="absolute left-5 top-5 z-20">
-                    <span className="rounded-full bg-[#111827] px-4 py-2 text-[10px] font-bold tracking-[0.15em] text-white shadow-lg">
+                  <div className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6">
+                    <span className="rounded-full bg-slate-950 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-white shadow-lg sm:text-[10px]">
                       {product.badge}
                     </span>
                   </div>
                 )}
 
-                {/* Remise */}
+                {/* Réduction */}
                 {discount > 0 && (
-                  <div className="absolute right-5 top-5 z-20">
-                    <span className="rounded-full bg-red-500 px-4 py-2 text-xs font-bold text-white shadow-lg">
+                  <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
+                    <span className="rounded-full bg-red-500 px-3.5 py-2 text-[10px] font-bold text-white shadow-lg">
                       -{discount}%
                     </span>
                   </div>
                 )}
 
-                {/* Image */}
+                {/* Image principale */}
                 <div
-                  className="relative flex aspect-square items-center justify-center p-8 sm:p-12 lg:p-16"
+                  className="relative flex aspect-square items-center justify-center p-7 sm:p-12 lg:p-14"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={resetImagePosition}
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
                 >
                   <div className="pointer-events-none absolute bottom-[12%] left-[20%] right-[20%] h-8 rounded-[50%] bg-slate-900/10 blur-2xl" />
 
@@ -280,37 +365,38 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     ref={imageRef}
                     src={images[activeImage]}
                     alt={product.name}
-                    onError={(event) => {
-                      event.currentTarget.src = "/images/placeholder.webp";
-                    }}
-                    className="relative z-10 max-h-full w-full object-contain drop-shadow-[0_30px_25px_rgba(15,23,42,0.18)] transition-transform duration-300 ease-out will-change-transform"
+                    onError={handleImageError}
+                    className="relative z-10 max-h-full w-full select-none object-contain drop-shadow-[0_25px_25px_rgba(15,23,42,0.15)] transition-transform duration-300 ease-out will-change-transform"
                   />
                 </div>
 
-                {/* Zoom */}
+                {/* Bouton zoom */}
                 <button
+                  type="button"
                   onClick={() => setZoomOpen(true)}
-                  className="absolute bottom-5 right-5 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/80 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:scale-110 hover:bg-slate-950 hover:text-white"
                   aria-label="Agrandir l'image"
+                  className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:scale-110 hover:bg-slate-950 hover:text-white sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
                 >
                   <ZoomIn size={19} />
                 </button>
 
-                {/* Navigation */}
+                {/* Navigation des images */}
                 {images.length > 1 && (
                   <>
                     <button
+                      type="button"
                       onClick={() => changeImage(-1)}
-                      className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:left-5"
                       aria-label="Image précédente"
+                      className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:left-5 sm:h-11 sm:w-11"
                     >
                       <ChevronLeft size={20} />
                     </button>
 
                     <button
+                      type="button"
                       onClick={() => changeImage(1)}
-                      className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:right-5"
                       aria-label="Image suivante"
+                      className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:right-5 sm:h-11 sm:w-11"
                     >
                       <ChevronRight size={20} />
                     </button>
@@ -319,66 +405,76 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               </div>
 
               {/* Miniatures */}
-              <div className="mt-5 flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                {images.map((image, index) => (
-                  <button
-                    key={image}
-                    onClick={() => setActiveImage(index)}
-                    className={`relative h-[78px] w-[78px] shrink-0 overflow-hidden rounded-2xl border-2 bg-white p-2 transition-all duration-300 sm:h-[94px] sm:w-[94px] ${
-                      activeImage === index
-                        ? "border-blue-600 shadow-[0_8px_25px_-10px_rgba(37,99,235,0.5)]"
-                        : "border-transparent opacity-65 hover:border-slate-300 hover:opacity-100"
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`${product.name} ${index + 1}`}
-                      onError={(event) => {
-                        event.currentTarget.src = "/images/placeholder.webp";
-                      }}
-                      className="h-full w-full object-contain"
-                    />
+              {images.length > 1 && (
+                <div className="mt-4 flex gap-2.5 overflow-x-auto pb-2 sm:mt-5 sm:gap-3">
+                  {images.map((image, index) => (
+                    <button
+                      key={`${image}-${index}`}
+                      type="button"
+                      onClick={() => setActiveImage(index)}
+                      aria-label={`Afficher l'image ${index + 1}`}
+                      aria-pressed={activeImage === index}
+                      className={`relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-xl border-2 bg-white p-2 transition-all duration-200 sm:h-[88px] sm:w-[88px] sm:rounded-2xl ${
+                        activeImage === index
+                          ? "border-blue-600 shadow-[0_8px_25px_-10px_rgba(37,99,235,0.5)]"
+                          : "border-transparent opacity-65 hover:border-slate-300 hover:opacity-100"
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`${product.name} ${index + 1}`}
+                        onError={handleImageError}
+                        loading="lazy"
+                        className="h-full w-full object-contain"
+                      />
 
-                    {activeImage === index && (
-                      <span className="absolute bottom-0 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-blue-600" />
-                    )}
-                  </button>
-                ))}
-              </div>
+                      {activeImage === index && (
+                        <span className="absolute bottom-0 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-blue-600" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-              <p className="mt-2 text-[10px] font-medium tracking-wide text-slate-400">
+              <p className="mt-2 text-[9px] font-medium tracking-[0.08em] text-slate-400 sm:text-[10px]">
                 FAITES DÉFILER LES IMAGES POUR EXPLORER LE PRODUIT
               </p>
             </div>
 
-            {/* Points de confiance */}
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-slate-100 bg-white p-4 text-center">
-                <Truck className="mx-auto text-blue-600" size={22} />
-                <p className="mt-2 text-[10px] font-bold text-slate-800 sm:text-xs">
+            {/* POINTS DE CONFIANCE */}
+            <div className="mt-7 grid grid-cols-3 gap-2.5 sm:mt-8 sm:gap-3">
+              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
+                <Truck size={21} className="mx-auto text-blue-600" />
+
+                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
                   Livraison
                 </p>
-                <p className="mt-1 text-[9px] text-slate-400">
+
+                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
                   Selon votre ville
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 bg-white p-4 text-center">
-                <ShieldCheck className="mx-auto text-blue-600" size={22} />
-                <p className="mt-2 text-[10px] font-bold text-slate-800 sm:text-xs">
+              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
+                <ShieldCheck size={21} className="mx-auto text-blue-600" />
+
+                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
                   Assistance
                 </p>
-                <p className="mt-1 text-[9px] text-slate-400">
+
+                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
                   Avant commande
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-100 bg-white p-4 text-center">
-                <PackageCheck className="mx-auto text-blue-600" size={22} />
-                <p className="mt-2 text-[10px] font-bold text-slate-800 sm:text-xs">
+              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
+                <PackageCheck size={21} className="mx-auto text-blue-600" />
+
+                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
                   Disponibilité
                 </p>
-                <p className="mt-1 text-[9px] text-slate-400">
+
+                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
                   À confirmer
                 </p>
               </div>
@@ -387,19 +483,23 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
           {/* PANNEAU D'ACHAT */}
           <div className="lg:sticky lg:top-8 lg:h-fit">
-
-            <div className="rounded-[28px] border border-white bg-white p-5 shadow-[0_20px_70px_-45px_rgba(15,23,42,0.3)] sm:rounded-[32px] sm:p-8">
-
+            <div className="rounded-[22px] border border-slate-100 bg-white p-5 shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] sm:rounded-[28px] sm:p-7 lg:p-8">
               {/* Catégorie et actions */}
-              <div className="flex items-center justify-between">
-                <span className="rounded-full bg-blue-50 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">
+              <div className="flex items-center justify-between gap-3">
+                <span className="max-w-[65%] truncate rounded-full bg-blue-50 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-blue-700 sm:text-[10px]">
                   {product.category}
                 </span>
 
-                <div className="flex gap-2">
+                <div className="flex shrink-0 gap-2">
                   <button
-                    onClick={() => setFavorite(!favorite)}
-                    aria-label="Ajouter aux favoris"
+                    type="button"
+                    onClick={() => setFavorite((value) => !value)}
+                    aria-label={
+                      favorite
+                        ? "Retirer des favoris"
+                        : "Ajouter aux favoris"
+                    }
+                    aria-pressed={favorite}
                     className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
                       favorite
                         ? "border-red-100 bg-red-50 text-red-500"
@@ -413,58 +513,70 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   </button>
 
                   <button
+                    type="button"
                     onClick={handleShare}
                     aria-label="Partager le produit"
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-100 text-slate-500 transition hover:bg-slate-50"
                   >
-                    {copied ? <Check size={18} /> : <Share2 size={18} />}
+                    {copied ? (
+                      <Check size={18} className="text-green-600" />
+                    ) : (
+                      <Share2 size={18} />
+                    )}
                   </button>
                 </div>
               </div>
 
-              {/* Nom */}
-              <h1 className="mt-7 text-[30px] font-extrabold leading-[1.12] tracking-[-0.045em] text-[#111827] sm:text-[40px]">
+              {/* Nom du produit */}
+              <h1 className="mt-6 text-[27px] font-bold leading-[1.15] tracking-[-0.045em] text-[#111827] sm:mt-7 sm:text-[36px] lg:text-[40px]">
                 {product.name}
               </h1>
 
-              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-500">
+              {/* Description courte */}
+              <p className="mt-3 max-w-xl text-[13px] leading-6 text-slate-500 sm:mt-4 sm:text-sm sm:leading-7">
                 {product.shortDescription || product.description}
               </p>
 
-              {/* Note */}
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((item) => (
-                    <Star
-                      key={item}
-                      size={14}
-                      className={
-                        item <= Math.round(product.rating)
-                          ? "fill-amber-400 text-amber-400"
-                          : "text-slate-200"
-                      }
-                    />
-                  ))}
+              {/* Évaluation */}
+              {product.rating != null && (
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <div className="flex items-center gap-0.5">
+                    {[1, 2, 3, 4, 5].map((item) => (
+                      <Star
+                        key={item}
+                        size={13}
+                        className={
+                          item <= Math.round(Number(product.rating))
+                            ? "fill-amber-400 text-amber-400"
+                            : "text-slate-200"
+                        }
+                      />
+                    ))}
+                  </div>
+
+                  <span className="text-xs font-semibold text-slate-800">
+                    {product.rating}
+                  </span>
+
+                  <span className="text-xs text-slate-400">
+                    ({product.reviewsCount ?? 0} avis)
+                  </span>
                 </div>
+              )}
 
-                <span className="text-xs font-bold text-slate-800">
-                  {product.rating}
-                </span>
+              {/* PRIX */}
+              <div className="mt-7 rounded-2xl bg-[#f7f8fa] p-4 sm:mt-8 sm:p-5">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                  Prix du produit
+                </p>
 
-                <span className="text-xs text-slate-400">
-                  ({product.reviewsCount} avis)
-                </span>
-              </div>
-
-              {/* Prix */}
-              <div className="mt-8 rounded-2xl bg-[#f7f8fa] p-5">
-                <div className="flex flex-wrap items-end gap-3">
-                  <span className="text-[32px] font-black tracking-[-0.04em] text-slate-950 sm:text-[38px]">
+                <div className="mt-2 flex flex-wrap items-end gap-3">
+                  <span className="text-[29px] font-bold tracking-[-0.045em] text-slate-950 sm:text-[36px]">
                     {formatPrice(product.price)}
                   </span>
 
                   {product.oldPrice > product.price && (
-                    <span className="pb-1 text-sm text-slate-400 line-through">
+                    <span className="pb-1 text-sm font-medium text-slate-400 line-through">
                       {formatPrice(product.oldPrice)}
                     </span>
                   )}
@@ -472,43 +584,42 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
                 {discount > 0 && (
                   <p className="mt-2 text-xs font-semibold text-green-600">
-                    Vous économisez {formatPrice(product.oldPrice - product.price)}
+                    Vous économisez{" "}
+                    {formatPrice(product.oldPrice - product.price)}
                   </p>
                 )}
               </div>
 
-              {/* Disponibilité */}
-              <div className="mt-6 flex items-center justify-between border-b border-slate-100 pb-5">
+              {/* DISPONIBILITÉ */}
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-5">
                 <div className="flex items-center gap-2">
                   <span
                     className={`h-2 w-2 rounded-full ${
-                      product.stock > 0 ? "bg-green-500" : "bg-red-500"
+                      isAvailable ? "bg-green-500" : "bg-red-500"
                     }`}
                   />
 
                   <span className="text-xs font-semibold text-slate-700">
-                    {product.stock > 0
-                      ? "Disponible"
-                      : "Indisponible"}
+                    {isAvailable ? "Disponible" : "Indisponible"}
                   </span>
                 </div>
 
-                <span className="text-xs text-slate-400">
-                  {product.stock > 0
-                    ? `${product.stock} unité(s) en stock`
+                <span className="text-[11px] text-slate-400 sm:text-xs">
+                  {isAvailable
+                    ? `${stock} unité(s) en stock`
                     : "Rupture de stock"}
                 </span>
               </div>
 
-              {/* Couleurs */}
+              {/* COULEURS */}
               {product.variants?.colors?.length > 0 && (
                 <div className="mt-6">
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="text-sm font-bold text-slate-900">
+                  <div className="mb-3 flex items-center justify-between gap-2">
+                    <span className="text-[13px] font-semibold text-slate-900">
                       Choisir une couleur
                     </span>
 
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs font-medium text-slate-400">
                       {selectedColor}
                     </span>
                   </div>
@@ -517,8 +628,10 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     {product.variants.colors.map((color) => (
                       <button
                         key={color}
+                        type="button"
                         onClick={() => setSelectedColor(color)}
-                        className={`rounded-xl border px-4 py-2.5 text-xs font-semibold transition ${
+                        aria-pressed={selectedColor === color}
+                        className={`rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition ${
                           selectedColor === color
                             ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
                             : "border-slate-200 bg-white text-slate-600 hover:border-slate-400"
@@ -527,6 +640,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                         {selectedColor === color && (
                           <Check size={12} className="mr-1 inline" />
                         )}
+
                         {color}
                       </button>
                     ))}
@@ -534,34 +648,38 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
               )}
 
-              {/* Quantité */}
+              {/* QUANTITÉ */}
               <div className="mt-7 flex items-center justify-between">
-                <span className="text-sm font-bold text-slate-900">
+                <span className="text-[13px] font-semibold text-slate-900">
                   Quantité
                 </span>
 
                 <div className="flex items-center rounded-xl border border-slate-200 p-1">
                   <button
+                    type="button"
                     onClick={() =>
                       setQuantity((value) => Math.max(1, value - 1))
                     }
                     disabled={quantity <= 1}
+                    aria-label="Diminuer la quantité"
                     className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30"
                   >
                     <Minus size={15} />
                   </button>
 
-                  <span className="min-w-10 text-center text-sm font-bold">
+                  <span className="min-w-10 text-center text-sm font-semibold tabular-nums">
                     {quantity}
                   </span>
 
                   <button
+                    type="button"
                     onClick={() =>
                       setQuantity((value) =>
-                        Math.min(product.stock, value + 1)
+                        Math.min(stock, value + 1)
                       )
                     }
-                    disabled={quantity >= product.stock}
+                    disabled={quantity >= stock}
+                    aria-label="Augmenter la quantité"
                     className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30"
                   >
                     <Plus size={15} />
@@ -569,66 +687,73 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
               </div>
 
-              {/* Total */}
-              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                <span className="text-sm text-slate-500">
+              {/* TOTAL */}
+              <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
+                <span className="text-xs font-medium text-slate-500 sm:text-sm">
                   Total de votre sélection
                 </span>
 
-                <span className="text-xl font-extrabold text-slate-950">
+                <span className="text-lg font-bold tracking-[-0.03em] text-slate-950 sm:text-xl">
                   {formatPrice(total)}
                 </span>
               </div>
 
-              {/* CTA */}
+              {/* COMMANDER */}
               <button
+                type="button"
                 onClick={() => setOrderOpen(true)}
-                disabled={product.stock <= 0}
-                className="group mt-7 flex w-full items-center justify-center gap-3 rounded-2xl bg-[#111827] px-6 py-[18px] text-sm font-bold text-white shadow-[0_12px_25px_-12px_rgba(15,23,42,0.65)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_35px_-12px_rgba(37,99,235,0.5)] disabled:cursor-not-allowed disabled:opacity-40"
+                disabled={!isAvailable}
+                className="group mt-7 flex w-full items-center justify-center gap-3 rounded-xl bg-[#111827] px-5 py-4 text-[13px] font-semibold text-white shadow-[0_12px_25px_-12px_rgba(15,23,42,0.65)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_18px_35px_-12px_rgba(37,99,235,0.4)] disabled:cursor-not-allowed disabled:opacity-40 sm:rounded-2xl sm:py-[18px] sm:text-sm"
               >
-                <ShoppingBag size={19} />
+                <ShoppingBag size={18} />
                 Commander maintenant
                 <ArrowRight
-                  size={18}
+                  size={17}
                   className="transition-transform group-hover:translate-x-1"
                 />
               </button>
 
               <button
+                type="button"
                 onClick={() => setOrderOpen(true)}
-                disabled={product.stock <= 0}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-green-200 bg-green-50 px-6 py-4 text-xs font-bold text-green-700 transition hover:bg-green-100 disabled:opacity-40"
+                disabled={!isAvailable}
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-green-200 bg-green-50 px-5 py-3.5 text-xs font-semibold text-green-700 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 sm:rounded-2xl sm:py-4"
               >
                 <MessageCircle size={17} />
                 Commander via WhatsApp
               </button>
 
-              <p className="mt-5 text-center text-[10px] leading-5 text-slate-400">
-                Vous pourrez vérifier votre commande avant de l'envoyer sur WhatsApp.
+              <p className="mt-4 text-center text-[10px] leading-5 text-slate-400">
+                Vous pourrez vérifier votre commande avant de l'envoyer sur
+                WhatsApp.
               </p>
             </div>
 
-            {/* Assistance */}
-            <div className="mt-5 flex items-center gap-4 rounded-2xl border border-slate-100 bg-white p-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                <MessageCircle size={21} />
+            {/* ASSISTANCE */}
+            <div className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 sm:mt-5 sm:gap-4 sm:p-5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 sm:h-11 sm:w-11">
+                <MessageCircle size={20} />
               </div>
 
-              <div>
-                <p className="text-xs font-bold text-slate-900">
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-slate-900">
                   Besoin d'informations ?
                 </p>
+
                 <a
-                  href="https://wa.me/237690372977"
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-1 inline-block text-xs font-medium text-blue-600 hover:underline"
+                  className="mt-1 inline-block text-[11px] font-medium text-blue-600 transition hover:underline sm:text-xs"
                 >
                   Contactez notre équipe
                 </a>
               </div>
 
-              <ArrowRight size={17} className="ml-auto text-slate-300" />
+              <ArrowRight
+                size={17}
+                className="ml-auto shrink-0 text-slate-300"
+              />
             </div>
           </div>
         </div>
@@ -636,19 +761,20 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
       {/* DESCRIPTION ET CARACTÉRISTIQUES */}
       <section className="border-y border-slate-100 bg-white">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-8 lg:px-12">
-
-          <div className="flex flex-wrap gap-8 border-b border-slate-100">
+        <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
+          {/* ONGLETS */}
+          <div className="flex gap-7 border-b border-slate-100 sm:gap-9">
             {[
               { id: "description", label: "Description" },
               { id: "specifications", label: "Caractéristiques" },
             ].map((tab) => (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative pb-5 text-sm font-bold transition ${
+                className={`relative pb-4 text-[12px] font-semibold transition sm:pb-5 sm:text-sm ${
                   activeTab === tab.id
-                    ? "text-blue-600"
+                    ? "text-blue-700"
                     : "text-slate-400 hover:text-slate-700"
                 }`}
               >
@@ -661,62 +787,61 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
             ))}
           </div>
 
-          <div className="grid gap-12 pt-10 lg:grid-cols-2">
+          <div className="grid gap-9 pt-8 sm:pt-10 lg:grid-cols-2 lg:gap-12">
+            {/* TEXTE */}
             <div>
-              {activeTab === "description" ? (
-                <>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
-                    À propos du produit
-                  </p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
+                {activeTab === "description"
+                  ? "À propos du produit"
+                  : "Informations techniques"}
+              </p>
 
-                  <h2 className="mt-4 max-w-lg text-2xl font-extrabold leading-tight tracking-tight text-slate-950 sm:text-3xl">
-                    Découvrez chaque détail.
-                  </h2>
+              <h2 className="mt-4 max-w-lg text-[24px] font-bold leading-tight tracking-[-0.04em] text-slate-950 sm:text-3xl">
+                {activeTab === "description"
+                  ? "Découvrez chaque détail."
+                  : "Les caractéristiques."}
+              </h2>
 
-                  <p className="mt-5 max-w-xl text-sm leading-8 text-slate-500">
-                    {product.description}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
-                    Informations techniques
-                  </p>
-
-                  <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-950">
-                    Les caractéristiques.
-                  </h2>
-
-                  <p className="mt-4 text-sm leading-7 text-slate-500">
-                    Retrouvez les informations disponibles sur ce produit.
-                  </p>
-                </>
-              )}
+              <p className="mt-4 max-w-xl whitespace-pre-line text-[13px] leading-7 text-slate-500 sm:mt-5 sm:text-sm sm:leading-8">
+                {activeTab === "description"
+                  ? product.description ||
+                    product.shortDescription ||
+                    "Aucune description disponible pour ce produit."
+                  : "Retrouvez les informations disponibles sur ce produit."}
+              </p>
             </div>
 
-            <div className="rounded-2xl bg-[#f7f8fa] p-6 sm:p-8">
-              <h3 className="mb-6 text-sm font-bold text-slate-900">
+            {/* FICHE TECHNIQUE */}
+            <div className="rounded-2xl bg-[#f7f8fa] p-5 sm:p-7">
+              <h3 className="mb-5 text-[13px] font-semibold text-slate-900 sm:mb-6 sm:text-sm">
                 {activeTab === "description"
                   ? "Informations du produit"
                   : "Fiche technique"}
               </h3>
 
-              <div className="space-y-4">
-                {product.specifications.map((spec) => (
-                  <div
-                    key={spec.label}
-                    className="flex justify-between gap-5 border-b border-slate-200 pb-4 last:border-0 last:pb-0"
-                  >
-                    <span className="text-xs text-slate-500">
-                      {spec.label}
-                    </span>
+              {specifications.length > 0 ? (
+                <div className="space-y-4">
+                  {specifications.map((spec, index) => (
+                    <div
+                      key={spec.label || index}
+                      className="flex justify-between gap-5 border-b border-slate-200 pb-4 last:border-0 last:pb-0"
+                    >
+                      <span className="text-xs text-slate-500">
+                        {spec.label}
+                      </span>
 
-                    <span className="text-right text-xs font-bold text-slate-800">
-                      {spec.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
+                      <span className="text-right text-xs font-semibold text-slate-800">
+                        {spec.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs leading-6 text-slate-400">
+                  Aucune caractéristique supplémentaire disponible pour ce
+                  produit.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -724,103 +849,123 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
       {/* PRODUITS SIMILAIRES */}
       {relatedProducts.length > 0 && (
-        <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-8 lg:px-12">
-          <div className="mb-8 flex items-end justify-between">
+        <section className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
+          <div className="mb-7 flex items-end justify-between gap-4 sm:mb-8">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
                 Vous pourriez aimer
               </p>
 
-              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">
+              <h2 className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 sm:mt-3 sm:text-3xl">
                 Produits similaires
               </h2>
             </div>
 
             <Link
               to="/all-products"
-              className="hidden items-center gap-2 text-xs font-bold text-slate-500 transition hover:text-blue-600 sm:flex"
+              className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-600 sm:flex"
             >
               Voir toute la boutique
               <ArrowRight size={16} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
             {relatedProducts.map((item) => (
               <Link
                 key={item.id}
                 to={`/produit/${item.slug}`}
-                className="group overflow-hidden rounded-2xl border border-slate-100 bg-white p-3 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group overflow-hidden rounded-2xl border border-slate-100 bg-white p-2.5 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-3"
               >
-                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#f7f8fa] p-4">
+                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#f7f8fa] p-3 sm:p-4">
                   <img
-                    src={item.images?.[0] || "/images/placeholder.webp"}
+                    src={item.images?.[0] || PLACEHOLDER}
                     alt={item.name}
-                    onError={(event) => {
-                      event.currentTarget.src = "/images/placeholder.webp";
-                    }}
+                    onError={handleImageError}
+                    loading="lazy"
                     className="h-full w-full object-contain transition duration-500 group-hover:scale-110"
                   />
                 </div>
 
-                <div className="px-1 pb-1 pt-4">
-                  <p className="line-clamp-2 min-h-9 text-xs font-bold text-slate-800">
+                <div className="px-1 pb-1 pt-3 sm:pt-4">
+                  <p className="line-clamp-2 min-h-9 text-[11px] font-semibold leading-5 text-slate-800 sm:text-xs">
                     {item.name}
                   </p>
 
-                  <p className="mt-2 text-sm font-extrabold text-slate-950">
+                  <p className="mt-2 text-[13px] font-bold tracking-[-0.02em] text-slate-950 sm:text-sm">
                     {formatPrice(item.price)}
                   </p>
                 </div>
               </Link>
             ))}
           </div>
+
+          <Link
+            to="/all-products"
+            className="mt-6 flex items-center justify-center gap-2 text-xs font-semibold text-blue-700 sm:hidden"
+          >
+            Voir toute la boutique
+            <ArrowRight size={15} />
+          </Link>
         </section>
       )}
 
       {/* ZOOM IMAGE */}
       {zoomOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 p-5 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Aperçu du produit"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 p-4 backdrop-blur-md sm:p-6"
           onClick={() => setZoomOpen(false)}
         >
           <button
+            type="button"
             onClick={() => setZoomOpen(false)}
-            className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
             aria-label="Fermer"
+            className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-6 sm:top-6"
           >
-            <X size={23} />
+            <X size={22} />
           </button>
 
-          <button
-            onClick={(event) => {
-              event.stopPropagation();
-              changeImage(-1);
-            }}
-            className="absolute left-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:left-8"
-          >
-            <ChevronLeft size={22} />
-          </button>
+          {images.length > 1 && (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                changeImage(-1);
+              }}
+              aria-label="Image précédente"
+              className="absolute left-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-8 sm:h-12 sm:w-12"
+            >
+              <ChevronLeft size={22} />
+            </button>
+          )}
 
           <img
             src={images[activeImage]}
             alt={product.name}
-           className="relative z-10 block h-full w-full select-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)] animate-in fade-in zoom-in-95 duration-300"
-      draggable="false"
+            onError={handleImageError}
+            draggable="false"
             onClick={(event) => event.stopPropagation()}
+            className="relative z-10 max-h-[85vh] max-w-full select-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)]"
           />
 
-          <button
-            onClick={(event) => {
-              event.stopPropagation();
-              changeImage(1);
-            }}
-            className="absolute right-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:right-8"
-          >
-            <ChevronRight size={22} />
-          </button>
+          {images.length > 1 && (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                changeImage(1);
+              }}
+              aria-label="Image suivante"
+              className="absolute right-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-8 sm:h-12 sm:w-12"
+            >
+              <ChevronRight size={22} />
+            </button>
+          )}
 
-          <span className="absolute bottom-6 text-xs font-medium text-white/60">
+          <span className="absolute bottom-5 text-xs font-medium text-white/60">
             {activeImage + 1} / {images.length}
           </span>
         </div>
@@ -829,20 +974,27 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
       {/* MODAL COMMANDE */}
       {orderOpen && (
         <div
-          className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="order-title"
+          className="fixed inset-0 z-[110] flex items-end justify-center bg-slate-950/70 p-0 backdrop-blur-sm sm:items-center sm:p-4"
           onClick={() => setOrderOpen(false)}
         >
           <div
-            className="max-h-[92vh] w-full max-w-[480px] overflow-y-auto rounded-[28px] bg-white p-6 shadow-2xl sm:p-8"
+            className="max-h-[94dvh] w-full max-w-[480px] overflow-y-auto rounded-t-[26px] bg-white p-5 shadow-2xl sm:max-h-[92vh] sm:rounded-[28px] sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-start justify-between">
+            {/* En-tête */}
+            <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
                   MBOASHOP
                 </p>
 
-                <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">
+                <h2
+                  id="order-title"
+                  className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 sm:text-2xl"
+                >
                   Votre commande
                 </h2>
 
@@ -852,39 +1004,49 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               </div>
 
               <button
+                type="button"
                 onClick={() => setOrderOpen(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200"
+                aria-label="Fermer la fenêtre"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200"
               >
-                <X size={19} />
+                <X size={18} />
               </button>
             </div>
 
             {/* Résumé produit */}
-            <div className="mt-7 flex gap-4 rounded-2xl bg-[#f7f8fa] p-4">
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-white p-2">
+            <div className="mt-6 flex gap-3 rounded-2xl bg-[#f7f8fa] p-3.5 sm:mt-7 sm:gap-4 sm:p-4">
+              <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-xl bg-white p-2 sm:h-20 sm:w-20">
                 <img
                   src={images[0]}
                   alt={product.name}
+                  onError={handleImageError}
                   className="h-full w-full object-contain"
                 />
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="line-clamp-2 text-sm font-bold text-slate-900">
+                <p className="line-clamp-2 text-[12px] font-semibold leading-5 text-slate-900 sm:text-sm">
                   {product.name}
                 </p>
 
-                <p className="mt-2 text-xs text-slate-500">
+                {selectedColor && (
+                  <p className="mt-1 text-[10px] text-slate-500">
+                    Couleur : {selectedColor}
+                  </p>
+                )}
+
+                <p className="mt-1.5 text-[11px] text-slate-500">
                   Quantité : {quantity}
                 </p>
 
-                <p className="mt-2 font-extrabold text-blue-600">
+                <p className="mt-1.5 text-sm font-bold text-blue-600">
                   {formatPrice(total)}
                 </p>
               </div>
             </div>
 
-            <form onSubmit={handleOrder} className="mt-7 space-y-4">
+            {/* FORMULAIRE */}
+            <form onSubmit={handleOrder} className="mt-6 space-y-4 sm:mt-7">
               {[
                 {
                   name: "name",
@@ -895,7 +1057,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 {
                   name: "phone",
                   label: "Téléphone",
-                  placeholder: "Ex : 690 00 00 00",
+                  placeholder: "Ex : 690 46 18 30",
                   type: "tel",
                 },
                 {
@@ -912,29 +1074,36 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 },
               ].map((field) => (
                 <div key={field.name}>
-                  <label className="mb-2 block text-xs font-bold text-slate-700">
+                  <label
+                    htmlFor={`customer-${field.name}`}
+                    className="mb-2 block text-[11px] font-semibold text-slate-700 sm:text-xs"
+                  >
                     {field.label}
                   </label>
 
                   <input
+                    id={`customer-${field.name}`}
+                    name={field.name}
                     required
                     type={field.type}
                     value={customer[field.name]}
-                    onChange={(event) =>
-                      setCustomer((current) => ({
-                        ...current,
-                        [field.name]: event.target.value,
-                      }))
-                    }
+                    onChange={updateCustomer}
                     placeholder={field.placeholder}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                    autoComplete={
+                      field.name === "name"
+                        ? "name"
+                        : field.name === "phone"
+                          ? "tel"
+                          : "off"
+                    }
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-[13px] text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
                   />
                 </div>
               ))}
 
               <button
                 type="submit"
-                className="mt-3 flex w-full items-center justify-center gap-3 rounded-xl bg-[#159b55] py-4 text-sm font-bold text-white transition hover:bg-[#128348]"
+                className="mt-2 flex w-full items-center justify-center gap-3 rounded-xl bg-[#159b55] py-4 text-[13px] font-semibold text-white transition hover:bg-[#128348] active:scale-[0.99]"
               >
                 <MessageCircle size={19} />
                 Continuer sur WhatsApp

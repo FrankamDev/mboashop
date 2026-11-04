@@ -8,12 +8,11 @@ import { CartProvider } from "./context/CartContext";
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-     <CartProvider>
- <ToastProvider>
-
-    <App />
- </ToastProvider>
-     </CartProvider>
+      <CartProvider>
+        <ToastProvider>
+          <App />
+        </ToastProvider>
+      </CartProvider>
     </BrowserRouter>
   </StrictMode>,
 )
