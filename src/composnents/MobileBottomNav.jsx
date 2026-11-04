@@ -69,8 +69,8 @@ export default function MobileBottomNav() {
       {/* RECHERCHE INSTANTANÉE */}
       <div
         className={`fixed inset-x-0 bottom-[76px] z-[70] px-3 transition-all duration-300 md:hidden ${searchOpen
-            ? "visible translate-y-0 opacity-100"
-            : "invisible translate-y-5 opacity-0 pointer-events-none"
+          ? "visible translate-y-0 opacity-100"
+          : "invisible translate-y-5 opacity-0 pointer-events-none"
           }`}
       >
         <div className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15">

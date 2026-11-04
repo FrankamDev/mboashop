@@ -16936,7 +16936,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 						src: images[activeImage],
 						alt: product.name,
-						className: "max-h-[85vh] max-w-[85vw] object-contain drop-shadow-2xl",
+						className: "relative z-10 block h-full w-full select-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)] animate-in fade-in zoom-in-95 duration-300",
+						draggable: "false",
 						onClick: (event) => event.stopPropagation()
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {

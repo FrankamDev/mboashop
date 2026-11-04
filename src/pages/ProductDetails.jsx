@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -806,7 +805,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
           <img
             src={images[activeImage]}
             alt={product.name}
-            className="max-h-[85vh] max-w-[85vw] object-contain drop-shadow-2xl"
+           className="relative z-10 block h-full w-full select-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)] animate-in fade-in zoom-in-95 duration-300"
+      draggable="false"
             onClick={(event) => event.stopPropagation()}
           />
 
