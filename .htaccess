@@ -1,10 +1,18 @@
-<IfModule mod_rewrite.c>
+<!-- <IfModule mod_rewrite.c>
     RewriteEngine On
 
     RewriteRule ^$ dist/index.html [L]
 
     RewriteCond %{REQUEST_URI} !^/dist/
     RewriteRule ^(.*)$ dist/$1 [L]
-</IfModule>
+</IfModule> -->
 
-club bantou
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>
