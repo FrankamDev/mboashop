@@ -2,81 +2,69 @@
 export const products = [
   {
     id: 1,
-  slug: "montre-elegance-premium",
-  name: "Montre Élégance Premium",
-  category: "Accessoires",
-
-  shortDescription:
-    "Une montre raffinée pour affirmer votre style au quotidien.",
-
-  description:
-    "Découvrez notre montre Élégance Premium. Avec son bracelet en acier inoxydable, son cadran raffiné et son design intemporel, elle apporte une touche de sophistication à toutes vos tenues. Idéale pour le travail, les sorties et les occasions spéciales.",
-
-  price: 12999,
-  oldPrice: 18000,
-  currency: "XAF",
-
-  images: [
-    "/images/products/montres/m1.jpg",
-    "/images/products/montres/m2.jpg",
-    "/images/products/montres/m3.jpg",
-    "/images/products/montres/m4.jpg",
-  ],
-
-  specifications: [
-    { label: "Matière", value: "Acier inoxydable" },
-    { label: "Mouvement", value: "Quartz" },
-    { label: "Affichage", value: "Analogique" },
-    { label: "Bracelet", value: "Acier ajustable" },
-    { label: "Fermeture", value: "Boucle déployante" },
-    { label: "Style", value: "Élégant et moderne" },
-  ],
-
-  variants: {
-    colors: ["Noir et or", "Argent", "Or"],
-    sizes: [],
+    slug: "montre-elegance-premium",
+    name: "Montre Élégance Premium",
+    category: "Accessoires",
+    shortDescription:
+      "Une montre raffinée pour affirmer votre style au quotidien.",
+    description:
+      "Découvrez notre montre Élégance Premium. Avec son bracelet en acier inoxydable, son cadran raffiné et son design intemporel, elle apporte une touche de sophistication à toutes vos tenues. Idéale pour le travail, les sorties et les occasions spéciales.",
+    price: 12999,
+    oldPrice: 18000,
+    currency: "XAF",
+    images: [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?auto=format&fit=crop&w=900&q=85",
+    ],
+    specifications: [
+      { label: "Matière", value: "Acier inoxydable" },
+      { label: "Mouvement", value: "Quartz" },
+      { label: "Affichage", value: "Analogique" },
+      { label: "Bracelet", value: "Acier ajustable" },
+      { label: "Fermeture", value: "Boucle déployante" },
+      { label: "Style", value: "Élégant et moderne" },
+    ],
+    variants: {
+      colors: ["Noir et or", "Argent", "Or"],
+      sizes: [],
+    },
+    stock: 15,
+    rating: 4.8,
+    reviewsCount: 120,
+    badge: "BESTSELLER",
+    featured: true,
+    isNew: false,
+    isPublished: true,
+    tags: ["montre", "accessoire", "élégance", "homme", "cadeau"],
   },
 
-  stock: 15,
-  rating: 4.8,
-  reviewsCount: 120,
-
-  badge: "BESTSELLER",
-  featured: true,
-  isNew: false,
-  isPublished: true,
-
-  tags: [
-    "montre",
-    "accessoire",
-    "élégance",
-    "homme",
-    "cadeau",
-  ],
-  },
   {
     id: 2,
     slug: "montre-connecte",
     name: "Montre connectée",
     category: "Électronique",
-    shortDescription: "Transformez votre chambre en salle de cinéma.",
+    shortDescription:
+      "Transformez votre chambre en salle de cinéma.",
     description:
       "Un mini-projecteur compact pour profiter de vos films, séries et présentations sur grand écran.",
     price: 15999,
     oldPrice: 22000,
     currency: "FCFA",
     images: [
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Résolution", value: "HD" },
       { label: "Connectivité", value: "HDMI, USB" },
       { label: "Utilisation", value: "Maison et bureau" },
     ],
-    variants: { colors: ["Blanc"], sizes: [] },
+    variants: {
+      colors: ["Blanc"],
+      sizes: [],
+    },
     stock: 8,
     rating: 4.7,
     reviewsCount: 96,
@@ -86,6 +74,7 @@ export const products = [
     isPublished: true,
     tags: ["projecteur", "cinéma", "maison"],
   },
+
   {
     id: 3,
     slug: "chargeur-rapide-usb-c",
@@ -98,17 +87,18 @@ export const products = [
     oldPrice: 14000,
     currency: "FCFA",
     images: [
-      "/images/products/chargeurs/c1.jpg",
-      "/images/products/chargeurs/c1.jpg",
-      "/images/products/chargeurs/c1.jpg",
-      "/images/products/chargeurs/c1.jpg",
+      "https://images.unsplash.com/photo-1591290619762-c588e4b4b5d7?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1609592424832-9c1c4b8f9f5b?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Connecteur", value: "USB-C" },
       { label: "Format", value: "Compact" },
       { label: "Compatibilité", value: "Appareils compatibles USB-C" },
     ],
-    variants: { colors: ["Noir", "Blanc"], sizes: [] },
+    variants: {
+      colors: ["Noir", "Blanc"],
+      sizes: [],
+    },
     stock: 25,
     rating: 4.6,
     reviewsCount: 74,
@@ -118,6 +108,7 @@ export const products = [
     isPublished: true,
     tags: ["chargeur", "usb-c", "téléphone"],
   },
+
   {
     id: 4,
     slug: "montre-connectee",
@@ -130,17 +121,18 @@ export const products = [
     oldPrice: 16000,
     currency: "FCFA",
     images: [
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
-      "/images/products/montres/m2.jpg",
+      "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Écran", value: "Tactile" },
       { label: "Connexion", value: "Bluetooth" },
       { label: "Bracelet", value: "Ajustable" },
     ],
-    variants: { colors: ["Noir", "Rose", "Argent"], sizes: [] },
+    variants: {
+      colors: ["Noir", "Rose", "Argent"],
+      sizes: [],
+    },
     stock: 12,
     rating: 4.9,
     reviewsCount: 52,
@@ -150,6 +142,7 @@ export const products = [
     isPublished: true,
     tags: ["montre", "connectée", "accessoire"],
   },
+
   {
     id: 5,
     slug: "enceinte-bluetooth",
@@ -162,16 +155,19 @@ export const products = [
     oldPrice: 11000,
     currency: "FCFA",
     images: [
-      "/images/products/bluetooth/1.webp",
-      "/images/products/bluetooth/3.webp",
-      "/images/products/bluetooth/4.webp",
+      "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Connexion", value: "Bluetooth" },
       { label: "Format", value: "Portable" },
       { label: "Recharge", value: "USB" },
     ],
-    variants: { colors: ["Noir", "Bleu", "Rouge"], sizes: [] },
+    variants: {
+      colors: ["Noir", "Bleu", "Rouge"],
+      sizes: [],
+    },
     stock: 20,
     rating: 4.5,
     reviewsCount: 43,
@@ -181,6 +177,7 @@ export const products = [
     isPublished: true,
     tags: ["enceinte", "musique", "bluetooth"],
   },
+
   {
     id: 6,
     slug: "manette-gaming",
@@ -193,17 +190,18 @@ export const products = [
     oldPrice: 15000,
     currency: "FCFA",
     images: [
-      "/images/products/manette-gaming/1.webp",
-      "/images/products/manette-gaming/2.webp",
-      "/images/products/manette-gaming/3.webp",
-      "/images/products/manette-gaming/4.webp",
+      "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Connexion", value: "Sans fil" },
       { label: "Utilisation", value: "Gaming" },
       { label: "Prise en main", value: "Ergonomique" },
     ],
-    variants: { colors: ["Noir", "Blanc"], sizes: [] },
+    variants: {
+      colors: ["Noir", "Blanc"],
+      sizes: [],
+    },
     stock: 10,
     rating: 4.7,
     reviewsCount: 35,
@@ -213,6 +211,7 @@ export const products = [
     isPublished: true,
     tags: ["gaming", "manette", "jeux"],
   },
+
   {
     id: 7,
     slug: "blender-electrique",
@@ -225,17 +224,18 @@ export const products = [
     oldPrice: 10000,
     currency: "XAF",
     images: [
-      "/images/products/blender/1.jpg",
-      "/images/products/blender/2.jpg",
-      "/images/products/blender/3.jpg",
-      "/images/products/blender/4.jpg",
+      "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Utilisation", value: "Préparation alimentaire" },
       { label: "Nettoyage", value: "Facile" },
       { label: "Alimentation", value: "Électrique" },
     ],
-    variants: { colors: ["Blanc", "Noir"], sizes: [] },
+    variants: {
+      colors: ["Blanc", "Noir"],
+      sizes: [],
+    },
     stock: 9,
     rating: 4.6,
     reviewsCount: 28,
@@ -245,6 +245,7 @@ export const products = [
     isPublished: true,
     tags: ["blender", "cuisine", "maison"],
   },
+
   {
     id: 8,
     slug: "lampe-led-decorative",
@@ -257,17 +258,18 @@ export const products = [
     oldPrice: 9000,
     currency: "XAF",
     images: [
-      "/images/products/lampes/1.webp",
-      "/images/products/lampes/2.webp",
-      "/images/products/lampes/3.webp",
-      "/images/products/lampes/4.webp",
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Éclairage", value: "LED" },
       { label: "Usage", value: "Intérieur" },
       { label: "Style", value: "Décoratif" },
     ],
-    variants: { colors: ["Blanc", "Multicolore"], sizes: [] },
+    variants: {
+      colors: ["Blanc", "Multicolore"],
+      sizes: [],
+    },
     stock: 18,
     rating: 4.4,
     reviewsCount: 19,
@@ -277,6 +279,7 @@ export const products = [
     isPublished: true,
     tags: ["lampe", "led", "décoration"],
   },
+
   {
     id: 9,
     slug: "clavier-mecanique",
@@ -289,17 +292,18 @@ export const products = [
     oldPrice: 19000,
     currency: "XAF",
     images: [
-      "/images/products/images/1.webp",
-      "/images/products/images/2.webp",
-      "/images/products/images/3.webp",
-      "/images/products/images/4.webp",
+      "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Type", value: "Mécanique" },
       { label: "Connexion", value: "USB" },
       { label: "Utilisation", value: "Bureau et gaming" },
     ],
-    variants: { colors: ["Noir", "Blanc"], sizes: [] },
+    variants: {
+      colors: ["Noir", "Blanc"],
+      sizes: [],
+    },
     stock: 7,
     rating: 4.8,
     reviewsCount: 62,
@@ -309,6 +313,7 @@ export const products = [
     isPublished: true,
     tags: ["clavier", "informatique", "gaming"],
   },
+
   {
     id: 10,
     slug: "mini-camera-webcam",
@@ -321,17 +326,18 @@ export const products = [
     oldPrice: 12500,
     currency: "XAF",
     images: [
-      "/images/products/images/1.webp",
-      "/images/products/images/2.webp",
-      "/images/products/images/3.webp",
-      "/images/products/images/4.webp",
+      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=900&q=85",
     ],
     specifications: [
       { label: "Résolution", value: "HD" },
       { label: "Connexion", value: "USB" },
       { label: "Usage", value: "Visioconférence" },
     ],
-    variants: { colors: ["Noir"], sizes: [] },
+    variants: {
+      colors: ["Noir"],
+      sizes: [],
+    },
     stock: 11,
     rating: 4.5,
     reviewsCount: 21,

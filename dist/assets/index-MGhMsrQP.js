@@ -13712,6 +13712,21 @@ function isModifiedEvent(event) {
 function shouldProcessLinkClick(event, target) {
 	return event.button === 0 && (!target || target === "_self") && !isModifiedEvent(event);
 }
+function createSearchParams(init = "") {
+	return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo2, key) => {
+		let value = init[key];
+		return memo2.concat(Array.isArray(value) ? value.map((v) => [key, v]) : [[key, value]]);
+	}, []));
+}
+function getSearchParamsForLocation(locationSearch, defaultSearchParams) {
+	let searchParams = createSearchParams(locationSearch);
+	if (defaultSearchParams) defaultSearchParams.forEach((_, key) => {
+		if (!searchParams.has(key)) defaultSearchParams.getAll(key).forEach((value) => {
+			searchParams.append(key, value);
+		});
+	});
+	return searchParams;
+}
 var _formDataSupportsSubmitter = null;
 function isFormDataSubmitterSupported() {
 	if (_formDataSupportsSubmitter === null) try {
@@ -14597,6 +14612,19 @@ function useLinkClickHandler(to, { target, replace: replaceProp, mask, state, pr
 		defaultShouldRevalidate,
 		useTransitions
 	]);
+}
+function useSearchParams(defaultInit) {
+	warning(typeof URLSearchParams !== "undefined", `You cannot use the \`useSearchParams\` hook in a browser that does not support the URLSearchParams API. If you need to support Internet Explorer 11, we recommend you load a polyfill such as https://github.com/ungap/url-search-params.`);
+	let defaultSearchParamsRef = import_react.useRef(createSearchParams(defaultInit));
+	let hasSetSearchParamsRef = import_react.useRef(false);
+	let location = useLocation();
+	let searchParams = import_react.useMemo(() => getSearchParamsForLocation(location.search, hasSetSearchParamsRef.current ? null : defaultSearchParamsRef.current), [location.search]);
+	let navigate = useNavigate();
+	return [searchParams, import_react.useCallback((nextInit, navigateOptions) => {
+		const newSearchParams = createSearchParams(typeof nextInit === "function" ? nextInit(new URLSearchParams(searchParams)) : nextInit);
+		hasSetSearchParamsRef.current = true;
+		navigate("?" + newSearchParams, navigateOptions);
+	}, [navigate, searchParams])];
 }
 var fetcherId = 0;
 var getUniqueFetcherId = () => `__${String(++fetcherId)}__`;
@@ -15710,10 +15738,9 @@ var products = [
 		oldPrice: 18e3,
 		currency: "XAF",
 		images: [
-			"/images/products/montres/m1.jpg",
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m3.jpg",
-			"/images/products/montres/m4.jpg"
+			"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?auto=format&fit=crop&w=900&q=85"
 		],
 		specifications: [
 			{
@@ -15775,10 +15802,9 @@ var products = [
 		oldPrice: 22e3,
 		currency: "FCFA",
 		images: [
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg"
+			"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85"
 		],
 		specifications: [
 			{
@@ -15821,12 +15847,7 @@ var products = [
 		price: 9999,
 		oldPrice: 14e3,
 		currency: "FCFA",
-		images: [
-			"/images/products/chargeurs/c1.jpg",
-			"/images/products/chargeurs/c1.jpg",
-			"/images/products/chargeurs/c1.jpg",
-			"/images/products/chargeurs/c1.jpg"
-		],
+		images: ["https://images.unsplash.com/photo-1591290619762-c588e4b4b5d7?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1609592424832-9c1c4b8f9f5b?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Connecteur",
@@ -15868,12 +15889,7 @@ var products = [
 		price: 12500,
 		oldPrice: 16e3,
 		currency: "FCFA",
-		images: [
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg",
-			"/images/products/montres/m2.jpg"
-		],
+		images: ["https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Écran",
@@ -15920,9 +15936,9 @@ var products = [
 		oldPrice: 11e3,
 		currency: "FCFA",
 		images: [
-			"/images/products/bluetooth/1.webp",
-			"/images/products/bluetooth/3.webp",
-			"/images/products/bluetooth/4.webp"
+			"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=85",
+			"https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=900&q=85"
 		],
 		specifications: [
 			{
@@ -15969,12 +15985,7 @@ var products = [
 		price: 11500,
 		oldPrice: 15e3,
 		currency: "FCFA",
-		images: [
-			"/images/products/manette-gaming/1.webp",
-			"/images/products/manette-gaming/2.webp",
-			"/images/products/manette-gaming/3.webp",
-			"/images/products/manette-gaming/4.webp"
-		],
+		images: ["https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Connexion",
@@ -16016,12 +16027,7 @@ var products = [
 		price: 7500,
 		oldPrice: 1e4,
 		currency: "XAF",
-		images: [
-			"/images/products/blender/1.jpg",
-			"/images/products/blender/2.jpg",
-			"/images/products/blender/3.jpg",
-			"/images/products/blender/4.jpg"
-		],
+		images: ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Utilisation",
@@ -16063,12 +16069,7 @@ var products = [
 		price: 6500,
 		oldPrice: 9e3,
 		currency: "XAF",
-		images: [
-			"/images/products/lampes/1.webp",
-			"/images/products/lampes/2.webp",
-			"/images/products/lampes/3.webp",
-			"/images/products/lampes/4.webp"
-		],
+		images: ["https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Éclairage",
@@ -16110,12 +16111,7 @@ var products = [
 		price: 14500,
 		oldPrice: 19e3,
 		currency: "XAF",
-		images: [
-			"/images/products/images/1.webp",
-			"/images/products/images/2.webp",
-			"/images/products/images/3.webp",
-			"/images/products/images/4.webp"
-		],
+		images: ["https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Type",
@@ -16157,12 +16153,7 @@ var products = [
 		price: 9500,
 		oldPrice: 12500,
 		currency: "XAF",
-		images: [
-			"/images/products/images/1.webp",
-			"/images/products/images/2.webp",
-			"/images/products/images/3.webp",
-			"/images/products/images/4.webp"
-		],
+		images: ["https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85", "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=900&q=85"],
 		specifications: [
 			{
 				label: "Résolution",
@@ -16305,13 +16296,28 @@ var categories = [
 	"Home",
 	"Computers"
 ];
+var normalize$1 = (value = "") => String(value).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 function AllProducts({ onAddToCart = () => {} }) {
-	const [search, setSearch] = (0, import_react.useState)("");
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [search, setSearch] = (0, import_react.useState)(searchParams.get("search") || "");
 	const [category, setCategory] = (0, import_react.useState)("All");
-	const [sort, setSort] = (0, import_react.useState)("featured");
+	const [sort, setSort] = (0, import_react.useState)(searchParams.get("sort") || "featured");
+	(0, import_react.useEffect)(() => {
+		setSearch(searchParams.get("search") || "");
+		setSort(searchParams.get("sort") || "featured");
+	}, [searchParams]);
 	const filteredProducts = (0, import_react.useMemo)(() => {
-		let result = [...products];
-		if (search.trim()) result = result.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
+		let result = products.filter((product) => product.isPublished !== false);
+		const query = normalize$1(search);
+		if (query) result = result.filter((product) => {
+			return normalize$1([
+				product.name,
+				product.category,
+				product.shortDescription,
+				product.description,
+				...product.tags || []
+			].join(" ")).includes(query);
+		});
 		if (category !== "All") result = result.filter((product) => product.category === category);
 		switch (sort) {
 			case "price-asc":
@@ -16321,9 +16327,9 @@ function AllProducts({ onAddToCart = () => {} }) {
 				result.sort((a, b) => b.price - a.price);
 				break;
 			case "rating":
-				result.sort((a, b) => b.rating - a.rating);
+				result.sort((a, b) => Number(b.rating || 0) - Number(a.rating || 0));
 				break;
-			case "popular": result.sort((a, b) => (b.reviewsCount || b.reviews || 0) - (a.reviewsCount || a.reviews || 0));
+			case "popular": result.sort((a, b) => Number(b.reviewsCount || b.reviews || 0) - Number(a.reviewsCount || a.reviews || 0));
 		}
 		return result;
 	}, [
@@ -16335,67 +16341,122 @@ function AllProducts({ onAddToCart = () => {} }) {
 		setSearch("");
 		setCategory("All");
 		setSort("featured");
+		setSearchParams({});
+	};
+	const clearSearch = () => {
+		setSearch("");
+		const params = new URLSearchParams(searchParams);
+		params.delete("search");
+		setSearchParams(params);
 	};
 	const hasActiveFilters = search.trim() !== "" || category !== "All" || sort !== "featured";
+	const handleSortChange = (value) => {
+		setSort(value);
+		const params = new URLSearchParams(searchParams);
+		if (value === "featured") params.delete("sort");
+		else params.set("sort", value);
+		setSearchParams(params);
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-		className: "min-h-screen bg-gray-50/50 pb-20",
+		className: "min-h-screen overflow-hidden bg-[#f8f9fb] pb-24 font-sans text-slate-900",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navbar, {}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "mx-auto max-w-[1440px] px-4 pt-7 sm:px-8 sm:pt-10 lg:px-12",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "relative overflow-hidden rounded-[22px] border border-slate-100 bg-white px-5 py-7 shadow-[0_12px_40px_-30px_rgba(15,23,42,0.2)] sm:rounded-[28px] sm:px-8 sm:py-9 lg:px-10",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-blue-100/60 blur-3xl" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -bottom-24 right-[20%] h-48 w-48 rounded-full bg-indigo-100/50 blur-3xl" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative z-10",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+										size: 13,
+										className: "text-blue-600"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[9px] font-semibold uppercase tracking-[0.14em] text-blue-700 sm:text-[10px]",
+										children: "MBOASHOP STORE"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+									className: "mt-4 max-w-2xl text-[28px] font-bold leading-[1.12] tracking-[-0.045em] text-slate-950 sm:text-4xl lg:text-[42px]",
+									children: ["Tous nos produits,", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-blue-700",
+										children: "au même endroit."
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "mt-3 max-w-xl text-[12px] leading-6 text-slate-500 sm:text-sm sm:leading-7",
+									children: "Découvrez notre catalogue et trouvez les produits qui correspondent à vos besoins, au meilleur prix."
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "mt-5 flex items-center gap-2 text-[11px] font-medium text-slate-500",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, {
+										size: 15,
+										className: "text-blue-600"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [filteredProducts.length, " produit(s) disponible(s)"] })]
+								})
+							]
+						})
+					]
+				})
+			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				className: "mx-auto max-w-7xl px-3.5 pt-4 sm:px-6 sm:pt-8",
+				className: "mx-auto max-w-[1440px] px-4 pt-7 sm:px-8 sm:pt-9 lg:px-12",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "mb-6 space-y-1",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-[11px] font-bold uppercase tracking-widest text-blue-600",
-								children: "MBOASHOP STORE"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-								className: "text-2xl font-black tracking-tight text-gray-950 sm:text-4xl",
-								children: "Tous nos produits"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-xs text-gray-500 sm:text-sm",
-								children: "Découvrez notre catalogue complet et trouvez ce qu'il vous faut au meilleur prix."
-							})
-						]
+						className: "mb-4 flex items-center justify-between gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-600",
+							children: "Notre catalogue"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "mt-1 text-[19px] font-bold tracking-[-0.035em] text-slate-950 sm:text-2xl",
+							children: "Explorer la boutique"
+						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white text-slate-500 sm:hidden",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 17 })
+						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex flex-col gap-3 sm:flex-row sm:items-center",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative flex-1",
+							className: "relative min-w-0 flex-1",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
 									size: 18,
-									className: "absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+									className: "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "text",
+									type: "search",
 									value: search,
-									onChange: (e) => setSearch(e.target.value),
+									onChange: (event) => setSearch(event.target.value),
 									placeholder: "Rechercher un produit...",
-									className: "h-11 w-full rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-medium text-gray-900 shadow-xs transition-all placeholder:text-gray-400 focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm"
+									"aria-label": "Rechercher un produit",
+									className: "h-[48px] w-full rounded-xl border border-slate-200 bg-white pl-11 pr-11 text-[12px] font-medium text-slate-800 shadow-sm outline-none transition placeholder:font-normal placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 sm:h-[50px] sm:text-[13px]"
 								}),
 								search && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 									type: "button",
-									onClick: () => setSearch(""),
+									onClick: clearSearch,
 									"aria-label": "Effacer la recherche",
-									className: "absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200",
+									className: "absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg bg-slate-100 text-slate-500 transition hover:bg-slate-200",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 14 })
 								})
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative min-w-[180px] sm:w-56",
+							className: "relative w-full sm:w-[230px] sm:shrink-0",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpDown, {
 									size: 16,
-									className: "pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"
+									className: "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
 									value: sort,
-									onChange: (e) => setSort(e.target.value),
-									className: "h-11 w-full appearance-none rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-bold text-gray-700 shadow-xs transition-all focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm",
+									onChange: (event) => handleSortChange(event.target.value),
+									"aria-label": "Trier les produits",
+									className: "h-[48px] w-full appearance-none rounded-xl border border-slate-200 bg-white pl-11 pr-10 text-[12px] font-semibold text-slate-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 sm:h-[50px] sm:text-[13px]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
 											value: "featured",
@@ -16411,82 +16472,120 @@ function AllProducts({ onAddToCart = () => {} }) {
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
 											value: "price-asc",
-											children: "Prix : Croissant"
+											children: "Prix : croissant"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
 											value: "price-desc",
-											children: "Prix : Décroissant"
+											children: "Prix : décroissant"
 										})
 									]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
 									size: 16,
-									className: "pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+									className: "pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
 								})
 							]
 						})]
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "mt-4 flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none",
-						children: categories.map((item) => {
-							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								type: "button",
-								onClick: () => setCategory(item),
-								className: `flex min-h-[40px] shrink-0 items-center rounded-xl px-4 text-xs font-bold transition-all active:scale-95 ${category === item ? "bg-blue-600 text-white shadow-md shadow-blue-500/20" : "border border-gray-200/80 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900"}`,
-								children: item === "All" ? "Tous les produits" : item
-							}, item);
-						})
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-5",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mb-3 flex items-center justify-between",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[11px] font-semibold text-slate-700",
+								children: "Catégories"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[10px] font-medium text-slate-400",
+								children: "Faites défiler"
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 scrollbar-hide sm:mx-0 sm:px-0",
+							children: categories.map((item) => {
+								const isActive = category === item;
+								return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+									type: "button",
+									onClick: () => setCategory(item),
+									"aria-pressed": isActive,
+									className: `flex min-h-[39px] shrink-0 items-center justify-center rounded-xl px-4 text-[11px] font-semibold transition-all duration-200 active:scale-95 sm:text-xs ${isActive ? "bg-blue-700 text-white shadow-[0_5px_15px_-5px_rgba(37,99,235,0.5)]" : "border border-slate-200 bg-white text-slate-600 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"}`,
+									children: item === "All" ? "Tous les produits" : item
+								}, item);
+							})
+						})]
 					})
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				className: "mx-auto mt-6 max-w-7xl px-3.5 sm:px-6",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mb-4 flex items-center justify-between gap-2 border-b border-gray-100 pb-3",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-sm font-bold text-gray-900 sm:text-base",
-						children: "Explorer le catalogue"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						className: "text-xs text-gray-500",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-semibold text-gray-900",
-							children: filteredProducts.length
-						}), " produit(s) trouvé(s)"]
-					})] }), hasActiveFilters && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						type: "button",
-						onClick: resetFilters,
-						className: "flex min-h-[36px] items-center gap-1.5 rounded-lg border border-rose-100 bg-rose-50/80 px-3 text-xs font-bold text-rose-600 transition-all hover:bg-rose-100 active:scale-95",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 14 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Réinitialiser" })]
-					})]
-				}), filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5",
-					children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
-						product,
-						onAddToCart
-					}, product.id))
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "my-8 flex flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white px-4 py-12 text-center shadow-xs sm:py-16",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mb-4",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageSearch, { size: 32 })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-base font-extrabold text-gray-900 sm:text-lg",
-							children: "Aucun produit ne correspond à votre recherche"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "mt-1.5 max-w-md text-xs text-gray-500 sm:text-sm",
-							children: "Essayez de modifier votre terme de recherche ou de changer les filtres de catégorie."
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+				className: "mx-auto mt-6 max-w-[1440px] px-4 sm:px-8 lg:px-12",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mb-5 flex items-center justify-between gap-3 border-b border-slate-200/70 pb-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-[13px] font-bold tracking-[-0.02em] text-slate-900 sm:text-base",
+							children: search.trim() ? "Résultats de recherche" : category !== "All" ? category : "Tous les produits"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							className: "mt-1 text-[10px] text-slate-400 sm:text-xs",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-semibold text-slate-700",
+									children: filteredProducts.length
+								}),
+								" ",
+								"produit(s) trouvé(s)"
+							]
+						})] }), hasActiveFilters && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 							type: "button",
 							onClick: resetFilters,
-							className: "mt-6 flex min-h-[44px] items-center justify-center rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:bg-blue-700 active:scale-95 sm:text-sm",
-							children: "Réinitialiser tous les filtres"
+							className: "flex min-h-[35px] shrink-0 items-center gap-1.5 rounded-lg border border-red-100 bg-red-50 px-3 text-[10px] font-semibold text-red-600 transition hover:bg-red-100 sm:text-xs",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 13 }), "Réinitialiser"]
+						})]
+					}),
+					filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "grid grid-cols-2 items-stretch gap-2.5 min-[390px]:gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5",
+						children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "min-w-0",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
+								product,
+								onAddToCart
+							})
+						}, product.id))
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "my-8 flex flex-col items-center justify-center rounded-[22px] border border-dashed border-slate-200 bg-white px-5 py-12 text-center sm:my-10 sm:rounded-[28px] sm:py-16",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue-600",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageSearch, {
+									size: 30,
+									strokeWidth: 1.7
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "max-w-md text-[16px] font-bold tracking-[-0.03em] text-slate-900 sm:text-xl",
+								children: "Aucun produit trouvé"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-2 max-w-sm text-[11px] leading-6 text-slate-500 sm:text-sm",
+								children: "Aucun produit ne correspond à votre recherche. Essayez un autre nom ou modifiez vos filtres."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+								type: "button",
+								onClick: resetFilters,
+								className: "mt-6 flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-700 px-6 text-[11px] font-semibold text-white shadow-md shadow-blue-500/20 transition hover:bg-blue-800 active:scale-95 sm:text-xs",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 15 }), "Réinitialiser les filtres"]
+							})
+						]
+					}),
+					filteredProducts.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "mt-10 border-t border-slate-200/70 py-7 text-center",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							className: "text-[10px] font-medium text-slate-400 sm:text-xs",
+							children: [
+								"Vous consultez les ",
+								filteredProducts.length,
+								" produit(s) correspondant à votre sélection."
+							]
 						})
-					]
-				})]
+					})
+				]
 			})
 		]
 	});
