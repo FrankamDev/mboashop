@@ -1,17 +1,15 @@
-
 import { useMemo, useState } from "react";
 import {
   Search,
-  
   ArrowUpDown,
   X,
   PackageSearch,
+  ChevronDown,
 } from "lucide-react";
 
 import { products } from "../data/products";
 import ProductCard from "../composnents/ProductCard";
 import Navbar from "../composnents/Navbar";
-// import ProductCard from "../components/ProductCard";
 
 const categories = [
   "All",
@@ -60,7 +58,7 @@ export default function AllProducts({ onAddToCart = () => {} }) {
         break;
 
       case "popular":
-        result.sort((a, b) => b.reviews - a.reviews);
+        result.sort((a, b) => (b.reviewsCount || b.reviews || 0) - (a.reviewsCount || a.reviews || 0));
         break;
 
       default:
@@ -76,112 +74,127 @@ export default function AllProducts({ onAddToCart = () => {} }) {
     setSort("featured");
   };
 
+  const hasActiveFilters = search.trim() !== "" || category !== "All" || sort !== "featured";
+
   return (
-    <main className="min-h-screen bg-gray-50 pb-16">
+    <main className="min-h-screen bg-gray-50/50 pb-20">
+      {/* NAVBAR */}
+      <Navbar />
 
-      {/* En-tête */}
-      <section className="mx-auto max-w-7xl px-4 pt-7 sm:pt-10">
-<Navbar />
-        <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
+      {/* EN-TÊTE & FILTRES */}
+      <section className="mx-auto max-w-7xl px-3.5 pt-4 sm:px-6 sm:pt-8">
+        <div className="mb-6 space-y-1">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-blue-600">
             MBOASHOP STORE
-          </p>
-
-          <h1 className="mt-2 text-2xl font-black text-gray-950 sm:text-3xl">
-            All Products
+          </span>
+          <h1 className="text-2xl font-black tracking-tight text-gray-950 sm:text-4xl">
+            Tous nos produits
           </h1>
-
-          <p className="mt-2 text-sm text-gray-500">
-            Découvrez tous nos produits et trouvez ce dont vous avez besoin.
+          <p className="text-xs text-gray-500 sm:text-sm">
+            Découvrez notre catalogue complet et trouvez ce qu'il vous faut au meilleur prix.
           </p>
         </div>
 
-        {/* Barre de recherche */}
-        <div className="flex flex-col gap-3 sm:flex-row">
-
+        {/* BARRE DE RECHERCHE ET SELECTEUR DE TRI */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          {/* Champ de recherche */}
           <div className="relative flex-1">
             <Search
-              size={19}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+              size={18}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
             />
-
             <input
-              type="search"
+              type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Rechercher un produit..."
-              className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-12 pr-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              className="h-11 w-full rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-medium text-gray-900 shadow-xs transition-all placeholder:text-gray-400 focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm"
             />
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch("")}
+                aria-label="Effacer la recherche"
+                className="absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
 
-          <div className="relative">
+          {/* Sélecteur de Tri */}
+          <div className="relative min-w-[180px] sm:w-56">
             <ArrowUpDown
-              size={17}
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+              size={16}
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"
             />
-
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="w-full appearance-none rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-10 text-sm outline-none focus:border-blue-500 sm:w-52"
+              className="h-11 w-full appearance-none rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-bold text-gray-700 shadow-xs transition-all focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm"
             >
-              <option value="featured">Featured products</option>
-              <option value="popular">Most popular</option>
-              <option value="rating">Top rated</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
+              <option value="featured">En vedette</option>
+              <option value="popular">Plus populaires</option>
+              <option value="rating">Mieux notés</option>
+              <option value="price-asc">Prix : Croissant</option>
+              <option value="price-desc">Prix : Décroissant</option>
             </select>
+            <ChevronDown
+              size={16}
+              className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+            />
           </div>
         </div>
 
-        {/* Catégories */}
-        <div className="mt-5 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {categories.map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => setCategory(item)}
-              className={`shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${
-                category === item
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "border border-gray-200 bg-white text-gray-600 hover:border-blue-400 hover:text-blue-600"
-              }`}
-            >
-              {item === "All" ? "All products" : item}
-            </button>
-          ))}
+        {/* CARROUSEL DES CATÉGORIES */}
+        <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none">
+          {categories.map((item) => {
+            const isActive = category === item;
+            return (
+              <button
+                key={item}
+                type="button"
+                onClick={() => setCategory(item)}
+                className={`flex min-h-[40px] shrink-0 items-center rounded-xl px-4 text-xs font-bold transition-all active:scale-95 ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                    : "border border-gray-200/80 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900"
+                }`}
+              >
+                {item === "All" ? "Tous les produits" : item}
+              </button>
+            );
+          })}
         </div>
-
       </section>
 
-      {/* Liste des produits */}
-      <section className="mx-auto mt-7 max-w-7xl px-4">
-
-        <div className="mb-4 flex items-center justify-between">
+      {/* LISTE DES PRODUITS & RÉSULTATS */}
+      <section className="mx-auto mt-6 max-w-7xl px-3.5 sm:px-6">
+        <div className="mb-4 flex items-center justify-between gap-2 border-b border-gray-100 pb-3">
           <div>
-            <h2 className="text-base font-bold text-gray-900">
-              Explore our products
+            <h2 className="text-sm font-bold text-gray-900 sm:text-base">
+              Explorer le catalogue
             </h2>
-
-            <p className="mt-1 text-xs text-gray-500">
-              {filteredProducts.length} product(s) found
+            <p className="text-xs text-gray-500">
+              <span className="font-semibold text-gray-900">{filteredProducts.length}</span> produit(s) trouvé(s)
             </p>
           </div>
 
-          {(search || category !== "All" || sort !== "featured") && (
+          {hasActiveFilters && (
             <button
               type="button"
               onClick={resetFilters}
-              className="flex items-center gap-1 text-xs font-semibold text-red-500 hover:text-red-700"
+              className="flex min-h-[36px] items-center gap-1.5 rounded-lg border border-rose-100 bg-rose-50/80 px-3 text-xs font-bold text-rose-600 transition-all hover:bg-rose-100 active:scale-95"
             >
-              <X size={15} />
-              Reset filters
+              <X size={14} />
+              <span>Réinitialiser</span>
             </button>
           )}
         </div>
 
+        {/* GRILLE OU EMPTY STATE */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -191,27 +204,28 @@ export default function AllProducts({ onAddToCart = () => {} }) {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-white px-5 py-16 text-center">
-            <PackageSearch size={42} className="text-gray-300" />
+          <div className="my-8 flex flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white px-4 py-12 text-center shadow-xs sm:py-16">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mb-4">
+              <PackageSearch size={32} />
+            </div>
 
-            <h3 className="mt-4 font-bold text-gray-800">
-              Aucun produit trouvé
+            <h3 className="text-base font-extrabold text-gray-900 sm:text-lg">
+              Aucun produit ne correspond à votre recherche
             </h3>
 
-            <p className="mt-2 text-sm text-gray-500">
-              Essaie une autre recherche ou change de catégorie.
+            <p className="mt-1.5 max-w-md text-xs text-gray-500 sm:text-sm">
+              Essayez de modifier votre terme de recherche ou de changer les filtres de catégorie.
             </p>
 
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-5 rounded-full bg-blue-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-blue-700"
+              className="mt-6 flex min-h-[44px] items-center justify-center rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:bg-blue-700 active:scale-95 sm:text-sm"
             >
-              Voir tous les produits
+              Réinitialiser tous les filtres
             </button>
           </div>
         )}
-
       </section>
     </main>
   );

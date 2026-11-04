@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import {
   Search,
@@ -85,11 +84,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-xl">
-
+    <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/90 backdrop-blur-md">
       {/* HEADER PRINCIPAL */}
-      <div className="relative mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6">
-
+      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-3.5 sm:h-20 sm:px-6">
         {/* MENU BURGER */}
         <button
           type="button"
@@ -99,29 +96,27 @@ export default function Navbar() {
           }}
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}
-          className="group flex items-center gap-2.5 rounded-lg py-2 pr-2"
+          className="group flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-100/80 active:scale-95"
         >
-          <div className="relative flex h-5 w-6 flex-col justify-center gap-[5px]">
+          <div className="relative flex h-5 w-5 flex-col justify-center gap-[5px]">
             <span
-              className={`h-[2px] w-6 rounded-full bg-gray-800 transition-all duration-300 ${
+              className={`h-[2px] w-5 rounded-full bg-gray-900 transition-all duration-300 ${
                 menuOpen ? "translate-y-[7px] rotate-45" : ""
               }`}
             />
-
             <span
-              className={`h-[2px] rounded-full bg-gray-800 transition-all duration-300 ${
-                menuOpen ? "w-0 opacity-0" : "w-4"
+              className={`h-[2px] rounded-full bg-gray-900 transition-all duration-300 ${
+                menuOpen ? "w-0 opacity-0" : "w-3.5"
               }`}
             />
-
             <span
-              className={`h-[2px] w-6 rounded-full bg-gray-800 transition-all duration-300 ${
+              className={`h-[2px] w-5 rounded-full bg-gray-900 transition-all duration-300 ${
                 menuOpen ? "-translate-y-[7px] -rotate-45" : ""
               }`}
             />
           </div>
 
-          <span className="text-[11px] font-extrabold tracking-[2px] text-gray-800 transition-colors group-hover:text-blue-700">
+          <span className="hidden text-xs font-black tracking-widest text-gray-900 transition-colors group-hover:text-blue-600 sm:inline-block">
             MENU
           </span>
         </button>
@@ -130,90 +125,84 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={() => setMenuOpen(false)}
-          className="absolute left-1/2 flex -translate-x-1/2 flex-col items-center"
+          className="group absolute left-1/2 flex -translate-x-1/2 flex-col items-center"
         >
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <img
               src="/images/logo.png"
               alt="MBOASHOP"
-              className="h-9 w-9 object-contain"
+              className="h-8 w-8 object-contain transition-transform group-hover:scale-105 sm:h-9 sm:w-9"
             />
-
-            <span className="whitespace-nowrap text-lg font-black tracking-tight text-gray-900 sm:text-xl">
-              MBOA<span className="text-blue-700">SHOP</span>
+            <span className="whitespace-nowrap text-lg font-black tracking-tight text-gray-950 sm:text-xl">
+              MBOA<span className="text-blue-600">SHOP</span>
             </span>
           </div>
-
-          <span className="mt-[-2px] ml-10 text-[9px] font-bold tracking-[2px] text-gray-500">
+          <span className="-mt-1 text-[8px] font-bold tracking-[2.5px] text-gray-400 sm:text-[9px]">
             E-COMMERCE
           </span>
         </Link>
 
-        {/* ACTIONS */}
-        <div className="flex items-center gap-2">
-
+        {/* ACTIONS (PANIER & WHATSAPP) */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* PANIER */}
           <Link
             to="/cart"
             aria-label={`Panier, ${cartCount} article(s)`}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition duration-300 hover:bg-blue-50 hover:text-blue-700"
+            className="relative flex h-11 w-11 items-center justify-center rounded-2xl text-gray-800 transition-all hover:bg-blue-50 hover:text-blue-600 active:scale-95"
           >
             <ShoppingCart size={21} />
-
             {cartCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 animate-in zoom-in items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm">
+              <span className="absolute right-1 top-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-extrabold text-white shadow-md shadow-blue-500/30">
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             )}
           </Link>
 
+          {/* WHATSAPP */}
           <button
             type="button"
             onClick={handleWhatsApp}
             aria-label="Contacter MBOASHOP sur WhatsApp"
-            className="group flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-[#25D366] shadow-sm transition-all duration-300 hover:scale-110 hover:bg-[#25D366] hover:text-white hover:shadow-lg hover:shadow-green-200"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 transition-all hover:bg-emerald-600 hover:text-white hover:shadow-lg hover:shadow-emerald-600/20 active:scale-95"
           >
-            <FaWhatsapp size={24} />
+            <FaWhatsapp size={22} />
           </button>
         </div>
       </div>
 
-      {/* RECHERCHE ET FILTRES */}
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6">
-
+      {/* BARRE DE RECHERCHE ET FILTRES */}
+      <div className="mx-auto flex max-w-7xl items-center gap-2.5 px-3.5 pb-3 sm:px-6">
         <form onSubmit={handleSearch} className="flex min-w-0 flex-1">
-          <div className="group flex h-12 w-full items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-lg focus-within:shadow-blue-100/70">
+          <div className="group flex h-11 w-full items-center gap-2.5 rounded-2xl border border-gray-200 bg-gray-50/80 px-3.5 shadow-xs transition-all duration-300 focus-within:border-blue-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10">
             <Search
-              size={19}
+              size={18}
               className="shrink-0 text-gray-400 transition-colors group-focus-within:text-blue-600"
             />
-
             <input
               type="search"
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
               placeholder="Rechercher un produit..."
               aria-label="Rechercher un produit"
-              className="w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+              className="w-full min-w-0 bg-transparent text-xs font-medium text-gray-900 outline-none placeholder:text-gray-400 sm:text-sm"
             />
-
             {searchValue && (
               <button
                 type="button"
                 onClick={() => setSearchValue("")}
                 aria-label="Effacer la recherche"
-                className="shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-800"
+                className="shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-200 hover:text-gray-700"
               >
-                <X size={16} />
+                <X size={15} />
               </button>
             )}
-
             <button
               type="submit"
               disabled={!searchValue.trim()}
               aria-label="Lancer la recherche"
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition-all hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <Search size={15} />
+              <Search size={14} />
             </button>
           </div>
         </form>
@@ -228,119 +217,117 @@ export default function Navbar() {
             }}
             aria-label="Ouvrir les filtres"
             aria-expanded={filterOpen}
-            className={`relative flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 active:scale-95 ${
+            className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-300 active:scale-95 ${
               filterOpen
-                ? "border-blue-700 bg-blue-700 text-white shadow-lg shadow-blue-200"
-                : "border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                ? "border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50"
             }`}
           >
-            {filterOpen ? <X size={20} /> : <SlidersHorizontal size={20} />}
+            {filterOpen ? <X size={19} /> : <SlidersHorizontal size={19} />}
           </button>
 
           {/* PANNEAU DE FILTRAGE */}
           <div
-            className={`absolute right-0 top-[calc(100%+12px)] z-[60] w-[min(320px,calc(100vw-32px))] origin-top-right transition-all duration-300 ${
+            className={`absolute right-0 top-[calc(100%+10px)] z-[60] w-[min(320px,calc(100vw-28px))] origin-top-right transition-all duration-300 ${
               filterOpen
                 ? "visible translate-y-0 scale-100 opacity-100"
-                : "invisible -translate-y-3 scale-95 opacity-0"
+                : "invisible -translate-y-2 scale-95 opacity-0"
             }`}
           >
-            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/10">
-
-              <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-5 py-4 text-white">
+            <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-4 text-white">
                 <div className="flex items-center gap-2">
-                  <SlidersHorizontal size={19} />
-                  <h3 className="font-bold">Filtrer les produits</h3>
+                  <SlidersHorizontal size={18} />
+                  <h3 className="text-sm font-extrabold">Filtrer les produits</h3>
                 </div>
-                <p className="mt-1 text-xs text-blue-100">
+                <p className="mt-1 text-xs text-blue-100/90">
                   Trouvez rapidement ce que vous recherchez.
                 </p>
               </div>
 
-              <div className="space-y-2 p-3">
-
-                <p className="px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[1.5px] text-gray-400">
+              <div className="space-y-1 p-2.5">
+                <p className="px-3 pb-1 pt-2 text-[10px] font-black uppercase tracking-wider text-gray-400">
                   Trier les produits
                 </p>
 
                 <button
                   onClick={() => applyFilter("price-asc")}
-                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50"
+                  className="group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-blue-50/80 active:scale-[0.99]"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700 transition group-hover:bg-blue-100">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-100">
                     <ArrowDownWideNarrow size={18} />
                   </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-gray-800">
+                  <div>
+                    <span className="block text-xs font-bold text-gray-900">
                       Prix croissant
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-[11px] text-gray-500">
                       Du moins cher au plus cher
                     </span>
-                  </span>
+                  </div>
                 </button>
 
                 <button
                   onClick={() => applyFilter("price-desc")}
-                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50"
+                  className="group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-purple-50/80 active:scale-[0.99]"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors group-hover:bg-purple-100">
                     <ArrowUpDown size={18} />
                   </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-gray-800">
+                  <div>
+                    <span className="block text-xs font-bold text-gray-900">
                       Prix décroissant
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-[11px] text-gray-500">
                       Du plus cher au moins cher
                     </span>
-                  </span>
+                  </div>
                 </button>
 
                 <button
                   onClick={() => applyFilter("discount")}
-                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-orange-50"
+                  className="group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-amber-50/80 active:scale-[0.99]"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition-colors group-hover:bg-amber-100">
                     <Tag size={18} />
                   </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-gray-800">
+                  <div>
+                    <span className="block text-xs font-bold text-gray-900">
                       Promotions
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-[11px] text-gray-500">
                       Voir les produits en réduction
                     </span>
-                  </span>
+                  </div>
                 </button>
 
                 <button
                   onClick={() => applyFilter("newest")}
-                  className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-emerald-50"
+                  className="group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-emerald-50/80 active:scale-[0.99]"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-colors group-hover:bg-emerald-100">
                     <Sparkles size={18} />
                   </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-gray-800">
+                  <div>
+                    <span className="block text-xs font-bold text-gray-900">
                       Nouveautés
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-[11px] text-gray-500">
                       Découvrir les derniers produits
                     </span>
-                  </span>
+                  </div>
                 </button>
 
-                <div className="border-t border-gray-100 pt-3">
+                <div className="border-t border-gray-100 pt-2">
                   <button
                     onClick={() => {
                       setFilterOpen(false);
                       navigate("/all-products");
                     }}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gray-100 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-200"
+                    className="flex min-h-[42px] w-full items-center justify-center gap-2 rounded-2xl bg-gray-100 px-4 text-xs font-bold text-gray-800 transition-all hover:bg-gray-200 active:scale-95"
                   >
-                    Voir tous les produits
-                    <ChevronRight size={16} />
+                    <span>Voir tous les produits</span>
+                    <ChevronRight size={15} />
                   </button>
                 </div>
               </div>
@@ -349,51 +336,53 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MENU DÉROULANT */}
+      {/* MENU DÉROULANT (BURGER OVERLAY) */}
       <div
-        className={`absolute left-0 top-full w-full overflow-hidden border-t border-gray-100 bg-white shadow-xl transition-all duration-300 ease-in-out ${
+        className={`absolute left-0 top-full w-full overflow-hidden border-t border-gray-100 bg-white/98 shadow-2xl backdrop-blur-xl transition-all duration-300 ease-in-out ${
           menuOpen
             ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-3 opacity-0"
+            : "invisible -translate-y-2 opacity-0"
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
-          <p className="mb-3 px-3 text-[10px] font-bold tracking-[2px] text-gray-400">
+        <nav className="mx-auto max-w-7xl px-3.5 py-4 sm:px-6">
+          <p className="mb-2.5 px-3 text-[10px] font-black tracking-widest text-gray-400">
             NAVIGATION
           </p>
 
-          {links.map((link, index) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              onClick={() => setMenuOpen(false)}
-              style={{
-                transitionDelay: menuOpen ? `${index * 45}ms` : "0ms",
-              }}
-              className={`group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:translate-x-1 hover:bg-blue-50 hover:text-blue-700 ${
-                menuOpen
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-3 opacity-0"
-              }`}
-            >
-              {link.name}
-              <ChevronRight
-                size={17}
-                className="text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-700"
-              />
-            </Link>
-          ))}
+          <div className="space-y-1">
+            {links.map((link, index) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  transitionDelay: menuOpen ? `${index * 35}ms` : "0ms",
+                }}
+                className={`group flex min-h-[44px] items-center justify-between rounded-2xl px-4 py-2.5 text-xs font-bold text-gray-800 transition-all duration-300 hover:bg-blue-50 hover:text-blue-600 active:scale-[0.99] sm:text-sm ${
+                  menuOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-2 opacity-0"
+                }`}
+              >
+                <span>{link.name}</span>
+                <ChevronRight
+                  size={16}
+                  className="text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-600"
+                />
+              </Link>
+            ))}
+          </div>
 
           <Link
             to="/cart"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 flex items-center justify-between rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700"
+            className="mt-3 flex min-h-[46px] items-center justify-between rounded-2xl bg-blue-50/80 px-4 py-3 text-xs font-bold text-blue-700 transition-all hover:bg-blue-100 active:scale-[0.99] sm:text-sm"
           >
-            <span className="flex items-center gap-3">
+            <span className="flex items-center gap-2.5">
               <ShoppingCart size={18} />
-              Mon panier
+              <span>Mon panier</span>
             </span>
-            <span className="rounded-full bg-blue-600 px-2 py-1 text-[10px] text-white">
+            <span className="rounded-full bg-blue-600 px-2.5 py-0.5 text-[10px] font-extrabold text-white shadow-xs">
               {cartCount}
             </span>
           </Link>
@@ -405,10 +394,10 @@ export default function Navbar() {
                 setMenuOpen(false);
                 handleWhatsApp();
               }}
-              className="flex w-full items-center gap-3 rounded-xl bg-green-50 p-3 text-left text-sm font-semibold text-green-700 transition hover:bg-green-100"
+              className="flex min-h-[46px] w-full items-center gap-3 rounded-2xl bg-emerald-50 px-4 py-3 text-left text-xs font-bold text-emerald-700 transition-all hover:bg-emerald-100 active:scale-[0.99] sm:text-sm"
             >
-              <FaWhatsapp size={23} />
-              Besoin d'aide ? Contactez-nous
+              <FaWhatsapp size={20} />
+              <span>Besoin d'aide ? Contactez-nous sur WhatsApp</span>
             </button>
           </div>
         </nav>

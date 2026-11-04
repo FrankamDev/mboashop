@@ -11596,7 +11596,7 @@ function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
 }
 
 // node_modules/lucide-react/dist/esm/icons/arrow-down-wide-narrow.mjs
-var __iconData$33 = {
+var __iconData$34 = {
 	name: "arrow-down-wide-narrow",
 	size: 24,
 	node: [
@@ -11623,11 +11623,11 @@ var __iconData$33 = {
 	],
 	aliases: ["sort-desc"]
 };
-__iconData$33.node;
-var ArrowDownWideNarrow = createLucideIcon(__iconData$33);
+__iconData$34.node;
+var ArrowDownWideNarrow = createLucideIcon(__iconData$34);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-left.mjs
-var __iconData$32 = {
+var __iconData$33 = {
 	name: "arrow-left",
 	size: 24,
 	node: [["path", {
@@ -11638,11 +11638,11 @@ var __iconData$32 = {
 		key: "x3x0zl"
 	}]]
 };
-__iconData$32.node;
-var ArrowLeft = createLucideIcon(__iconData$32);
+__iconData$33.node;
+var ArrowLeft = createLucideIcon(__iconData$33);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-right.mjs
-var __iconData$31 = {
+var __iconData$32 = {
 	name: "arrow-right",
 	size: 24,
 	node: [["path", {
@@ -11653,11 +11653,11 @@ var __iconData$31 = {
 		key: "xquz4c"
 	}]]
 };
-__iconData$31.node;
-var ArrowRight = createLucideIcon(__iconData$31);
+__iconData$32.node;
+var ArrowRight = createLucideIcon(__iconData$32);
 
 // node_modules/lucide-react/dist/esm/icons/arrow-up-down.mjs
-var __iconData$30 = {
+var __iconData$31 = {
 	name: "arrow-up-down",
 	size: 24,
 	node: [
@@ -11679,11 +11679,11 @@ var __iconData$30 = {
 		}]
 	]
 };
-__iconData$30.node;
-var ArrowUpDown = createLucideIcon(__iconData$30);
+__iconData$31.node;
+var ArrowUpDown = createLucideIcon(__iconData$31);
 
 // node_modules/lucide-react/dist/esm/icons/check.mjs
-var __iconData$29 = {
+var __iconData$30 = {
 	name: "check",
 	size: 24,
 	node: [["path", {
@@ -11691,8 +11691,20 @@ var __iconData$29 = {
 		key: "1gmf2c"
 	}]]
 };
+__iconData$30.node;
+var Check = createLucideIcon(__iconData$30);
+
+// node_modules/lucide-react/dist/esm/icons/chevron-down.mjs
+var __iconData$29 = {
+	name: "chevron-down",
+	size: 24,
+	node: [["path", {
+		d: "m6 9 6 6 6-6",
+		key: "qrunsl"
+	}]]
+};
 __iconData$29.node;
-var Check = createLucideIcon(__iconData$29);
+var ChevronDown = createLucideIcon(__iconData$29);
 
 // node_modules/lucide-react/dist/esm/icons/chevron-left.mjs
 var __iconData$28 = {
@@ -15188,10 +15200,10 @@ function Navbar() {
 		window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Bonjour MBOASHOP, je souhaite avoir des informations sur vos produits.")}`, "_blank", "noopener,noreferrer");
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-xl",
+		className: "sticky top-0 z-50 w-full border-b border-gray-100 bg-white/90 backdrop-blur-md",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6",
+				className: "relative mx-auto flex h-16 max-w-7xl items-center justify-between px-3.5 sm:h-20 sm:px-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						type: "button",
@@ -15201,71 +15213,71 @@ function Navbar() {
 						},
 						"aria-label": menuOpen ? "Fermer le menu" : "Ouvrir le menu",
 						"aria-expanded": menuOpen,
-						className: "group flex items-center gap-2.5 rounded-lg py-2 pr-2",
+						className: "group flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-100/80 active:scale-95",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "relative flex h-5 w-6 flex-col justify-center gap-[5px]",
+							className: "relative flex h-5 w-5 flex-col justify-center gap-[5px]",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] w-6 rounded-full bg-gray-800 transition-all duration-300 ${menuOpen ? "translate-y-[7px] rotate-45" : ""}` }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] rounded-full bg-gray-800 transition-all duration-300 ${menuOpen ? "w-0 opacity-0" : "w-4"}` }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] w-6 rounded-full bg-gray-800 transition-all duration-300 ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}` })
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] w-5 rounded-full bg-gray-900 transition-all duration-300 ${menuOpen ? "translate-y-[7px] rotate-45" : ""}` }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] rounded-full bg-gray-900 transition-all duration-300 ${menuOpen ? "w-0 opacity-0" : "w-3.5"}` }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: `h-[2px] w-5 rounded-full bg-gray-900 transition-all duration-300 ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}` })
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-[11px] font-extrabold tracking-[2px] text-gray-800 transition-colors group-hover:text-blue-700",
+							className: "hidden text-xs font-black tracking-widest text-gray-900 transition-colors group-hover:text-blue-600 sm:inline-block",
 							children: "MENU"
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 						to: "/",
 						onClick: () => setMenuOpen(false),
-						className: "absolute left-1/2 flex -translate-x-1/2 flex-col items-center",
+						className: "group absolute left-1/2 flex -translate-x-1/2 flex-col items-center",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-1.5",
+							className: "flex items-center gap-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 								src: "/images/logo.png",
 								alt: "MBOASHOP",
-								className: "h-9 w-9 object-contain"
+								className: "h-8 w-8 object-contain transition-transform group-hover:scale-105 sm:h-9 sm:w-9"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "whitespace-nowrap text-lg font-black tracking-tight text-gray-900 sm:text-xl",
+								className: "whitespace-nowrap text-lg font-black tracking-tight text-gray-950 sm:text-xl",
 								children: ["MBOA", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-blue-700",
+									className: "text-blue-600",
 									children: "SHOP"
 								})]
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "mt-[-2px] ml-10 text-[9px] font-bold tracking-[2px] text-gray-500",
+							className: "-mt-1 text-[8px] font-bold tracking-[2.5px] text-gray-400 sm:text-[9px]",
 							children: "E-COMMERCE"
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2",
+						className: "flex items-center gap-1.5 sm:gap-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 							to: "/cart",
 							"aria-label": `Panier, ${cartCount} article(s)`,
-							className: "relative flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition duration-300 hover:bg-blue-50 hover:text-blue-700",
+							className: "relative flex h-11 w-11 items-center justify-center rounded-2xl text-gray-800 transition-all hover:bg-blue-50 hover:text-blue-600 active:scale-95",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 21 }), cartCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "absolute -right-1 -top-1 flex h-5 min-w-5 animate-in zoom-in items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white shadow-sm",
+								className: "absolute right-1 top-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-extrabold text-white shadow-md shadow-blue-500/30",
 								children: cartCount > 99 ? "99+" : cartCount
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "button",
 							onClick: handleWhatsApp,
 							"aria-label": "Contacter MBOASHOP sur WhatsApp",
-							className: "group flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-[#25D366] shadow-sm transition-all duration-300 hover:scale-110 hover:bg-[#25D366] hover:text-white hover:shadow-lg hover:shadow-green-200",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 24 })
+							className: "flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 transition-all hover:bg-emerald-600 hover:text-white hover:shadow-lg hover:shadow-emerald-600/20 active:scale-95",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 22 })
 						})]
 					})
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mx-auto flex max-w-7xl items-center gap-2 px-4 pb-3 sm:px-6",
+				className: "mx-auto flex max-w-7xl items-center gap-2.5 px-3.5 pb-3 sm:px-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("form", {
 					onSubmit: handleSearch,
 					className: "flex min-w-0 flex-1",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "group flex h-12 w-full items-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 transition-all duration-300 focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-lg focus-within:shadow-blue-100/70",
+						className: "group flex h-11 w-full items-center gap-2.5 rounded-2xl border border-gray-200 bg-gray-50/80 px-3.5 shadow-xs transition-all duration-300 focus-within:border-blue-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-500/10",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-								size: 19,
+								size: 18,
 								className: "shrink-0 text-gray-400 transition-colors group-focus-within:text-blue-600"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
@@ -15274,21 +15286,21 @@ function Navbar() {
 								onChange: (event) => setSearchValue(event.target.value),
 								placeholder: "Rechercher un produit...",
 								"aria-label": "Rechercher un produit",
-								className: "w-full min-w-0 bg-transparent text-sm text-gray-800 outline-none placeholder:text-gray-400"
+								className: "w-full min-w-0 bg-transparent text-xs font-medium text-gray-900 outline-none placeholder:text-gray-400 sm:text-sm"
 							}),
 							searchValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 								type: "button",
 								onClick: () => setSearchValue(""),
 								"aria-label": "Effacer la recherche",
-								className: "shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-800",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 16 })
+								className: "shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-200 hover:text-gray-700",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 15 })
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 								type: "submit",
 								disabled: !searchValue.trim(),
 								"aria-label": "Lancer la recherche",
-								className: "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { size: 15 })
+								className: "flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition-all hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { size: 14 })
 							})
 						]
 					})
@@ -15303,96 +15315,96 @@ function Navbar() {
 						},
 						"aria-label": "Ouvrir les filtres",
 						"aria-expanded": filterOpen,
-						className: `relative flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 active:scale-95 ${filterOpen ? "border-blue-700 bg-blue-700 text-white shadow-lg shadow-blue-200" : "border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:bg-blue-50 hover:text-blue-700"}`,
-						children: filterOpen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 20 }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 20 })
+						className: `flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-300 active:scale-95 ${filterOpen ? "border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-500/20" : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50"}`,
+						children: filterOpen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 19 }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 19 })
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: `absolute right-0 top-[calc(100%+12px)] z-[60] w-[min(320px,calc(100vw-32px))] origin-top-right transition-all duration-300 ${filterOpen ? "visible translate-y-0 scale-100 opacity-100" : "invisible -translate-y-3 scale-95 opacity-0"}`,
+						className: `absolute right-0 top-[calc(100%+10px)] z-[60] w-[min(320px,calc(100vw-28px))] origin-top-right transition-all duration-300 ${filterOpen ? "visible translate-y-0 scale-100 opacity-100" : "invisible -translate-y-2 scale-95 opacity-0"}`,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/10",
+							className: "overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-900/15",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "bg-gradient-to-r from-blue-700 to-blue-600 px-5 py-4 text-white",
+								className: "bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-4 text-white",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex items-center gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 19 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-										className: "font-bold",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, { size: 18 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "text-sm font-extrabold",
 										children: "Filtrer les produits"
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "mt-1 text-xs text-blue-100",
+									className: "mt-1 text-xs text-blue-100/90",
 									children: "Trouvez rapidement ce que vous recherchez."
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "space-y-2 p-3",
+								className: "space-y-1 p-2.5",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[1.5px] text-gray-400",
+										className: "px-3 pb-1 pt-2 text-[10px] font-black uppercase tracking-wider text-gray-400",
 										children: "Trier les produits"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										onClick: () => applyFilter("price-asc"),
-										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50",
+										className: "group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-blue-50/80 active:scale-[0.99]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700 transition group-hover:bg-blue-100",
+											className: "flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-100",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDownWideNarrow, { size: 18 })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "block text-sm font-semibold text-gray-800",
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-xs font-bold text-gray-900",
 											children: "Prix croissant"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-xs text-gray-400",
+											className: "text-[11px] text-gray-500",
 											children: "Du moins cher au plus cher"
 										})] })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										onClick: () => applyFilter("price-desc"),
-										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-blue-50",
+										className: "group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-purple-50/80 active:scale-[0.99]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-purple-700",
+											className: "flex h-9 w-9 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors group-hover:bg-purple-100",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpDown, { size: 18 })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "block text-sm font-semibold text-gray-800",
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-xs font-bold text-gray-900",
 											children: "Prix décroissant"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-xs text-gray-400",
+											className: "text-[11px] text-gray-500",
 											children: "Du plus cher au moins cher"
 										})] })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										onClick: () => applyFilter("discount"),
-										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-orange-50",
+										className: "group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-amber-50/80 active:scale-[0.99]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600",
+											className: "flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition-colors group-hover:bg-amber-100",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tag, { size: 18 })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "block text-sm font-semibold text-gray-800",
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-xs font-bold text-gray-900",
 											children: "Promotions"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-xs text-gray-400",
+											className: "text-[11px] text-gray-500",
 											children: "Voir les produits en réduction"
 										})] })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										onClick: () => applyFilter("newest"),
-										className: "group flex w-full items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-emerald-50",
+										className: "group flex w-full items-center gap-3 rounded-2xl p-2.5 text-left transition-all hover:bg-emerald-50/80 active:scale-[0.99]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600",
+											className: "flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-colors group-hover:bg-emerald-100",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { size: 18 })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "block text-sm font-semibold text-gray-800",
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-xs font-bold text-gray-900",
 											children: "Nouveautés"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-xs text-gray-400",
+											className: "text-[11px] text-gray-500",
 											children: "Découvrir les derniers produits"
 										})] })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: "border-t border-gray-100 pt-3",
+										className: "border-t border-gray-100 pt-2",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 											onClick: () => {
 												setFilterOpen(false);
 												navigate("/all-products");
 											},
-											className: "flex w-full items-center justify-center gap-2 rounded-xl bg-gray-100 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-200",
-											children: ["Voir tous les produits", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { size: 16 })]
+											className: "flex min-h-[42px] w-full items-center justify-center gap-2 rounded-2xl bg-gray-100 px-4 text-xs font-bold text-gray-800 transition-all hover:bg-gray-200 active:scale-95",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Voir tous les produits" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { size: 15 })]
 										})
 									})
 								]
@@ -15402,33 +15414,36 @@ function Navbar() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: `absolute left-0 top-full w-full overflow-hidden border-t border-gray-100 bg-white shadow-xl transition-all duration-300 ease-in-out ${menuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0"}`,
+				className: `absolute left-0 top-full w-full overflow-hidden border-t border-gray-100 bg-white/98 shadow-2xl backdrop-blur-xl transition-all duration-300 ease-in-out ${menuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
-					className: "mx-auto max-w-7xl px-4 py-3 sm:px-6",
+					className: "mx-auto max-w-7xl px-3.5 py-4 sm:px-6",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "mb-3 px-3 text-[10px] font-bold tracking-[2px] text-gray-400",
+							className: "mb-2.5 px-3 text-[10px] font-black tracking-widest text-gray-400",
 							children: "NAVIGATION"
 						}),
-						links.map((link, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-							to: link.href,
-							onClick: () => setMenuOpen(false),
-							style: { transitionDelay: menuOpen ? `${index * 45}ms` : "0ms" },
-							className: `group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:translate-x-1 hover:bg-blue-50 hover:text-blue-700 ${menuOpen ? "translate-x-0 opacity-100" : "-translate-x-3 opacity-0"}`,
-							children: [link.name, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-								size: 17,
-								className: "text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-700"
-							})]
-						}, link.name)),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "space-y-1",
+							children: links.map((link, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+								to: link.href,
+								onClick: () => setMenuOpen(false),
+								style: { transitionDelay: menuOpen ? `${index * 35}ms` : "0ms" },
+								className: `group flex min-h-[44px] items-center justify-between rounded-2xl px-4 py-2.5 text-xs font-bold text-gray-800 transition-all duration-300 hover:bg-blue-50 hover:text-blue-600 active:scale-[0.99] sm:text-sm ${menuOpen ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: link.name }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+									size: 16,
+									className: "text-gray-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-600"
+								})]
+							}, link.name))
+						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 							to: "/cart",
 							onClick: () => setMenuOpen(false),
-							className: "mt-2 flex items-center justify-between rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700",
+							className: "mt-3 flex min-h-[46px] items-center justify-between rounded-2xl bg-blue-50/80 px-4 py-3 text-xs font-bold text-blue-700 transition-all hover:bg-blue-100 active:scale-[0.99] sm:text-sm",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "flex items-center gap-3",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 18 }), "Mon panier"]
+								className: "flex items-center gap-2.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 18 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Mon panier" })]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "rounded-full bg-blue-600 px-2 py-1 text-[10px] text-white",
+								className: "rounded-full bg-blue-600 px-2.5 py-0.5 text-[10px] font-extrabold text-white shadow-xs",
 								children: cartCount
 							})]
 						}),
@@ -15440,8 +15455,8 @@ function Navbar() {
 									setMenuOpen(false);
 									handleWhatsApp();
 								},
-								className: "flex w-full items-center gap-3 rounded-xl bg-green-50 p-3 text-left text-sm font-semibold text-green-700 transition hover:bg-green-100",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 23 }), "Besoin d'aide ? Contactez-nous"]
+								className: "flex min-h-[46px] w-full items-center gap-3 rounded-2xl bg-emerald-50 px-4 py-3 text-left text-xs font-bold text-emerald-700 transition-all hover:bg-emerald-100 active:scale-[0.99] sm:text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FaWhatsapp, { size: 20 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Besoin d'aide ? Contactez-nous sur WhatsApp" })]
 							})
 						})
 					]
@@ -15456,103 +15471,118 @@ function ProductCard({ product }) {
 	const { addToCart } = useCart();
 	const { showToast } = useToast();
 	const discount = product.oldPrice > product.price ? Math.round((product.oldPrice - product.price) / product.oldPrice * 100) : 0;
+	const isOutOfStock = product.stock <= 0;
 	const handleAddToCart = () => {
-		if (product.stock <= 0) return;
+		if (isOutOfStock) return;
 		addToCart(product);
 		showToast(`${product.name} a été ajouté à votre panier.`);
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
-		className: "group relative min-w-[155px] overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-900/10 sm:min-w-0",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-			to: `/produit/${product.slug}`,
-			className: "relative block aspect-square overflow-hidden bg-gray-50",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: product.images?.[0] || "/images/placeholder.webp",
-					alt: product.name,
-					loading: "lazy",
-					decoding: "async",
-					onError: (event) => {
-						event.currentTarget.onerror = null;
-						event.currentTarget.src = "/images/placeholder.webp";
-					},
-					className: "h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.03]" }),
-				product.badge && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute left-3 top-3 rounded-full bg-blue-700 px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-wide text-white shadow-lg",
-					children: product.badge
-				}),
-				discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "absolute right-3 top-3 rounded-full bg-red-500 px-2.5 py-1.5 text-[10px] font-extrabold text-white shadow-lg",
-					children: [
-						"-",
-						discount,
-						"%"
-					]
-				}),
-				product.stock <= 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "absolute inset-0 flex items-center justify-center bg-black/45",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "rounded-full bg-white px-4 py-2 text-xs font-bold text-gray-900",
-						children: "Rupture de stock"
+		className: "group relative flex h-full min-w-[155px] w-full flex-col justify-between overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xs transition-all duration-300 hover:border-gray-200 hover:shadow-xl hover:shadow-gray-900/5 active:scale-[0.995] sm:min-w-0",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "relative block",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+				to: `/produit/${product.slug}`,
+				className: "relative block aspect-square w-full overflow-hidden bg-gray-50",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: product.images?.[0] || "/images/placeholder.webp",
+						alt: product.name,
+						loading: "lazy",
+						decoding: "async",
+						onError: (event) => {
+							event.currentTarget.onerror = null;
+							event.currentTarget.src = "/images/placeholder.webp";
+						},
+						className: `h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${isOutOfStock ? "opacity-75 grayscale-[30%]" : ""}`
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.02]" }),
+					product.badge && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "absolute left-2.5 top-2.5 z-10 rounded-full bg-blue-600/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm backdrop-blur-md sm:left-3 sm:top-3",
+						children: product.badge
+					}),
+					discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "absolute right-2.5 top-2.5 z-10 rounded-full bg-rose-500/90 px-2 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-md sm:right-3 sm:top-3",
+						children: [
+							"-",
+							discount,
+							"%"
+						]
+					}),
+					isOutOfStock && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "absolute inset-0 z-20 flex items-center justify-center bg-gray-900/40 backdrop-blur-[2px]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-bold text-gray-900 shadow-lg backdrop-blur-md",
+							children: "Rupture de stock"
+						})
 					})
-				})
-			]
+				]
+			})
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "p-3 sm:p-4",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mb-1 truncate text-[9px] font-bold uppercase tracking-[1.5px] text-blue-600",
+			className: "flex flex-1 flex-col justify-between p-3.5 sm:p-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+				product.category && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mb-1 truncate text-[10px] font-bold uppercase tracking-wider text-blue-600/90",
 					children: product.category
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 					to: `/produit/${product.slug}`,
+					className: "group/title block",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-						className: "line-clamp-2 min-h-10 text-xs font-bold leading-5 text-gray-900 transition-colors group-hover:text-blue-700 sm:text-sm",
+						className: "line-clamp-2 text-xs font-semibold leading-snug text-gray-900 transition-colors group-hover/title:text-blue-600 sm:text-sm",
 						children: product.name
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mt-2 flex items-center gap-1.5",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, {
-							size: 13,
-							className: "fill-yellow-400 text-yellow-400"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-[10px] font-bold text-gray-700",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-1 rounded-md bg-amber-50 px-1.5 py-0.5 text-amber-700",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Star, {
+							size: 12,
+							className: "fill-amber-400 text-amber-400"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[11px] font-bold",
 							children: product.rating ?? "Nouveau"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							className: "text-[10px] text-gray-400",
-							children: [
-								"(",
-								product.reviewsCount ?? 0,
-								" avis)"
-							]
-						})
-					]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-3 flex min-h-9 flex-wrap items-center gap-x-2 gap-y-1",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-sm font-black tracking-tight text-gray-950 sm:text-base",
-						children: [Number(product.price).toLocaleString("fr-FR"), " FCFA"]
-					}), discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-[10px] font-medium text-gray-400 line-through",
-						children: [Number(product.oldPrice).toLocaleString("fr-FR"), " FCFA"]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "text-[11px] font-medium text-gray-400",
+						children: [
+							"(",
+							product.reviewsCount ?? 0,
+							")"
+						]
 					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+				})
+			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-3.5",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex min-h-[26px] items-baseline gap-2 flex-wrap",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "text-base font-extrabold tracking-tight text-gray-900 sm:text-lg",
+						children: [
+							Number(product.price).toLocaleString("fr-FR"),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-xs font-bold text-gray-600",
+								children: "FCFA"
+							})
+						]
+					}), discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-xs font-medium text-gray-400 line-through",
+						children: Number(product.oldPrice).toLocaleString("fr-FR")
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 					type: "button",
-					disabled: product.stock <= 0,
+					disabled: isOutOfStock,
 					onClick: handleAddToCart,
 					"aria-label": `Ajouter ${product.name} au panier`,
-					className: "mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gray-950 py-3 text-[10px] font-extrabold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:bg-gray-300",
-					children: product.stock > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 15 }), "Ajouter au panier"] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { size: 15 }), "Indisponible"] })
-				})
-			]
+					className: "mt-3 flex min-h-[42px] w-full items-center justify-center gap-2 rounded-xl bg-gray-900 px-3 py-2.5 text-xs font-bold text-white shadow-xs transition-all duration-200 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400 disabled:shadow-none",
+					children: !isOutOfStock ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, {
+						size: 16,
+						className: "transition-transform group-hover:scale-110"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Ajouter au panier" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { size: 16 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Indisponible" })] })
+				})]
+			})]
 		})]
 	});
 }
@@ -16070,27 +16100,40 @@ function ProductSection() {
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		id: "products",
-		className: "mx-auto mt-7 w-full max-w-7xl px-3 sm:px-4",
+		className: "mx-auto my-8 w-full max-w-7xl px-3.5 sm:my-12 sm:px-6 lg:my-16",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mb-4 flex items-center justify-between",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-					className: "text-base font-extrabold text-gray-950 sm:text-xl",
-					children: "Trending Products"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-0.5 text-[10px] text-gray-500 sm:text-xs",
-					children: "Découvrez nos produits populaires"
-				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+				className: "mb-5 flex items-end justify-between gap-4 border-b border-gray-100 pb-4 sm:mb-8 sm:pb-5",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "space-y-1",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2 w-2 rounded-full bg-blue-600 animate-pulse" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[11px] font-bold uppercase tracking-wider text-blue-600",
+								children: "Sélection du moment"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-lg font-extrabold tracking-tight text-gray-950 sm:text-2xl lg:text-3xl",
+							children: "Trending Products"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-xs text-gray-500 sm:text-sm",
+							children: "Découvrez nos produits les plus populaires"
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 					to: "/all-products",
-					className: "flex items-center gap-1 text-xs font-semibold text-gray-700 transition hover:text-blue-600",
-					children: ["View All", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
+					className: "group flex min-h-[44px] items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold text-gray-700 transition-all hover:bg-gray-100 hover:text-blue-600 active:scale-95 sm:text-sm",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Voir tout" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {
 						size: 16,
-						className: "text-blue-600"
+						className: "text-blue-600 transition-transform duration-200 group-hover:translate-x-1"
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4",
+				className: "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-6",
 				children: products.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
 					product,
 					onAddToCart: handleAddToCart
@@ -16098,15 +16141,30 @@ function ProductSection() {
 			}),
 			message && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				role: "status",
-				className: "fixed bottom-20 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-gray-950 px-4 py-3 text-xs font-medium text-white shadow-xl",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-					size: 16,
-					className: "text-green-400"
-				}), message]
+				className: "fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full border border-gray-800/80 bg-gray-950/90 px-4 py-3 text-xs font-medium text-white shadow-2xl backdrop-blur-md transition-all duration-300 sm:bottom-8 sm:text-sm",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+						size: 13,
+						strokeWidth: 2.5
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "truncate max-w-[220px] sm:max-w-xs",
+					children: message
+				})]
 			}),
 			cartCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "fixed bottom-24 right-4 z-40 flex items-center gap-2 rounded-full bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 17 }), cartCount]
+				className: "fixed bottom-6 right-4 z-40 flex min-h-[44px] items-center gap-2.5 rounded-full bg-blue-600 px-4 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-600/30 backdrop-blur-md transition-all duration-300 hover:bg-blue-700 active:scale-95 sm:bottom-8 sm:right-6 sm:text-sm",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "relative flex items-center justify-center",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, { size: 18 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-black text-blue-600 shadow-xs",
+						children: cartCount
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "ml-1",
+					children: "Panier"
+				})]
 			})
 		]
 	});
@@ -16155,7 +16213,7 @@ function AllProducts({ onAddToCart = () => {} }) {
 			case "rating":
 				result.sort((a, b) => b.rating - a.rating);
 				break;
-			case "popular": result.sort((a, b) => b.reviews - a.reviews);
+			case "popular": result.sort((a, b) => (b.reviewsCount || b.reviews || 0) - (a.reviewsCount || a.reviews || 0));
 		}
 		return result;
 	}, [
@@ -16168,133 +16226,159 @@ function AllProducts({ onAddToCart = () => {} }) {
 		setCategory("All");
 		setSort("featured");
 	};
+	const hasActiveFilters = search.trim() !== "" || category !== "All" || sort !== "featured";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-		className: "min-h-screen bg-gray-50 pb-16",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-			className: "mx-auto max-w-7xl px-4 pt-7 sm:pt-10",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navbar, {}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mb-6",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs font-bold uppercase tracking-widest text-blue-600",
-							children: "MBOASHOP STORE"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "mt-2 text-2xl font-black text-gray-950 sm:text-3xl",
-							children: "All Products"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "mt-2 text-sm text-gray-500",
-							children: "Découvrez tous nos produits et trouvez ce dont vous avez besoin."
-						})
-					]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex flex-col gap-3 sm:flex-row",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative flex-1",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-							size: 19,
-							className: "absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-							type: "search",
-							value: search,
-							onChange: (e) => setSearch(e.target.value),
-							placeholder: "Rechercher un produit...",
-							className: "w-full rounded-xl border border-gray-200 bg-white py-3 pl-12 pr-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpDown, {
-							size: 17,
-							className: "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
-							value: sort,
-							onChange: (e) => setSort(e.target.value),
-							className: "w-full appearance-none rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-10 text-sm outline-none focus:border-blue-500 sm:w-52",
+		className: "min-h-screen bg-gray-50/50 pb-20",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navbar, {}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "mx-auto max-w-7xl px-3.5 pt-4 sm:px-6 sm:pt-8",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mb-6 space-y-1",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[11px] font-bold uppercase tracking-widest text-blue-600",
+								children: "MBOASHOP STORE"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+								className: "text-2xl font-black tracking-tight text-gray-950 sm:text-4xl",
+								children: "Tous nos produits"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xs text-gray-500 sm:text-sm",
+								children: "Découvrez notre catalogue complet et trouvez ce qu'il vous faut au meilleur prix."
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-col gap-3 sm:flex-row sm:items-center",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative flex-1",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-									value: "featured",
-									children: "Featured products"
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+									size: 18,
+									className: "absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-									value: "popular",
-									children: "Most popular"
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									type: "text",
+									value: search,
+									onChange: (e) => setSearch(e.target.value),
+									placeholder: "Rechercher un produit...",
+									className: "h-11 w-full rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-medium text-gray-900 shadow-xs transition-all placeholder:text-gray-400 focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm"
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-									value: "rating",
-									children: "Top rated"
+								search && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+									type: "button",
+									onClick: () => setSearch(""),
+									"aria-label": "Effacer la recherche",
+									className: "absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 14 })
+								})
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative min-w-[180px] sm:w-56",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpDown, {
+									size: 16,
+									className: "pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-									value: "price-asc",
-									children: "Price: Low to High"
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+									value: sort,
+									onChange: (e) => setSort(e.target.value),
+									className: "h-11 w-full appearance-none rounded-2xl border border-gray-200 bg-white pl-10 pr-10 text-xs font-bold text-gray-700 shadow-xs transition-all focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:text-sm",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+											value: "featured",
+											children: "En vedette"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+											value: "popular",
+											children: "Plus populaires"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+											value: "rating",
+											children: "Mieux notés"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+											value: "price-asc",
+											children: "Prix : Croissant"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+											value: "price-desc",
+											children: "Prix : Décroissant"
+										})
+									]
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-									value: "price-desc",
-									children: "Price: High to Low"
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+									size: 16,
+									className: "pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400"
 								})
 							]
 						})]
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "mt-5 flex gap-2 overflow-x-auto pb-2 scrollbar-hide",
-					children: categories.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						type: "button",
-						onClick: () => setCategory(item),
-						className: `shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition ${category === item ? "bg-blue-600 text-white shadow-sm" : "border border-gray-200 bg-white text-gray-600 hover:border-blue-400 hover:text-blue-600"}`,
-						children: item === "All" ? "All products" : item
-					}, item))
-				})
-			]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-			className: "mx-auto mt-7 max-w-7xl px-4",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mb-4 flex items-center justify-between",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-					className: "text-base font-bold text-gray-900",
-					children: "Explore our products"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-					className: "mt-1 text-xs text-gray-500",
-					children: [filteredProducts.length, " product(s) found"]
-				})] }), (search || category !== "All" || sort !== "featured") && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-					type: "button",
-					onClick: resetFilters,
-					className: "flex items-center gap-1 text-xs font-semibold text-red-500 hover:text-red-700",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 15 }), "Reset filters"]
-				})]
-			}), filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5",
-				children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
-					product,
-					onAddToCart
-				}, product.id))
-			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-white px-5 py-16 text-center",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageSearch, {
-						size: 42,
-						className: "text-gray-300"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-						className: "mt-4 font-bold text-gray-800",
-						children: "Aucun produit trouvé"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "mt-2 text-sm text-gray-500",
-						children: "Essaie une autre recherche ou change de catégorie."
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						type: "button",
-						onClick: resetFilters,
-						className: "mt-5 rounded-full bg-blue-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-blue-700",
-						children: "Voir tous les produits"
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "mt-4 flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none",
+						children: categories.map((item) => {
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: () => setCategory(item),
+								className: `flex min-h-[40px] shrink-0 items-center rounded-xl px-4 text-xs font-bold transition-all active:scale-95 ${category === item ? "bg-blue-600 text-white shadow-md shadow-blue-500/20" : "border border-gray-200/80 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900"}`,
+								children: item === "All" ? "Tous les produits" : item
+							}, item);
+						})
 					})
 				]
-			})]
-		})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "mx-auto mt-6 max-w-7xl px-3.5 sm:px-6",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mb-4 flex items-center justify-between gap-2 border-b border-gray-100 pb-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-sm font-bold text-gray-900 sm:text-base",
+						children: "Explorer le catalogue"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "text-xs text-gray-500",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-semibold text-gray-900",
+							children: filteredProducts.length
+						}), " produit(s) trouvé(s)"]
+					})] }), hasActiveFilters && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
+						onClick: resetFilters,
+						className: "flex min-h-[36px] items-center gap-1.5 rounded-lg border border-rose-100 bg-rose-50/80 px-3 text-xs font-bold text-rose-600 transition-all hover:bg-rose-100 active:scale-95",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { size: 14 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Réinitialiser" })]
+					})]
+				}), filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5",
+					children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
+						product,
+						onAddToCart
+					}, product.id))
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "my-8 flex flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white px-4 py-12 text-center shadow-xs sm:py-16",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mb-4",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageSearch, { size: 32 })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "text-base font-extrabold text-gray-900 sm:text-lg",
+							children: "Aucun produit ne correspond à votre recherche"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-1.5 max-w-md text-xs text-gray-500 sm:text-sm",
+							children: "Essayez de modifier votre terme de recherche ou de changer les filtres de catégorie."
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: resetFilters,
+							className: "mt-6 flex min-h-[44px] items-center justify-center rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:bg-blue-700 active:scale-95 sm:text-sm",
+							children: "Réinitialiser tous les filtres"
+						})
+					]
+				})]
+			})
+		]
 	});
 }
 
@@ -17082,209 +17166,203 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 function Cart() {
 	const { cart, cartCount, cartTotal, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
 	const handleCheckout = () => {
-		const message = `
-Bonjour MBOASHOP, je souhaite commander :
-
-${cart.map((item, index) => `
+		`${cart.map((item, index) => `
 ${index + 1}. ${item.name}
 Quantité : ${item.quantity}
 Prix unitaire : ${formatPrice(item.price)}
 Total : ${formatPrice(item.price * item.quantity)}
-`).join("\n")}
-
-Nombre total d'articles : ${cartCount}
-TOTAL À CONFIRMER : ${formatPrice(cartTotal)}
-
-Merci de me confirmer la disponibilité et les frais de livraison.
-`;
-		window.open(`https://wa.me/237690372977?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+`).join("\n")}${cartCount}${formatPrice(cartTotal)}`;
+		window.open(`[https://wa.me/237690372977?text=$](https://wa.me/237690372977?text=$){encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
 	};
 	if (cart.length === 0) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
-		className: "flex min-h-[75vh] items-center justify-center bg-[#f7f8fa] px-4",
+		className: "flex min-h-[80vh] items-center justify-center bg-gray-50/50 px-4 py-12",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "max-w-md text-center",
+			className: "flex w-full max-w-md flex-col items-center rounded-3xl border border-gray-200/80 bg-white p-8 text-center shadow-xs sm:p-10",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-blue-50 text-blue-600",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, { size: 40 })
+					className: "flex h-20 w-20 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 shadow-inner",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, {
+						size: "{38}",
+						strokeWidth: "{1.8}"
+					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					className: "mt-7 text-3xl font-extrabold text-slate-950",
+					className: "mt-6 text-2xl font-black text-gray-950 sm:text-3xl",
 					children: "Votre panier est vide"
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-3 text-sm leading-7 text-slate-500",
-					children: "Découvrez notre sélection de produits et ajoutez vos articles préférés."
+					className: "mt-2.5 text-xs text-gray-500 sm:text-sm leading-relaxed",
+					children: "Vous n'avez pas encore ajouté d'article. Explorez notre catalogue pour découvrir nos meilleures offres."
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+					className: "mt-8 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-gray-950 px-6 text-xs font-bold text-white shadow-md transition-all hover:bg-blue-600 active:scale-95 sm:text-sm",
 					to: "/all-products",
-					className: "mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-7 py-4 text-sm font-bold text-white transition hover:bg-blue-700",
-					children: ["Découvrir la boutique", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { size: 18 })]
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Découvrir la boutique" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { size: "{18}" })]
 				})
 			]
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
-		className: "min-h-screen bg-[#f7f8fa] px-4 py-10 sm:px-8 lg:px-12",
+		className: "min-h-screen bg-gray-50/50 px-3.5 py-6 sm:px-6 sm:py-10 lg:px-8",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "mx-auto max-w-7xl",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+					className: "inline-flex min-h-[40px] items-center gap-2 text-xs font-bold text-gray-500 transition-colors hover:text-blue-600",
 					to: "/all-products",
-					className: "inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-blue-600",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { size: 16 }), "Continuer mes achats"]
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { size: "{16}" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Continuer mes achats" })]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-8 flex flex-wrap items-end justify-between gap-4",
+					className: "mt-4 flex flex-wrap items-end justify-between gap-4 border-b border-gray-200/60 pb-5",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs font-bold uppercase tracking-[0.2em] text-blue-600",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[11px] font-bold uppercase tracking-widest text-blue-600",
 							children: "MBOASHOP"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "mt-2 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl",
+							className: "mt-1 text-2xl font-black tracking-tight text-gray-950 sm:text-4xl",
 							children: "Mon panier"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-							className: "mt-2 text-sm text-slate-500",
-							children: [cartCount, " article(s) dans votre panier"]
+							className: "mt-1 text-xs font-medium text-gray-500 sm:text-sm",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "font-bold text-gray-900",
+								children: cartCount
+							}), " article(s) sélectionné(s)"]
 						})
-					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
 						onClick: clearCart,
-						className: "text-xs font-semibold text-red-500 hover:text-red-700",
-						children: "Vider le panier"
+						className: "flex min-h-[36px] items-center gap-1.5 rounded-xl border border-rose-100 bg-rose-50/80 px-3 text-xs font-bold text-rose-600 transition-all hover:bg-rose-100 active:scale-95",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash, { size: "{14}" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Vider le panier" })]
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-10 grid gap-8 lg:grid-cols-[1fr_360px]",
+					className: "mt-6 grid gap-6 lg:grid-cols-[1fr_380px] lg:gap-8",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-						className: "space-y-4",
+						className: "space-y-3.5",
 						children: cart.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
-							className: "flex flex-col gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm sm:flex-row sm:items-center",
+							className: "group relative flex flex-col gap-4 rounded-2xl border border-gray-200/80 bg-white p-3.5 shadow-xs transition-all hover:border-gray-300 sm:flex-row sm:items-center sm:p-4",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-									to: `/produit/${item.slug}`,
-									className: "flex h-28 w-full shrink-0 items-center justify-center rounded-xl bg-[#f7f8fa] p-3 sm:w-28",
+									className: "relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-50 p-2 sm:h-28 sm:w-28",
+									to: "{`/produit/${item.slug}`}",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 										src: item.images?.[0] || "/images/placeholder.webp",
 										alt: item.name,
 										onError: (e) => {
 											e.currentTarget.src = "/images/placeholder.webp";
 										},
-										className: "h-full w-full object-contain"
+										className: "h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "min-w-0 flex-1",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-											to: `/produit/${item.slug}`,
-											className: "font-bold text-slate-900 hover:text-blue-600",
-											children: item.name
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "mt-2 text-sm font-bold text-blue-600",
-											children: formatPrice(item.price)
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "mt-4 flex flex-wrap items-center gap-4",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-												className: "flex items-center rounded-lg border border-slate-200 p-1",
-												children: [
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-														onClick: () => decreaseQuantity(item.id),
-														className: "flex h-8 w-8 items-center justify-center rounded-md hover:bg-slate-100",
-														"aria-label": "Diminuer la quantité",
-														children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { size: 14 })
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-														className: "min-w-9 text-center text-sm font-bold",
-														children: item.quantity
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-														onClick: () => increaseQuantity(item.id),
-														disabled: item.quantity >= item.stock,
-														className: "flex h-8 w-8 items-center justify-center rounded-md hover:bg-slate-100 disabled:opacity-30",
-														"aria-label": "Augmenter la quantité",
-														children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { size: 14 })
-													})
-												]
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-												onClick: () => removeFromCart(item.id),
-												className: "flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-700",
-												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash, { size: 15 }), "Supprimer"]
-											})]
-										})
-									]
+									className: "flex min-w-0 flex-1 flex-col justify-between space-y-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+										className: "text-xs font-bold text-gray-900 transition-colors hover:text-blue-600 sm:text-sm line-clamp-2",
+										to: "{`/produit/${item.slug}`}",
+										children: item.name
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-1 text-xs font-extrabold text-blue-600",
+										children: formatPrice(item.price)
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex flex-wrap items-center justify-between gap-3 pt-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex items-center rounded-xl border border-gray-200 bg-gray-50/60 p-1",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+													type: "button",
+													onClick: () => decreaseQuantity(item.id),
+													"aria-label": "Diminuer la quantité",
+													className: "flex h-8 w-8 items-center justify-center rounded-lg bg-white text-gray-700 shadow-2xs transition-all hover:bg-gray-100 active:scale-95",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { size: "{13}" })
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "min-w-9 text-center text-xs font-bold text-gray-900",
+													children: item.quantity
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+													type: "button",
+													onClick: () => increaseQuantity(item.id),
+													disabled: item.quantity >= item.stock,
+													"aria-label": "Augmenter la quantité",
+													className: "flex h-8 w-8 items-center justify-center rounded-lg bg-white text-gray-700 shadow-2xs transition-all hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-white active:scale-95",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { size: "{13}" })
+												})
+											]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+											type: "button",
+											onClick: () => removeFromCart(item.id),
+											className: "flex min-h-[36px] items-center gap-1 rounded-lg px-2.5 text-xs font-bold text-rose-500 transition-all hover:bg-rose-50 active:scale-95",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash, { size: "{14}" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Supprimer" })]
+										})]
+									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "text-left sm:text-right",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-[10px] font-medium uppercase tracking-wider text-slate-400",
+									className: "flex items-center justify-between border-t border-gray-100 pt-3 sm:flex-col sm:items-end sm:justify-center sm:border-0 sm:pt-0 sm:text-right",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[10px] font-bold uppercase tracking-wider text-gray-400 sm:hidden",
 										children: "Sous-total"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "mt-1 text-lg font-extrabold text-slate-950",
+										className: "text-sm font-black text-gray-950 sm:text-base",
 										children: formatPrice(item.price * item.quantity)
 									})]
 								})
 							]
 						}, item.id))
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("aside", {
-						className: "h-fit rounded-2xl border border-slate-100 bg-white p-6 shadow-sm lg:sticky lg:top-8",
+						className: "h-fit rounded-3xl border border-gray-200/80 bg-white p-5 shadow-xs sm:p-6 lg:sticky lg:top-8",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-								className: "text-xl font-extrabold text-slate-950",
+								className: "text-base font-extrabold text-gray-950 sm:text-lg",
 								children: "Résumé de la commande"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "mt-7 flex justify-between text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-slate-500",
-									children: "Articles"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-semibold",
-									children: cartCount
+								className: "mt-5 space-y-3.5 text-xs sm:text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex justify-between text-gray-600",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+										"Articles (",
+										cartCount,
+										")"
+									] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-bold text-gray-900",
+										children: formatPrice(cartTotal)
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex justify-between text-gray-600",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Frais de livraison" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "rounded-md bg-amber-50 px-2 py-0.5 text-[11px] font-bold text-amber-700",
+										children: "À confirmer"
+									})]
 								})]
 							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-5 border-t border-gray-100" }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "mt-4 flex justify-between text-sm",
+								className: "flex items-baseline justify-between",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-slate-500",
-									children: "Sous-total"
+									className: "text-sm font-bold text-gray-900",
+									children: "Total estimé"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-semibold",
-									children: formatPrice(cartTotal)
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "mt-4 flex justify-between text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-slate-500",
-									children: "Livraison"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-xs font-medium text-slate-400",
-									children: "À confirmer"
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "my-6 border-t border-slate-100" }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-bold text-slate-900",
-									children: "Total"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-xl font-extrabold text-blue-600",
+									className: "text-xl font-black text-blue-600 sm:text-2xl",
 									children: formatPrice(cartTotal)
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+								type: "button",
 								onClick: handleCheckout,
-								className: "mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-green-600 py-4 text-sm font-bold text-white transition hover:bg-green-700",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { size: 19 }), "Commander sur WhatsApp"]
+								className: "mt-6 flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-2xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 active:scale-[0.98] sm:text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, {
+									className: "fill-white/20",
+									size: "{20}"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Commander sur WhatsApp" })]
 							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "mt-4 text-center text-[10px] leading-5 text-slate-400",
-								children: "Les frais de livraison seront confirmés avec notre équipe. Vous pourrez vérifier votre commande avant de l'envoyer."
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-4 flex items-start gap-2 rounded-xl bg-gray-50 p-3 text-[11px] leading-relaxed text-gray-500",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, {
+									className: "mt-0.5 shrink-0 text-emerald-600",
+									size: "{16}"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Commande directe. Les modalités et frais de livraison seront validés directement avec notre équipe." })]
 							})
 						]
 					})]

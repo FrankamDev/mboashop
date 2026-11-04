@@ -6,3 +6,5 @@
     RewriteCond %{REQUEST_URI} !^/dist/
     RewriteRule ^(.*)$ dist/$1 [L]
 </IfModule>
+
+club bantou
