@@ -86,15 +86,54 @@ export default function ProductCard({ product }) {
   const formattedOldPrice = oldPrice.toLocaleString("fr-FR");
 
   return (
-    <article className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-100 hover:shadow-xl hover:shadow-gray-900/[0.06]">
+    <article
+      className="
+        group
+        relative
+        flex
+        h-full
+        min-w-0
+        flex-col
+        overflow-hidden
+        rounded-2xl
+        border
+        border-gray-100
+        bg-white
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:border-blue-100
+        hover:shadow-xl
+        hover:shadow-gray-900/[0.06]
+
+        dark:border-slate-800
+        dark:bg-slate-900
+        dark:hover:border-slate-700
+        dark:hover:shadow-black/30
+      "
+    >
       {/* IMAGE PRODUIT */}
 
-      <div className="relative overflow-hidden bg-gray-50">
+      <div
+        className="
+          relative
+          overflow-hidden
+          bg-gray-50
+
+          dark:bg-slate-800
+        "
+      >
         <Link
           to={productUrl}
           onClick={handleProductView}
           aria-label={`Voir ${product.name}`}
-          className="relative block aspect-square w-full overflow-hidden"
+          className="
+            relative
+            block
+            aspect-square
+            w-full
+            overflow-hidden
+          "
         >
           <img
             src={image}
@@ -112,12 +151,46 @@ export default function ProductCard({ product }) {
 
           {/* Voile au survol */}
 
-          <div className="absolute inset-0 bg-black/[0.02] transition-colors duration-300 group-hover:bg-black/[0.06]" />
+          <div
+            className="
+              absolute
+              inset-0
+              bg-black/[0.02]
+              transition-colors
+              duration-300
+              group-hover:bg-black/[0.06]
+
+              dark:bg-black/[0.08]
+              dark:group-hover:bg-black/[0.18]
+            "
+          />
 
           {/* BADGE PRODUIT */}
 
           {product.badge && (
-            <span className="absolute left-2.5 top-2.5 max-w-[75%] truncate rounded-full bg-blue-600 px-2.5 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.12em] text-white shadow-sm sm:left-3 sm:top-3 sm:text-[10px]">
+            <span
+              className="
+                absolute
+                left-2.5
+                top-2.5
+                max-w-[75%]
+                truncate
+                rounded-full
+                bg-blue-600
+                px-2.5
+                py-1.5
+                text-[9px]
+                font-extrabold
+                uppercase
+                tracking-[0.12em]
+                text-white
+                shadow-sm
+
+                sm:left-3
+                sm:top-3
+                sm:text-[10px]
+              "
+            >
               {product.badge}
             </span>
           )}
@@ -125,7 +198,24 @@ export default function ProductCard({ product }) {
           {/* PROMOTION */}
 
           {discount > 0 && (
-            <span className="absolute right-2.5 top-2.5 rounded-full bg-rose-500 px-2 py-1.5 text-[10px] font-extrabold text-white shadow-sm sm:right-3 sm:top-3">
+            <span
+              className="
+                absolute
+                right-2.5
+                top-2.5
+                rounded-full
+                bg-rose-500
+                px-2
+                py-1.5
+                text-[10px]
+                font-extrabold
+                text-white
+                shadow-sm
+
+                sm:right-3
+                sm:top-3
+              "
+            >
               -{discount}%
             </span>
           )}
@@ -133,8 +223,37 @@ export default function ProductCard({ product }) {
           {/* RUPTURE */}
 
           {isOutOfStock && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-950/35 backdrop-blur-[2px]">
-              <span className="rounded-full bg-white px-3 py-2 text-[10px] font-bold text-gray-900 shadow-lg sm:text-xs">
+            <div
+              className="
+                absolute
+                inset-0
+                z-10
+                flex
+                items-center
+                justify-center
+                bg-gray-950/35
+                backdrop-blur-[2px]
+
+                dark:bg-black/50
+              "
+            >
+              <span
+                className="
+                  rounded-full
+                  bg-white
+                  px-3
+                  py-2
+                  text-[10px]
+                  font-bold
+                  text-gray-900
+                  shadow-lg
+
+                  dark:bg-slate-900
+                  dark:text-white
+
+                  sm:text-xs
+                "
+              >
                 Rupture de stock
               </span>
             </div>
@@ -142,7 +261,31 @@ export default function ProductCard({ product }) {
 
           {/* ICÔNE DÉTAILS */}
 
-          <span className="absolute bottom-3 right-3 flex h-8 w-8 translate-y-2 items-center justify-center rounded-full bg-white text-gray-900 opacity-0 shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <span
+            className="
+              absolute
+              bottom-3
+              right-3
+              flex
+              h-8
+              w-8
+              translate-y-2
+              items-center
+              justify-center
+              rounded-full
+              bg-white
+              text-gray-900
+              opacity-0
+              shadow-md
+              transition-all
+              duration-300
+              group-hover:translate-y-0
+              group-hover:opacity-100
+
+              dark:bg-slate-900
+              dark:text-white
+            "
+          >
             <ArrowUpRight size={16} />
           </span>
         </Link>
@@ -155,7 +298,21 @@ export default function ProductCard({ product }) {
           {/* CATÉGORIE */}
 
           {product.category && (
-            <p className="mb-1.5 truncate text-[9px] font-bold uppercase tracking-[0.13em] text-blue-600 sm:text-[10px]">
+            <p
+              className="
+                mb-1.5
+                truncate
+                text-[9px]
+                font-bold
+                uppercase
+                tracking-[0.13em]
+                text-blue-600
+
+                dark:text-blue-400
+
+                sm:text-[10px]
+              "
+            >
               {product.category}
             </p>
           )}
@@ -167,7 +324,24 @@ export default function ProductCard({ product }) {
             onClick={handleProductView}
             className="block"
           >
-            <h3 className="line-clamp-2 min-h-[2.5rem] text-[12px] font-bold leading-[1.45] tracking-[-0.02em] text-gray-900 transition-colors group-hover:text-blue-600 sm:text-sm">
+            <h3
+              className="
+                line-clamp-2
+                min-h-[2.5rem]
+                text-[12px]
+                font-bold
+                leading-[1.45]
+                tracking-[-0.02em]
+                text-gray-900
+                transition-colors
+                group-hover:text-blue-600
+
+                dark:text-white
+                dark:group-hover:text-blue-400
+
+                sm:text-sm
+              "
+            >
               {product.name}
             </h3>
           </Link>
@@ -177,23 +351,59 @@ export default function ProductCard({ product }) {
           <div className="mt-2.5 flex items-center gap-1.5">
             {product.rating != null ? (
               <>
-                <div className="flex items-center gap-1 rounded-md bg-amber-50 px-1.5 py-1">
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-1
+                    rounded-md
+                    bg-amber-50
+                    px-1.5
+                    py-1
+
+                    dark:bg-amber-950/40
+                  "
+                >
                   <Star
                     size={11}
                     className="fill-amber-400 text-amber-400"
                   />
 
-                  <span className="text-[10px] font-bold text-amber-700">
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      text-amber-700
+
+                      dark:text-amber-400
+                    "
+                  >
                     {product.rating}
                   </span>
                 </div>
 
-                <span className="text-[10px] font-medium text-gray-400">
+                <span
+                  className="
+                    text-[10px]
+                    font-medium
+                    text-gray-400
+
+                    dark:text-slate-500
+                  "
+                >
                   ({product.reviewsCount ?? 0} avis)
                 </span>
               </>
             ) : (
-              <span className="text-[10px] font-semibold text-gray-400">
+              <span
+                className="
+                  text-[10px]
+                  font-semibold
+                  text-gray-400
+
+                  dark:text-slate-500
+                "
+              >
                 Nouveau produit
               </span>
             )}
@@ -202,18 +412,60 @@ export default function ProductCard({ product }) {
 
         {/* PRIX */}
 
-        <div className="mt-4 border-t border-gray-100 pt-3">
+        <div
+          className="
+            mt-4
+            border-t
+            border-gray-100
+            pt-3
+
+            dark:border-slate-800
+          "
+        >
           <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <span className="text-[15px] font-extrabold tracking-tight text-gray-950 sm:text-lg">
+            <span
+              className="
+                text-[15px]
+                font-extrabold
+                tracking-tight
+                text-gray-950
+
+                dark:text-white
+
+                sm:text-lg
+              "
+            >
               {formattedPrice}
 
-              <span className="ml-1 text-[10px] font-bold text-gray-500 sm:text-xs">
+              <span
+                className="
+                  ml-1
+                  text-[10px]
+                  font-bold
+                  text-gray-500
+
+                  dark:text-slate-400
+
+                  sm:text-xs
+                "
+              >
                 FCFA
               </span>
             </span>
 
             {discount > 0 && (
-              <span className="text-[10px] font-medium text-gray-400 line-through sm:text-xs">
+              <span
+                className="
+                  text-[10px]
+                  font-medium
+                  text-gray-400
+                  line-through
+
+                  dark:text-slate-500
+
+                  sm:text-xs
+                "
+              >
                 {formattedOldPrice}
               </span>
             )}
@@ -226,7 +478,41 @@ export default function ProductCard({ product }) {
             disabled={isOutOfStock}
             onClick={handleAddToCart}
             aria-label={`Ajouter ${product.name} au panier`}
-            className="mt-3 flex min-h-[42px] w-full items-center justify-center gap-2 rounded-xl bg-gray-950 px-2 py-2.5 text-[11px] font-bold text-white transition-all duration-200 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-600/20 active:scale-[0.97] disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400 disabled:shadow-none sm:text-xs"
+            className="
+              mt-3
+              flex
+              min-h-[42px]
+              w-full
+              items-center
+              justify-center
+              gap-2
+              rounded-xl
+              bg-gray-950
+              px-2
+              py-2.5
+              text-[11px]
+              font-bold
+              text-white
+              transition-all
+              duration-200
+              hover:bg-blue-600
+              hover:shadow-lg
+              hover:shadow-blue-600/20
+              active:scale-[0.97]
+              disabled:cursor-not-allowed
+              disabled:bg-gray-100
+              disabled:text-gray-400
+              disabled:shadow-none
+
+              dark:bg-white
+              dark:text-slate-950
+              dark:hover:bg-blue-500
+              dark:hover:text-white
+              dark:disabled:bg-slate-800
+              dark:disabled:text-slate-500
+
+              sm:text-xs
+            "
           >
             {isOutOfStock ? (
               <>

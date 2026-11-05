@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
@@ -66,12 +64,24 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="mx-auto mt-4 w-full max-w-7xl px-2 sm:px-4">
+    <section className="mx-auto mt-4 w-full max-w-7xl px-2 transition-colors duration-300 sm:px-4">
       <div
-        className="relative isolate h-[210px] overflow-hidden rounded-2xl bg-[#020b1d] text-white shadow-xl sm:h-[300px] lg:h-[380px]"
+        className="
+          relative isolate
+          h-[210px]
+          overflow-hidden
+          rounded-2xl
+          bg-[#020b1d]
+          text-white
+          shadow-xl
+          transition-all duration-300
+          dark:bg-slate-950
+          sm:h-[300px]
+          lg:h-[380px]
+        "
         style={{ "--accent": themeColors[slide.theme] }}
       >
-        {/* Image de fond */}
+        {/* IMAGE DE FOND */}
         <img
           key={slide.id}
           src={slide.image}
@@ -79,29 +89,78 @@ export default function Hero() {
           fetchPriority={active === 0 ? "high" : "auto"}
           loading={active === 0 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center animate-hero-image"
+          className="
+            absolute inset-0 -z-20
+            h-full w-full
+            object-cover object-center
+            animate-hero-image
+          "
         />
 
-        {/* Dégradé sombre pour la lisibilité */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#020817] via-[#020817]/90 via-40% to-transparent" />
+        {/* DÉGRADÉ SOMBRE */}
+        <div
+          className="
+            absolute inset-0 -z-10
+            bg-gradient-to-r
+            from-[#020817]
+            via-[#020817]/90
+            via-40%
+            to-transparent
+            dark:from-[#020617]
+            dark:via-[#020617]/95
+            dark:via-40%
+          "
+        />
 
-        {/* Effet lumineux */}
+        {/* EFFET LUMINEUX */}
         <div className="hero-glow pointer-events-none absolute inset-0 -z-10" />
 
-        {/* Contenu */}
+        {/* CONTENU */}
         <div
           key={`content-${slide.id}`}
-          className="relative z-10 flex h-full w-[75%] flex-col items-start justify-center pl-5 pb-6 sm:w-[60%] sm:pl-9 lg:pl-14 animate-hero-content"
+          className="
+            relative z-10
+            flex h-full
+            w-[75%]
+            flex-col
+            items-start
+            justify-center
+            pl-5
+            pb-6
+            animate-hero-content
+            sm:w-[60%]
+            sm:pl-9
+            lg:pl-14
+          "
         >
+          {/* EYEBROW */}
           <span
-            className="mb-2 text-[9px] font-extrabold tracking-[1.5px] sm:mb-3 sm:text-sm"
+            className="
+              mb-2
+              text-[9px]
+              font-extrabold
+              tracking-[1.5px]
+              sm:mb-3
+              sm:text-sm
+            "
             style={{ color: "var(--accent)" }}
           >
             {slide.eyebrow}
           </span>
 
-          <h1 className="text-xl font-black leading-[1.08] tracking-tight sm:text-4xl lg:text-5xl">
+          {/* TITRE */}
+          <h1
+            className="
+              text-xl
+              font-black
+              leading-[1.08]
+              tracking-tight
+              sm:text-4xl
+              lg:text-5xl
+            "
+          >
             {slide.title}
+
             <span
               className="mt-1 block"
               style={{ color: "var(--accent)" }}
@@ -110,24 +169,66 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-2 max-w-[260px] text-[9px] leading-relaxed text-white/90 sm:mt-4 sm:max-w-sm sm:text-sm lg:text-base">
+          {/* DESCRIPTION */}
+          <p
+            className="
+              mt-2
+              max-w-[260px]
+              text-[9px]
+              leading-relaxed
+              text-white/90
+              sm:mt-4
+              sm:max-w-sm
+              sm:text-sm
+              lg:text-base
+            "
+          >
             {slide.description}
           </p>
 
+          {/* CTA */}
           <a
             href="#products"
-            className="mt-3 inline-flex items-center gap-3 rounded-full px-4 py-1.5 text-[10px] font-extrabold text-white transition hover:brightness-110 sm:mt-5 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="
+              mt-3
+              inline-flex
+              items-center
+              gap-3
+              rounded-full
+              px-4
+              py-1.5
+              text-[10px]
+              font-extrabold
+              text-white
+              transition
+              hover:brightness-110
+              hover:scale-[1.02]
+              sm:mt-5
+              sm:px-5
+              sm:py-2.5
+              sm:text-sm
+            "
             style={{ backgroundColor: "var(--accent)" }}
           >
             VISITER LA BOUTIQUE
 
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-white text-blue-600 sm:h-8 sm:w-8">
+            <span
+              className="
+                grid
+                h-6 w-6
+                place-items-center
+                rounded-full
+                bg-white
+                text-blue-600
+                sm:h-8 sm:w-8
+              "
+            >
               <ArrowRight size={17} strokeWidth={2.8} />
             </span>
           </a>
         </div>
 
-        {/* Pagination */}
+        {/* PAGINATION */}
         <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
           {slides.map((item, index) => (
             <button
@@ -136,11 +237,17 @@ export default function Hero() {
               onClick={() => setActive(index)}
               aria-label={`Afficher le slide ${index + 1}`}
               aria-current={active === index ? "true" : undefined}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                active === index
-                  ? "w-7"
-                  : "w-2 bg-white"
-              }`}
+              className={`
+                h-2
+                rounded-full
+                transition-all
+                duration-300
+                ${
+                  active === index
+                    ? "w-7"
+                    : "w-2 bg-white/80 hover:bg-white"
+                }
+              `}
               style={
                 active === index
                   ? { backgroundColor: "var(--accent)" }

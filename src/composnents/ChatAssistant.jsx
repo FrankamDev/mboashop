@@ -135,6 +135,11 @@ function isGreeting(text) {
     "bonsoir",
     "bjr",
     "coucou",
+    "yo",
+    "salutations",
+    "hey",
+    "salut tout le monde",
+    "salut à tous",
   ].some((word) => text === word || text.startsWith(`${word} `));
 }
 

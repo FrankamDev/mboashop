@@ -1,6 +1,6 @@
-
 import { useMemo, useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
+
 import {
   House,
   Store,
@@ -91,9 +91,10 @@ export default function MobileBottomNav() {
             : "invisible pointer-events-none translate-y-5 opacity-0"
         }`}
       >
-        <div className="mx-auto max-w-lg overflow-hidden rounded-[20px] border border-slate-100 bg-white shadow-[0_16px_50px_rgba(15,23,42,0.14)]">
+        <div className="mx-auto max-w-lg overflow-hidden rounded-[20px] border border-slate-100 bg-white shadow-[0_16px_50px_rgba(15,23,42,0.14)] dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_50px_rgba(0,0,0,0.45)]">
+
           {/* CHAMP DE RECHERCHE */}
-          <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3.5">
+          <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3.5 dark:border-slate-800">
             <Search
               size={19}
               strokeWidth={2}
@@ -106,7 +107,7 @@ export default function MobileBottomNav() {
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
               placeholder="Rechercher un produit..."
-              className="min-w-0 flex-1 bg-transparent text-[13px] font-medium tracking-[-0.01em] text-slate-800 outline-none placeholder:font-normal placeholder:text-slate-400"
+              className="min-w-0 flex-1 bg-transparent text-[13px] font-medium tracking-[-0.01em] text-slate-800 outline-none placeholder:font-normal placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-500"
             />
 
             {searchValue && (
@@ -114,7 +115,7 @@ export default function MobileBottomNav() {
                 type="button"
                 onClick={() => setSearchValue("")}
                 aria-label="Effacer la recherche"
-                className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                className="rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
               >
                 <X size={16} />
               </button>
@@ -124,7 +125,7 @@ export default function MobileBottomNav() {
               type="button"
               onClick={closeSearch}
               aria-label="Fermer la recherche"
-              className="rounded-full p-1.5 text-slate-500 transition hover:bg-slate-100"
+              className="rounded-full p-1.5 text-slate-500 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
             >
               <X size={18} />
             </button>
@@ -134,11 +135,11 @@ export default function MobileBottomNav() {
           <div className="max-h-[55vh] overflow-y-auto p-3">
             {!searchValue.trim() ? (
               <div className="py-8 text-center">
-                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50">
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50 dark:bg-slate-800">
                   <Search size={21} className="text-slate-400" />
                 </div>
 
-                <p className="text-[13px] font-semibold tracking-[-0.02em] text-slate-800">
+                <p className="text-[13px] font-semibold tracking-[-0.02em] text-slate-800 dark:text-white">
                   Que recherchez-vous ?
                 </p>
 
@@ -153,7 +154,7 @@ export default function MobileBottomNav() {
                     Résultats de recherche
                   </p>
 
-                  <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold text-blue-700">
+                  <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">
                     {results.length} résultat(s)
                   </span>
                 </div>
@@ -167,7 +168,7 @@ export default function MobileBottomNav() {
                       style={{
                         animationDelay: `${index * 40}ms`,
                       }}
-                      className="flex animate-in fade-in slide-in-from-bottom-2 items-center gap-3 rounded-xl p-2 transition-colors duration-200 hover:bg-slate-50 active:bg-blue-50"
+                      className="flex animate-in items-center gap-3 rounded-xl p-2 transition-colors duration-200 hover:bg-slate-50 active:bg-blue-50 dark:hover:bg-slate-800 dark:active:bg-blue-500/10"
                     >
                       <img
                         src={
@@ -176,11 +177,11 @@ export default function MobileBottomNav() {
                         }
                         alt={product.name}
                         loading="lazy"
-                        className="h-14 w-14 shrink-0 rounded-xl bg-slate-100 object-cover"
+                        className="h-14 w-14 shrink-0 rounded-xl bg-slate-100 object-cover dark:bg-slate-800"
                       />
 
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-[12px] font-semibold tracking-[-0.02em] text-slate-800">
+                        <p className="truncate text-[12px] font-semibold tracking-[-0.02em] text-slate-800 dark:text-white">
                           {product.name}
                         </p>
 
@@ -188,14 +189,14 @@ export default function MobileBottomNav() {
                           {product.category}
                         </p>
 
-                        <p className="mt-1 text-[12px] font-bold tracking-[-0.02em] text-blue-700">
+                        <p className="mt-1 text-[12px] font-bold tracking-[-0.02em] text-blue-700 dark:text-blue-400">
                           {formatPrice(product.price)}
                         </p>
                       </div>
 
                       <ArrowRight
                         size={16}
-                        className="shrink-0 text-slate-300"
+                        className="shrink-0 text-slate-300 dark:text-slate-600"
                       />
                     </Link>
                   ))}
@@ -214,11 +215,11 @@ export default function MobileBottomNav() {
               </>
             ) : (
               <div className="py-8 text-center">
-                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50">
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50 dark:bg-slate-800">
                   <Search size={21} className="text-slate-400" />
                 </div>
 
-                <p className="text-[13px] font-semibold text-slate-800">
+                <p className="text-[13px] font-semibold text-slate-800 dark:text-white">
                   Aucun produit trouvé
                 </p>
 
@@ -237,7 +238,7 @@ export default function MobileBottomNav() {
         aria-label="Fermer la recherche"
         tabIndex={searchOpen ? 0 : -1}
         onClick={closeSearch}
-        className={`fixed inset-0 z-[60] bg-slate-950/20 backdrop-blur-[2px] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] bg-slate-950/20 backdrop-blur-[2px] transition-opacity duration-300 dark:bg-black/50 md:hidden ${
           searchOpen
             ? "visible opacity-100"
             : "invisible pointer-events-none opacity-0"
@@ -245,7 +246,7 @@ export default function MobileBottomNav() {
       />
 
       {/* NAVIGATION MOBILE */}
-      <nav className="fixed bottom-0 left-0 z-[80] w-full border-t border-slate-100 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl md:hidden">
+      <nav className="fixed bottom-0 left-0 z-[80] w-full border-t border-slate-100 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl transition-colors duration-300 dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-[0_-8px_30px_rgba(0,0,0,0.35)] md:hidden">
         <div className="mx-auto flex h-[68px] max-w-lg items-center justify-around px-2">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -261,13 +262,15 @@ export default function MobileBottomNav() {
                   aria-expanded={searchOpen}
                   aria-label="Ouvrir la recherche"
                   className={`relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-colors duration-200 ${
-                    searchOpen ? "text-blue-700" : "text-slate-400"
+                    searchOpen
+                      ? "text-blue-700 dark:text-blue-400"
+                      : "text-slate-400 dark:text-slate-500"
                   }`}
                 >
                   <span
                     className={`flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-200 ${
                       searchOpen
-                        ? "scale-105 bg-blue-50"
+                        ? "scale-105 bg-blue-50 dark:bg-blue-500/10"
                         : "active:scale-90"
                     }`}
                   >
@@ -299,7 +302,9 @@ export default function MobileBottomNav() {
                 }}
                 className={({ isActive }) =>
                   `relative flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-1 transition-colors duration-200 ${
-                    isActive ? "text-blue-700" : "text-slate-400"
+                    isActive
+                      ? "text-blue-700 dark:text-blue-400"
+                      : "text-slate-400 dark:text-slate-500"
                   }`
                 }
               >
@@ -308,14 +313,14 @@ export default function MobileBottomNav() {
                     <span
                       className={`relative flex h-9 w-12 items-center justify-center rounded-2xl transition-all duration-200 ${
                         isActive
-                          ? "scale-105 bg-blue-50"
+                          ? "scale-105 bg-blue-50 dark:bg-blue-500/10"
                           : "active:scale-90"
                       }`}
                     >
                       <Icon size={21} strokeWidth={1.9} />
 
                       {item.label === "Panier" && cartCount > 0 && (
-                        <span className="absolute -right-1 -top-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white ring-2 ring-white">
+                        <span className="absolute -right-1 -top-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white ring-2 ring-white dark:ring-slate-950">
                           {cartCount > 99 ? "99+" : cartCount}
                         </span>
                       )}

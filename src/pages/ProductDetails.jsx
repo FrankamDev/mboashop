@@ -1,6 +1,6 @@
-
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import {
   ArrowLeft,
   ArrowRight,
@@ -53,10 +53,7 @@ export default function ProductDetails() {
   const touchStartX = useRef(null);
 
   const images = useMemo(
-    () =>
-      product?.images?.length
-        ? product.images
-        : [PLACEHOLDER],
+    () => (product?.images?.length ? product.images : [PLACEHOLDER]),
     [product]
   );
 
@@ -86,16 +83,14 @@ export default function ProductDetails() {
       .slice(0, 4);
   }, [product]);
 
-  // Réinitialiser les options lorsqu'on change de produit.
   useEffect(() => {
     setActiveImage(0);
     setQuantity(1);
     setSelectedColor(product?.variants?.colors?.[0] || "");
     setFavorite(false);
     setActiveTab("description");
-  }, [slug]);
+  }, [slug, product]);
 
-  // Fermer les fenêtres avec la touche Échap.
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -119,7 +114,6 @@ export default function ProductDetails() {
     };
   }, [zoomOpen, images.length]);
 
-  // Empêcher le défilement de la page derrière les fenêtres modales.
   useEffect(() => {
     if (!zoomOpen && !orderOpen) return;
 
@@ -142,7 +136,6 @@ export default function ProductDetails() {
     event.currentTarget.src = PLACEHOLDER;
   };
 
-  // Effet de perspective sur ordinateur.
   const handleMouseMove = (event) => {
     if (!imageRef.current || window.innerWidth < 1024) return;
 
@@ -169,7 +162,6 @@ export default function ProductDetails() {
     }
   };
 
-  // Navigation tactile dans la galerie.
   const handleTouchStart = (event) => {
     touchStartX.current = event.touches[0].clientX;
   };
@@ -187,7 +179,6 @@ export default function ProductDetails() {
     touchStartX.current = null;
   };
 
-  // Partager le produit.
   const handleShare = async () => {
     const url = window.location.href;
 
@@ -213,7 +204,6 @@ export default function ProductDetails() {
     }
   };
 
-  // Préparer la commande WhatsApp.
   const handleOrder = (event) => {
     event.preventDefault();
 
@@ -223,15 +213,23 @@ export default function ProductDetails() {
 Bonjour MBOASHOP, je souhaite passer une commande.
 
 PRODUIT : ${product.name}
+
 COULEUR : ${selectedColor || "Non précisée"}
+
 QUANTITÉ : ${quantity}
+
 PRIX UNITAIRE : ${formatPrice(product.price)}
+
 TOTAL : ${formatPrice(total)}
 
 INFORMATIONS CLIENT
+
 Nom : ${customer.name}
+
 Ville : ${customer.city}
+
 Quartier : ${customer.neighborhood}
+
 Téléphone : ${customer.phone}
 
 Merci de me confirmer la disponibilité et les modalités de livraison.
@@ -254,19 +252,18 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
     }));
   };
 
-  // Produit introuvable.
   if (!product) {
     return (
-      <main className="flex min-h-[75vh] flex-col items-center justify-center bg-[#f8f9fb] px-5 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-sm">
-          <PackageCheck size={34} className="text-slate-300" />
+      <main className="flex min-h-[75vh] flex-col items-center justify-center bg-[#f8f9fb] px-5 text-center transition-colors duration-300 dark:bg-slate-950">
+        <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-sm dark:bg-slate-900">
+          <PackageCheck size={34} className="text-slate-300 dark:text-slate-600" />
         </div>
 
-        <h1 className="mt-6 text-2xl font-bold tracking-[-0.04em] text-slate-900 sm:text-3xl">
+        <h1 className="mt-6 text-2xl font-bold tracking-[-0.04em] text-slate-900 dark:text-white sm:text-3xl">
           Produit introuvable
         </h1>
 
-        <p className="mt-3 max-w-sm text-sm leading-6 text-slate-500">
+        <p className="mt-3 max-w-sm text-sm leading-6 text-slate-500 dark:text-slate-400">
           Ce produit n'est pas disponible actuellement.
         </p>
 
@@ -282,12 +279,16 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#f8f9fb] font-sans text-[#15171c]">
+    <main className="min-h-screen overflow-hidden bg-[#f8f9fb] font-sans text-[#15171c] transition-colors duration-300 dark:bg-slate-950 dark:text-white">
+
       {/* FIL D'ARIANE */}
       <div className="mx-auto max-w-[1440px] px-4 pt-5 sm:px-8 sm:pt-7 lg:px-12">
         <div className="flex items-center justify-between">
           <div className="flex min-w-0 items-center gap-2 text-[11px] font-medium text-slate-400 sm:text-xs">
-            <Link to="/" className="shrink-0 transition hover:text-blue-700">
+            <Link
+              to="/"
+              className="shrink-0 transition hover:text-blue-700 dark:hover:text-blue-400"
+            >
               Accueil
             </Link>
 
@@ -295,21 +296,21 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
             <Link
               to="/all-products"
-              className="shrink-0 transition hover:text-blue-700"
+              className="shrink-0 transition hover:text-blue-700 dark:hover:text-blue-400"
             >
               Boutique
             </Link>
 
             <ChevronRight size={13} className="shrink-0" />
 
-            <span className="max-w-[130px] truncate font-semibold text-slate-700 sm:max-w-xs">
+            <span className="max-w-[130px] truncate font-semibold text-slate-700 dark:text-slate-300 sm:max-w-xs">
               {product.name}
             </span>
           </div>
 
           <Link
             to="/all-products"
-            className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-700 sm:flex"
+            className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-700 dark:text-slate-400 dark:hover:text-blue-400 sm:flex"
           >
             <ArrowLeft size={15} />
             Retour à la boutique
@@ -320,29 +321,28 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
       {/* ZONE PRINCIPALE */}
       <section className="mx-auto max-w-[1440px] px-4 pb-14 pt-6 sm:px-8 sm:pt-9 lg:px-12 lg:pb-20 lg:pt-12">
         <div className="grid items-start gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 xl:gap-20">
+
           {/* GALERIE */}
           <div className="min-w-0">
             <div className="relative">
-              <div className="relative overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] sm:rounded-[30px]">
-                {/* Fond décoratif */}
+              <div className="relative overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] transition-colors duration-300 dark:border-slate-800 dark:bg-slate-900 sm:rounded-[30px]">
+
                 <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                  <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-100/60 blur-3xl sm:h-80 sm:w-80" />
+                  <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-100/60 blur-3xl dark:bg-blue-500/10 sm:h-80 sm:w-80" />
 
-                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
+                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl dark:bg-indigo-500/10" />
 
-                  <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px]" />
+                  <div className="absolute inset-0 opacity-[0.035] dark:opacity-[0.06] [background-image:radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px]" />
                 </div>
 
-                {/* Badge produit */}
                 {product.badge && (
                   <div className="absolute left-4 top-4 z-20 sm:left-6 sm:top-6">
-                    <span className="rounded-full bg-slate-950 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-white shadow-lg sm:text-[10px]">
+                    <span className="rounded-full bg-slate-950 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-white shadow-lg dark:bg-white dark:text-slate-950 sm:text-[10px]">
                       {product.badge}
                     </span>
                   </div>
                 )}
 
-                {/* Réduction */}
                 {discount > 0 && (
                   <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
                     <span className="rounded-full bg-red-500 px-3.5 py-2 text-[10px] font-bold text-white shadow-lg">
@@ -351,7 +351,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   </div>
                 )}
 
-                {/* Image principale */}
+                {/* IMAGE PRINCIPALE */}
                 <div
                   className="relative flex aspect-square items-center justify-center p-7 sm:p-12 lg:p-14"
                   onMouseMove={handleMouseMove}
@@ -359,7 +359,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   onTouchStart={handleTouchStart}
                   onTouchEnd={handleTouchEnd}
                 >
-                  <div className="pointer-events-none absolute bottom-[12%] left-[20%] right-[20%] h-8 rounded-[50%] bg-slate-900/10 blur-2xl" />
+                  <div className="pointer-events-none absolute bottom-[12%] left-[20%] right-[20%] h-8 rounded-[50%] bg-slate-900/10 blur-2xl dark:bg-black/30" />
 
                   <img
                     ref={imageRef}
@@ -370,24 +370,23 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   />
                 </div>
 
-                {/* Bouton zoom */}
+                {/* ZOOM */}
                 <button
                   type="button"
                   onClick={() => setZoomOpen(true)}
                   aria-label="Agrandir l'image"
-                  className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:scale-110 hover:bg-slate-950 hover:text-white sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
+                  className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:scale-110 hover:bg-slate-950 hover:text-white dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-200 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
                 >
                   <ZoomIn size={19} />
                 </button>
 
-                {/* Navigation des images */}
                 {images.length > 1 && (
                   <>
                     <button
                       type="button"
                       onClick={() => changeImage(-1)}
                       aria-label="Image précédente"
-                      className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:left-5 sm:h-11 sm:w-11"
+                      className="absolute left-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-200 sm:left-5 sm:h-11 sm:w-11"
                     >
                       <ChevronLeft size={20} />
                     </button>
@@ -396,7 +395,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                       type="button"
                       onClick={() => changeImage(1)}
                       aria-label="Image suivante"
-                      className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white sm:right-5 sm:h-11 sm:w-11"
+                      className="absolute right-3 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/90 text-slate-800 shadow-md transition hover:bg-slate-950 hover:text-white dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-200 sm:right-5 sm:h-11 sm:w-11"
                     >
                       <ChevronRight size={20} />
                     </button>
@@ -404,7 +403,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 )}
               </div>
 
-              {/* Miniatures */}
+              {/* MINIATURES */}
               {images.length > 1 && (
                 <div className="mt-4 flex gap-2.5 overflow-x-auto pb-2 sm:mt-5 sm:gap-3">
                   {images.map((image, index) => (
@@ -414,10 +413,10 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                       onClick={() => setActiveImage(index)}
                       aria-label={`Afficher l'image ${index + 1}`}
                       aria-pressed={activeImage === index}
-                      className={`relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-xl border-2 bg-white p-2 transition-all duration-200 sm:h-[88px] sm:w-[88px] sm:rounded-2xl ${
+                      className={`relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-xl border-2 bg-white p-2 transition-all duration-200 dark:bg-slate-900 sm:h-[88px] sm:w-[88px] sm:rounded-2xl ${
                         activeImage === index
                           ? "border-blue-600 shadow-[0_8px_25px_-10px_rgba(37,99,235,0.5)]"
-                          : "border-transparent opacity-65 hover:border-slate-300 hover:opacity-100"
+                          : "border-transparent opacity-65 hover:border-slate-300 hover:opacity-100 dark:hover:border-slate-600"
                       }`}
                     >
                       <img
@@ -436,57 +435,61 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
               )}
 
-              <p className="mt-2 text-[9px] font-medium tracking-[0.08em] text-slate-400 sm:text-[10px]">
+              <p className="mt-2 text-[9px] font-medium tracking-[0.08em] text-slate-400 dark:text-slate-500 sm:text-[10px]">
                 FAITES DÉFILER LES IMAGES POUR EXPLORER LE PRODUIT
               </p>
             </div>
 
             {/* POINTS DE CONFIANCE */}
             <div className="mt-7 grid grid-cols-3 gap-2.5 sm:mt-8 sm:gap-3">
-              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
-                <Truck size={21} className="mx-auto text-blue-600" />
+              {[
+                {
+                  icon: Truck,
+                  title: "Livraison",
+                  text: "Selon votre ville",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Assistance",
+                  text: "Avant commande",
+                },
+                {
+                  icon: PackageCheck,
+                  title: "Disponibilité",
+                  text: "À confirmer",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
 
-                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
-                  Livraison
-                </p>
+                return (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center transition-colors dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+                  >
+                    <Icon
+                      size={21}
+                      className="mx-auto text-blue-600 dark:text-blue-400"
+                    />
 
-                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
-                  Selon votre ville
-                </p>
-              </div>
+                    <p className="mt-2 text-[10px] font-semibold text-slate-800 dark:text-slate-200 sm:text-xs">
+                      {item.title}
+                    </p>
 
-              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
-                <ShieldCheck size={21} className="mx-auto text-blue-600" />
-
-                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
-                  Assistance
-                </p>
-
-                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
-                  Avant commande
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-slate-100 bg-white px-2 py-4 text-center sm:p-4">
-                <PackageCheck size={21} className="mx-auto text-blue-600" />
-
-                <p className="mt-2 text-[10px] font-semibold text-slate-800 sm:text-xs">
-                  Disponibilité
-                </p>
-
-                <p className="mt-1 text-[9px] text-slate-400 sm:text-[10px]">
-                  À confirmer
-                </p>
-              </div>
+                    <p className="mt-1 text-[9px] text-slate-400 dark:text-slate-500 sm:text-[10px]">
+                      {item.text}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* PANNEAU D'ACHAT */}
           <div className="lg:sticky lg:top-8 lg:h-fit">
-            <div className="rounded-[22px] border border-slate-100 bg-white p-5 shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] sm:rounded-[28px] sm:p-7 lg:p-8">
-              {/* Catégorie et actions */}
+            <div className="rounded-[22px] border border-slate-100 bg-white p-5 shadow-[0_15px_50px_-35px_rgba(15,23,42,0.25)] transition-colors duration-300 dark:border-slate-800 dark:bg-slate-900 sm:rounded-[28px] sm:p-7 lg:p-8">
+
               <div className="flex items-center justify-between gap-3">
-                <span className="max-w-[65%] truncate rounded-full bg-blue-50 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-blue-700 sm:text-[10px]">
+                <span className="max-w-[65%] truncate rounded-full bg-blue-50 px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 sm:text-[10px]">
                   {product.category}
                 </span>
 
@@ -502,8 +505,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     aria-pressed={favorite}
                     className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
                       favorite
-                        ? "border-red-100 bg-red-50 text-red-500"
-                        : "border-slate-100 text-slate-500 hover:bg-slate-50"
+                        ? "border-red-100 bg-red-50 text-red-500 dark:border-red-900/50 dark:bg-red-500/10"
+                        : "border-slate-100 text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
                     }`}
                   >
                     <Heart
@@ -516,7 +519,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     type="button"
                     onClick={handleShare}
                     aria-label="Partager le produit"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-100 text-slate-500 transition hover:bg-slate-50"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-100 text-slate-500 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
                   >
                     {copied ? (
                       <Check size={18} className="text-green-600" />
@@ -527,17 +530,14 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
               </div>
 
-              {/* Nom du produit */}
-              <h1 className="mt-6 text-[27px] font-bold leading-[1.15] tracking-[-0.045em] text-[#111827] sm:mt-7 sm:text-[36px] lg:text-[40px]">
+              <h1 className="mt-6 text-[27px] font-bold leading-[1.15] tracking-[-0.045em] text-[#111827] dark:text-white sm:mt-7 sm:text-[36px] lg:text-[40px]">
                 {product.name}
               </h1>
 
-              {/* Description courte */}
-              <p className="mt-3 max-w-xl text-[13px] leading-6 text-slate-500 sm:mt-4 sm:text-sm sm:leading-7">
+              <p className="mt-3 max-w-xl text-[13px] leading-6 text-slate-500 dark:text-slate-400 sm:mt-4 sm:text-sm sm:leading-7">
                 {product.shortDescription || product.description}
               </p>
 
-              {/* Évaluation */}
               {product.rating != null && (
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <div className="flex items-center gap-0.5">
@@ -548,30 +548,30 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                         className={
                           item <= Math.round(Number(product.rating))
                             ? "fill-amber-400 text-amber-400"
-                            : "text-slate-200"
+                            : "text-slate-200 dark:text-slate-700"
                         }
                       />
                     ))}
                   </div>
 
-                  <span className="text-xs font-semibold text-slate-800">
+                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
                     {product.rating}
                   </span>
 
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-400 dark:text-slate-500">
                     ({product.reviewsCount ?? 0} avis)
                   </span>
                 </div>
               )}
 
               {/* PRIX */}
-              <div className="mt-7 rounded-2xl bg-[#f7f8fa] p-4 sm:mt-8 sm:p-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+              <div className="mt-7 rounded-2xl bg-[#f7f8fa] p-4 transition-colors dark:bg-slate-800 sm:mt-8 sm:p-5">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400 dark:text-slate-500">
                   Prix du produit
                 </p>
 
                 <div className="mt-2 flex flex-wrap items-end gap-3">
-                  <span className="text-[29px] font-bold tracking-[-0.045em] text-slate-950 sm:text-[36px]">
+                  <span className="text-[29px] font-bold tracking-[-0.045em] text-slate-950 dark:text-white sm:text-[36px]">
                     {formatPrice(product.price)}
                   </span>
 
@@ -583,7 +583,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
 
                 {discount > 0 && (
-                  <p className="mt-2 text-xs font-semibold text-green-600">
+                  <p className="mt-2 text-xs font-semibold text-green-600 dark:text-green-400">
                     Vous économisez{" "}
                     {formatPrice(product.oldPrice - product.price)}
                   </p>
@@ -591,7 +591,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               </div>
 
               {/* DISPONIBILITÉ */}
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-5">
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-5 dark:border-slate-800">
                 <div className="flex items-center gap-2">
                   <span
                     className={`h-2 w-2 rounded-full ${
@@ -599,12 +599,12 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     }`}
                   />
 
-                  <span className="text-xs font-semibold text-slate-700">
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                     {isAvailable ? "Disponible" : "Indisponible"}
                   </span>
                 </div>
 
-                <span className="text-[11px] text-slate-400 sm:text-xs">
+                <span className="text-[11px] text-slate-400 dark:text-slate-500 sm:text-xs">
                   {isAvailable
                     ? `${stock} unité(s) en stock`
                     : "Rupture de stock"}
@@ -615,11 +615,11 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               {product.variants?.colors?.length > 0 && (
                 <div className="mt-6">
                   <div className="mb-3 flex items-center justify-between gap-2">
-                    <span className="text-[13px] font-semibold text-slate-900">
+                    <span className="text-[13px] font-semibold text-slate-900 dark:text-slate-200">
                       Choisir une couleur
                     </span>
 
-                    <span className="text-xs font-medium text-slate-400">
+                    <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
                       {selectedColor}
                     </span>
                   </div>
@@ -633,8 +633,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                         aria-pressed={selectedColor === color}
                         className={`rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition ${
                           selectedColor === color
-                            ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
-                            : "border-slate-200 bg-white text-slate-600 hover:border-slate-400"
+                            ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm dark:border-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
+                            : "border-slate-200 bg-white text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-500"
                         }`}
                       >
                         {selectedColor === color && (
@@ -650,11 +650,11 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
               {/* QUANTITÉ */}
               <div className="mt-7 flex items-center justify-between">
-                <span className="text-[13px] font-semibold text-slate-900">
+                <span className="text-[13px] font-semibold text-slate-900 dark:text-slate-200">
                   Quantité
                 </span>
 
-                <div className="flex items-center rounded-xl border border-slate-200 p-1">
+                <div className="flex items-center rounded-xl border border-slate-200 p-1 dark:border-slate-700">
                   <button
                     type="button"
                     onClick={() =>
@@ -662,25 +662,23 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                     }
                     disabled={quantity <= 1}
                     aria-label="Diminuer la quantité"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                   >
                     <Minus size={15} />
                   </button>
 
-                  <span className="min-w-10 text-center text-sm font-semibold tabular-nums">
+                  <span className="min-w-10 text-center text-sm font-semibold tabular-nums text-slate-900 dark:text-white">
                     {quantity}
                   </span>
 
                   <button
                     type="button"
                     onClick={() =>
-                      setQuantity((value) =>
-                        Math.min(stock, value + 1)
-                      )
+                      setQuantity((value) => Math.min(stock, value + 1))
                     }
                     disabled={quantity >= stock}
                     aria-label="Augmenter la quantité"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                   >
                     <Plus size={15} />
                   </button>
@@ -688,12 +686,12 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               </div>
 
               {/* TOTAL */}
-              <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5">
-                <span className="text-xs font-medium text-slate-500 sm:text-sm">
+              <div className="mt-6 flex items-center justify-between gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 sm:text-sm">
                   Total de votre sélection
                 </span>
 
-                <span className="text-lg font-bold tracking-[-0.03em] text-slate-950 sm:text-xl">
+                <span className="text-lg font-bold tracking-[-0.03em] text-slate-950 dark:text-white sm:text-xl">
                   {formatPrice(total)}
                 </span>
               </div>
@@ -703,10 +701,11 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 type="button"
                 onClick={() => setOrderOpen(true)}
                 disabled={!isAvailable}
-                className="group mt-7 flex w-full items-center justify-center gap-3 rounded-xl bg-[#111827] px-5 py-4 text-[13px] font-semibold text-white shadow-[0_12px_25px_-12px_rgba(15,23,42,0.65)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_18px_35px_-12px_rgba(37,99,235,0.4)] disabled:cursor-not-allowed disabled:opacity-40 sm:rounded-2xl sm:py-[18px] sm:text-sm"
+                className="group mt-7 flex w-full items-center justify-center gap-3 rounded-xl bg-[#111827] px-5 py-4 text-[13px] font-semibold text-white shadow-[0_12px_25px_-12px_rgba(15,23,42,0.65)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_18px_35px_-12px_rgba(37,99,235,0.4)] disabled:cursor-not-allowed disabled:opacity-40 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-500 dark:hover:text-white sm:rounded-2xl sm:py-[18px] sm:text-sm"
               >
                 <ShoppingBag size={18} />
                 Commander maintenant
+
                 <ArrowRight
                   size={17}
                   className="transition-transform group-hover:translate-x-1"
@@ -717,26 +716,26 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 type="button"
                 onClick={() => setOrderOpen(true)}
                 disabled={!isAvailable}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-green-200 bg-green-50 px-5 py-3.5 text-xs font-semibold text-green-700 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 sm:rounded-2xl sm:py-4"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-green-200 bg-green-50 px-5 py-3.5 text-xs font-semibold text-green-700 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-green-900/60 dark:bg-green-500/10 dark:text-green-400 dark:hover:bg-green-500/15 sm:rounded-2xl sm:py-4"
               >
                 <MessageCircle size={17} />
                 Commander via WhatsApp
               </button>
 
-              <p className="mt-4 text-center text-[10px] leading-5 text-slate-400">
+              <p className="mt-4 text-center text-[10px] leading-5 text-slate-400 dark:text-slate-500">
                 Vous pourrez vérifier votre commande avant de l'envoyer sur
                 WhatsApp.
               </p>
             </div>
 
             {/* ASSISTANCE */}
-            <div className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 sm:mt-5 sm:gap-4 sm:p-5">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 sm:h-11 sm:w-11">
+            <div className="mt-4 flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-4 transition-colors dark:border-slate-800 dark:bg-slate-900 sm:mt-5 sm:gap-4 sm:p-5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 sm:h-11 sm:w-11">
                 <MessageCircle size={20} />
               </div>
 
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-slate-900">
+                <p className="text-xs font-semibold text-slate-900 dark:text-white">
                   Besoin d'informations ?
                 </p>
 
@@ -744,7 +743,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   href={`https://wa.me/${WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-1 inline-block text-[11px] font-medium text-blue-600 transition hover:underline sm:text-xs"
+                  className="mt-1 inline-block text-[11px] font-medium text-blue-600 transition hover:underline dark:text-blue-400 sm:text-xs"
                 >
                   Contactez notre équipe
                 </a>
@@ -752,18 +751,18 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
               <ArrowRight
                 size={17}
-                className="ml-auto shrink-0 text-slate-300"
+                className="ml-auto shrink-0 text-slate-300 dark:text-slate-700"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* DESCRIPTION ET CARACTÉRISTIQUES */}
-      <section className="border-y border-slate-100 bg-white">
+      {/* DESCRIPTION / CARACTÉRISTIQUES */}
+      <section className="border-y border-slate-100 bg-white transition-colors duration-300 dark:border-slate-800 dark:bg-slate-900">
         <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
-          {/* ONGLETS */}
-          <div className="flex gap-7 border-b border-slate-100 sm:gap-9">
+
+          <div className="flex gap-7 border-b border-slate-100 dark:border-slate-800 sm:gap-9">
             {[
               { id: "description", label: "Description" },
               { id: "specifications", label: "Caractéristiques" },
@@ -774,8 +773,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative pb-4 text-[12px] font-semibold transition sm:pb-5 sm:text-sm ${
                   activeTab === tab.id
-                    ? "text-blue-700"
-                    : "text-slate-400 hover:text-slate-700"
+                    ? "text-blue-700 dark:text-blue-400"
+                    : "text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 }`}
               >
                 {tab.label}
@@ -788,21 +787,20 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
           </div>
 
           <div className="grid gap-9 pt-8 sm:pt-10 lg:grid-cols-2 lg:gap-12">
-            {/* TEXTE */}
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
                 {activeTab === "description"
                   ? "À propos du produit"
                   : "Informations techniques"}
               </p>
 
-              <h2 className="mt-4 max-w-lg text-[24px] font-bold leading-tight tracking-[-0.04em] text-slate-950 sm:text-3xl">
+              <h2 className="mt-4 max-w-lg text-[24px] font-bold leading-tight tracking-[-0.04em] text-slate-950 dark:text-white sm:text-3xl">
                 {activeTab === "description"
                   ? "Découvrez chaque détail."
                   : "Les caractéristiques."}
               </h2>
 
-              <p className="mt-4 max-w-xl whitespace-pre-line text-[13px] leading-7 text-slate-500 sm:mt-5 sm:text-sm sm:leading-8">
+              <p className="mt-4 max-w-xl whitespace-pre-line text-[13px] leading-7 text-slate-500 dark:text-slate-400 sm:mt-5 sm:text-sm sm:leading-8">
                 {activeTab === "description"
                   ? product.description ||
                     product.shortDescription ||
@@ -812,8 +810,8 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
             </div>
 
             {/* FICHE TECHNIQUE */}
-            <div className="rounded-2xl bg-[#f7f8fa] p-5 sm:p-7">
-              <h3 className="mb-5 text-[13px] font-semibold text-slate-900 sm:mb-6 sm:text-sm">
+            <div className="rounded-2xl bg-[#f7f8fa] p-5 transition-colors dark:bg-slate-800 sm:p-7">
+              <h3 className="mb-5 text-[13px] font-semibold text-slate-900 dark:text-white sm:mb-6 sm:text-sm">
                 {activeTab === "description"
                   ? "Informations du produit"
                   : "Fiche technique"}
@@ -824,20 +822,20 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                   {specifications.map((spec, index) => (
                     <div
                       key={spec.label || index}
-                      className="flex justify-between gap-5 border-b border-slate-200 pb-4 last:border-0 last:pb-0"
+                      className="flex justify-between gap-5 border-b border-slate-200 pb-4 last:border-0 last:pb-0 dark:border-slate-700"
                     >
-                      <span className="text-xs text-slate-500">
+                      <span className="text-xs text-slate-500 dark:text-slate-400">
                         {spec.label}
                       </span>
 
-                      <span className="text-right text-xs font-semibold text-slate-800">
+                      <span className="text-right text-xs font-semibold text-slate-800 dark:text-slate-200">
                         {spec.value}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-xs leading-6 text-slate-400">
+                <p className="text-xs leading-6 text-slate-400 dark:text-slate-500">
                   Aucune caractéristique supplémentaire disponible pour ce
                   produit.
                 </p>
@@ -852,18 +850,18 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
         <section className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 sm:py-16 lg:px-12">
           <div className="mb-7 flex items-end justify-between gap-4 sm:mb-8">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
                 Vous pourriez aimer
               </p>
 
-              <h2 className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 sm:mt-3 sm:text-3xl">
+              <h2 className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 dark:text-white sm:mt-3 sm:text-3xl">
                 Produits similaires
               </h2>
             </div>
 
             <Link
               to="/all-products"
-              className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-600 sm:flex"
+              className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-slate-500 transition hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 sm:flex"
             >
               Voir toute la boutique
               <ArrowRight size={16} />
@@ -875,9 +873,9 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               <Link
                 key={item.id}
                 to={`/produit/${item.slug}`}
-                className="group overflow-hidden rounded-2xl border border-slate-100 bg-white p-2.5 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-3"
+                className="group overflow-hidden rounded-2xl border border-slate-100 bg-white p-2.5 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 sm:p-3"
               >
-                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#f7f8fa] p-3 sm:p-4">
+                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#f7f8fa] p-3 transition-colors dark:bg-slate-800 sm:p-4">
                   <img
                     src={item.images?.[0] || PLACEHOLDER}
                     alt={item.name}
@@ -888,11 +886,11 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 </div>
 
                 <div className="px-1 pb-1 pt-3 sm:pt-4">
-                  <p className="line-clamp-2 min-h-9 text-[11px] font-semibold leading-5 text-slate-800 sm:text-xs">
+                  <p className="line-clamp-2 min-h-9 text-[11px] font-semibold leading-5 text-slate-800 dark:text-slate-200 sm:text-xs">
                     {item.name}
                   </p>
 
-                  <p className="mt-2 text-[13px] font-bold tracking-[-0.02em] text-slate-950 sm:text-sm">
+                  <p className="mt-2 text-[13px] font-bold tracking-[-0.02em] text-slate-950 dark:text-white sm:text-sm">
                     {formatPrice(item.price)}
                   </p>
                 </div>
@@ -902,7 +900,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
 
           <Link
             to="/all-products"
-            className="mt-6 flex items-center justify-center gap-2 text-xs font-semibold text-blue-700 sm:hidden"
+            className="mt-6 flex items-center justify-center gap-2 text-xs font-semibold text-blue-700 dark:text-blue-400 sm:hidden"
           >
             Voir toute la boutique
             <ArrowRight size={15} />
@@ -981,24 +979,23 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
           onClick={() => setOrderOpen(false)}
         >
           <div
-            className="max-h-[94dvh] w-full max-w-[480px] overflow-y-auto rounded-t-[26px] bg-white p-5 shadow-2xl sm:max-h-[92vh] sm:rounded-[28px] sm:p-8"
+            className="max-h-[94dvh] w-full max-w-[480px] overflow-y-auto rounded-t-[26px] bg-white p-5 shadow-2xl transition-colors dark:bg-slate-900 sm:max-h-[92vh] sm:rounded-[28px] sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
-            {/* En-tête */}
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
                   MBOASHOP
                 </p>
 
                 <h2
                   id="order-title"
-                  className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 sm:text-2xl"
+                  className="mt-2 text-[23px] font-bold tracking-[-0.04em] text-slate-950 dark:text-white sm:text-2xl"
                 >
                   Votre commande
                 </h2>
 
-                <p className="mt-2 text-xs leading-5 text-slate-500">
+                <p className="mt-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
                   Renseignez vos coordonnées pour continuer sur WhatsApp.
                 </p>
               </div>
@@ -1007,15 +1004,15 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 type="button"
                 onClick={() => setOrderOpen(false)}
                 aria-label="Fermer la fenêtre"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
               >
                 <X size={18} />
               </button>
             </div>
 
-            {/* Résumé produit */}
-            <div className="mt-6 flex gap-3 rounded-2xl bg-[#f7f8fa] p-3.5 sm:mt-7 sm:gap-4 sm:p-4">
-              <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-xl bg-white p-2 sm:h-20 sm:w-20">
+            {/* RÉSUMÉ PRODUIT */}
+            <div className="mt-6 flex gap-3 rounded-2xl bg-[#f7f8fa] p-3.5 transition-colors dark:bg-slate-800 sm:mt-7 sm:gap-4 sm:p-4">
+              <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-xl bg-white p-2 dark:bg-slate-900 sm:h-20 sm:w-20">
                 <img
                   src={images[0]}
                   alt={product.name}
@@ -1025,21 +1022,21 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="line-clamp-2 text-[12px] font-semibold leading-5 text-slate-900 sm:text-sm">
+                <p className="line-clamp-2 text-[12px] font-semibold leading-5 text-slate-900 dark:text-white sm:text-sm">
                   {product.name}
                 </p>
 
                 {selectedColor && (
-                  <p className="mt-1 text-[10px] text-slate-500">
+                  <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-400">
                     Couleur : {selectedColor}
                   </p>
                 )}
 
-                <p className="mt-1.5 text-[11px] text-slate-500">
+                <p className="mt-1.5 text-[11px] text-slate-500 dark:text-slate-400">
                   Quantité : {quantity}
                 </p>
 
-                <p className="mt-1.5 text-sm font-bold text-blue-600">
+                <p className="mt-1.5 text-sm font-bold text-blue-600 dark:text-blue-400">
                   {formatPrice(total)}
                 </p>
               </div>
@@ -1076,7 +1073,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 <div key={field.name}>
                   <label
                     htmlFor={`customer-${field.name}`}
-                    className="mb-2 block text-[11px] font-semibold text-slate-700 sm:text-xs"
+                    className="mb-2 block text-[11px] font-semibold text-slate-700 dark:text-slate-300 sm:text-xs"
                   >
                     {field.label}
                   </label>
@@ -1093,10 +1090,10 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                       field.name === "name"
                         ? "name"
                         : field.name === "phone"
-                          ? "tel"
-                          : "off"
+                        ? "tel"
+                        : "off"
                     }
-                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-[13px] text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-[13px] text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500"
                   />
                 </div>
               ))}
@@ -1110,7 +1107,7 @@ Merci de me confirmer la disponibilité et les modalités de livraison.
                 <ArrowRight size={17} />
               </button>
 
-              <p className="text-center text-[10px] leading-5 text-slate-400">
+              <p className="text-center text-[10px] leading-5 text-slate-400 dark:text-slate-500">
                 Aucune commande n'est envoyée automatiquement. Vous pourrez
                 vérifier et envoyer votre message dans WhatsApp.
               </p>

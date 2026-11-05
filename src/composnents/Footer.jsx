@@ -14,20 +14,20 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 bg-white text-gray-900">
+    <footer className="border-t border-gray-200 bg-white text-gray-900 transition-colors duration-300 dark:border-slate-800 dark:bg-slate-950 dark:text-white">
       {/* CTA principal */}
-      <div className="bg-gray-50">
+      <div className="bg-gray-50 dark:bg-slate-900">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <div className="max-w-xl">
             <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-600 sm:text-xs">
               MboaShop
             </span>
 
-            <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-gray-950 sm:text-2xl">
+            <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-gray-950 sm:text-2xl dark:text-white">
               Trouvez ce qu’il vous faut, simplement.
             </h2>
 
-            <p className="mt-1.5 max-w-md text-xs leading-5 text-gray-500 sm:text-sm">
+            <p className="mt-1.5 max-w-md text-xs leading-5 text-gray-500 sm:text-sm dark:text-slate-400">
               Découvrez nos produits et commandez facilement depuis votre
               téléphone.
             </p>
@@ -35,7 +35,7 @@ export default function Footer() {
 
           <Link
             to="/produits"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gray-950 px-4 py-3 text-xs font-bold text-white transition hover:bg-blue-600 sm:w-fit sm:px-5 sm:text-sm"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gray-950 px-4 py-3 text-xs font-bold text-white transition hover:bg-blue-600 sm:w-fit sm:px-5 sm:text-sm dark:bg-white dark:text-slate-950 dark:hover:bg-blue-500 dark:hover:text-white"
           >
             Découvrir les produits
             <ArrowRight size={15} />
@@ -50,7 +50,7 @@ export default function Footer() {
           {/* Marque */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="inline-flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-950 text-sm font-black text-white">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-950 text-sm font-black text-white dark:bg-white dark:text-slate-950">
                 M
               </div>
 
@@ -59,13 +59,13 @@ export default function Footer() {
                   MBOA<span className="text-blue-600">SHOP</span>
                 </div>
 
-                <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-gray-400 dark:text-slate-500">
                   Shopping simple
                 </p>
               </div>
             </Link>
 
-            <p className="mt-3 max-w-xs text-[11px] leading-5 text-gray-500 sm:text-xs">
+            <p className="mt-3 max-w-xs text-[11px] leading-5 text-gray-500 sm:text-xs dark:text-slate-400">
               Votre boutique en ligne pour découvrir des produits pratiques,
               modernes et accessibles.
             </p>
@@ -75,7 +75,7 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Facebook"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-[11px] font-black text-gray-700 transition hover:border-gray-950 hover:bg-gray-950 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-[11px] font-black text-gray-700 transition hover:border-gray-950 hover:bg-gray-950 hover:text-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-white dark:hover:bg-white dark:hover:text-slate-950"
               >
                 f
               </a>
@@ -83,7 +83,7 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-[9px] font-black text-gray-700 transition hover:border-gray-950 hover:bg-gray-950 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-[9px] font-black text-gray-700 transition hover:border-gray-950 hover:bg-gray-950 hover:text-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-white dark:hover:bg-white dark:hover:text-slate-950"
               >
                 IG
               </a>
@@ -93,7 +93,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:border-green-500 hover:bg-green-500 hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition hover:border-green-500 hover:bg-green-500 hover:text-white dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
               >
                 <MessageCircle size={14} />
               </a>
@@ -102,7 +102,7 @@ export default function Footer() {
 
           {/* Boutique */}
           <div>
-            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs">
+            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs dark:text-white">
               Boutique
             </h3>
 
@@ -110,7 +110,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/produits"
-                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   <ChevronRight
                     size={11}
@@ -123,7 +123,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/produits?sort=popular"
-                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   <ChevronRight
                     size={11}
@@ -136,7 +136,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/produits?sort=price-asc"
-                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   <ChevronRight
                     size={11}
@@ -149,7 +149,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/produits?category=Gadgets"
-                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="group flex items-center text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   <ChevronRight
                     size={11}
@@ -163,7 +163,7 @@ export default function Footer() {
 
           {/* Informations */}
           <div>
-            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs">
+            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs dark:text-white">
               Informations
             </h3>
 
@@ -171,7 +171,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/a-propos"
-                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   À propos
                 </Link>
@@ -180,7 +180,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/livraison"
-                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   Livraison
                 </Link>
@@ -189,7 +189,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/conditions"
-                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   Conditions générales
                 </Link>
@@ -198,7 +198,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/confidentialite"
-                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs"
+                  className="text-[11px] text-gray-500 transition hover:text-blue-600 sm:text-xs dark:text-slate-400"
                 >
                   Confidentialité
                 </Link>
@@ -208,38 +208,38 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="col-span-2 md:col-span-1">
-            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs">
+            <h3 className="mb-3 text-[11px] font-extrabold text-gray-950 sm:text-xs dark:text-white">
               Contact
             </h3>
 
             <div className="space-y-2.5">
               <div className="flex items-start gap-2.5">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-600">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-600 dark:bg-slate-900 dark:text-slate-300">
                   <MapPin size={13} />
                 </div>
 
                 <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-wide text-gray-400">
+                  <p className="text-[9px] font-semibold uppercase tracking-wide text-gray-400 dark:text-slate-500">
                     Localisation
                   </p>
 
-                  <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">
+                  <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs dark:text-slate-400">
                     Yaoundé, Cameroun
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-600">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-600 dark:bg-slate-900 dark:text-slate-300">
                   <Phone size={13} />
                 </div>
 
                 <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-wide text-gray-400">
+                  <p className="text-[9px] font-semibold uppercase tracking-wide text-gray-400 dark:text-slate-500">
                     Commandes
                   </p>
 
-                  <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">
+                  <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs dark:text-slate-400">
                     Disponible sur WhatsApp
                   </p>
                 </div>
@@ -249,7 +249,7 @@ export default function Footer() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-950 px-3 py-2.5 text-[10px] font-bold text-white transition hover:bg-green-600 sm:text-xs"
+                className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-950 px-3 py-2.5 text-[10px] font-bold text-white transition hover:bg-green-600 sm:text-xs dark:bg-white dark:text-slate-950 dark:hover:bg-green-600 dark:hover:text-white"
               >
                 <MessageCircle size={14} />
                 Commander sur WhatsApp
@@ -260,8 +260,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-100 bg-gray-50">
-        <div className="mx-auto flex max-w-7xl flex-col gap-1.5 px-4 py-3.5 text-[9px] text-gray-400 sm:px-6 sm:text-[10px] lg:px-8 md:flex-row md:items-center md:justify-between">
+      <div className="border-t border-gray-100 bg-gray-50 dark:border-slate-800 dark:bg-slate-900">
+        <div className="mx-auto flex max-w-7xl flex-col gap-1.5 px-4 py-3.5 text-[9px] text-gray-400 sm:px-6 sm:text-[10px] lg:px-8 md:flex-row md:items-center md:justify-between dark:text-slate-500">
           <p>
             © {currentYear} MboaShop. Tous droits réservés.
           </p>
@@ -269,7 +269,7 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span>Paiement sécurisé</span>
 
-            <span className="h-1 w-1 rounded-full bg-gray-300" />
+            <span className="h-1 w-1 rounded-full bg-gray-300 dark:bg-slate-700" />
 
             <span>Shopping au Cameroun</span>
           </div>
@@ -278,4 +278,3 @@ export default function Footer() {
     </footer>
   );
 }
-
