@@ -1,4 +1,3 @@
-
 import {
   createContext,
   useContext,
@@ -7,13 +6,15 @@ import {
 } from "react";
 
 const CartContext = createContext(null);
+
 const STORAGE_KEY = "mboashop-cart";
 
 function getInitialCart() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
-  } catch {
+  } catch (error) {
+    console.error("Impossible de récupérer le panier :", error);
     return [];
   }
 }
@@ -23,22 +24,35 @@ function cartReducer(state, action) {
     case "ADD": {
       const product = action.product;
 
-      if (product.stock <= 0) return state;
+      if (!product || product.stock <= 0) {
+        return state;
+      }
 
-      const existing = state.find((item) => item.id === product.id);
+      const existing = state.find(
+        (item) => item.id === product.id
+      );
 
       if (existing) {
         return state.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: Math.min(item.quantity + 1, item.stock),
+                quantity: Math.min(
+                  item.quantity + 1,
+                  item.stock
+                ),
               }
             : item
         );
       }
 
-      return [...state, { ...product, quantity: 1 }];
+      return [
+        ...state,
+        {
+          ...product,
+          quantity: 1,
+        },
+      ];
     }
 
     case "INCREASE":
@@ -46,7 +60,10 @@ function cartReducer(state, action) {
         item.id === action.id
           ? {
               ...item,
-              quantity: Math.min(item.quantity + 1, item.stock),
+              quantity: Math.min(
+                item.quantity + 1,
+                item.stock
+              ),
             }
           : item
       );
@@ -55,13 +72,35 @@ function cartReducer(state, action) {
       return state
         .map((item) =>
           item.id === action.id
-            ? { ...item, quantity: item.quantity - 1 }
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
             : item
         )
         .filter((item) => item.quantity > 0);
 
+    case "SET_QUANTITY":
+      return state.map((item) => {
+        if (item.id !== action.id) {
+          return item;
+        }
+
+        const quantity = Math.max(
+          1,
+          Math.min(action.quantity, item.stock)
+        );
+
+        return {
+          ...item,
+          quantity,
+        };
+      });
+
     case "REMOVE":
-      return state.filter((item) => item.id !== action.id);
+      return state.filter(
+        (item) => item.id !== action.id
+      );
 
     case "CLEAR":
       return [];
@@ -78,28 +117,62 @@ export function CartProvider({ children }) {
     getInitialCart
   );
 
+  // Sauvegarde automatique
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(cart)
+      );
     } catch (error) {
-      console.error("Impossible de sauvegarder le panier :", error);
+      console.error(
+        "Impossible de sauvegarder le panier :",
+        error
+      );
     }
   }, [cart]);
 
-  const addToCart = (product) =>
-    dispatch({ type: "ADD", product });
+  const addToCart = (product) => {
+    dispatch({
+      type: "ADD",
+      product,
+    });
+  };
 
-  const increaseQuantity = (id) =>
-    dispatch({ type: "INCREASE", id });
+  const increaseQuantity = (id) => {
+    dispatch({
+      type: "INCREASE",
+      id,
+    });
+  };
 
-  const decreaseQuantity = (id) =>
-    dispatch({ type: "DECREASE", id });
+  const decreaseQuantity = (id) => {
+    dispatch({
+      type: "DECREASE",
+      id,
+    });
+  };
 
-  const removeFromCart = (id) =>
-    dispatch({ type: "REMOVE", id });
+  const setQuantity = (id, quantity) => {
+    dispatch({
+      type: "SET_QUANTITY",
+      id,
+      quantity: Number(quantity),
+    });
+  };
 
-  const clearCart = () =>
-    dispatch({ type: "CLEAR" });
+  const removeFromCart = (id) => {
+    dispatch({
+      type: "REMOVE",
+      id,
+    });
+  };
+
+  const clearCart = () => {
+    dispatch({
+      type: "CLEAR",
+    });
+  };
 
   const cartCount = cart.reduce(
     (total, item) => total + item.quantity,
@@ -107,9 +180,12 @@ export function CartProvider({ children }) {
   );
 
   const cartTotal = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) =>
+      total + Number(item.price) * item.quantity,
     0
   );
+
+  const isEmpty = cart.length === 0;
 
   return (
     <CartContext.Provider
@@ -117,9 +193,12 @@ export function CartProvider({ children }) {
         cart,
         cartCount,
         cartTotal,
+        isEmpty,
+
         addToCart,
         increaseQuantity,
         decreaseQuantity,
+        setQuantity,
         removeFromCart,
         clearCart,
       }}
@@ -133,7 +212,9 @@ export function useCart() {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error("useCart doit être utilisé dans CartProvider");
+    throw new Error(
+      "useCart doit être utilisé dans CartProvider"
+    );
   }
 
   return context;
