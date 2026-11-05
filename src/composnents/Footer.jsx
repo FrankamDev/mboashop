@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const whatsappNumber = "237XXXXXXXXX";
+const whatsappNumber = "237690372977";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
 export default function Footer() {
