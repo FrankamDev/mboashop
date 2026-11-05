@@ -6,6 +6,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SocialIcons } from "./icons/SocialIcons";
 
 const whatsappNumber = "237690372977";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
@@ -71,7 +72,7 @@ export default function Footer() {
             </p>
 
             {/* Réseaux */}
-            <div className="mt-4 flex items-center gap-2">
+            {/* <div className="mt-4 flex items-center gap-2">
               <a
                 href="#"
                 aria-label="Facebook"
@@ -97,7 +98,56 @@ export default function Footer() {
               >
                 <MessageCircle size={14} />
               </a>
-            </div>
+            </div> */}
+
+            <div className="mt-4 flex items-center gap-2">
+  <a
+    href="#"
+    aria-label="Facebook"
+    className="
+      flex h-8 w-8 items-center justify-center rounded-full
+      border border-gray-200 bg-white text-gray-700
+      transition-all duration-200
+      hover:border-blue-600 hover:bg-blue-600 hover:text-white
+      dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300
+      dark:hover:border-blue-500 dark:hover:bg-blue-500 dark:hover:text-white
+    "
+  >
+    <SocialIcons.Facebook size={13} />
+  </a>
+
+  <a
+    href="#"
+    aria-label="Instagram"
+    className="
+      flex h-8 w-8 items-center justify-center rounded-full
+      border border-gray-200 bg-white text-gray-700
+      transition-all duration-200
+      hover:border-pink-500 hover:bg-pink-500 hover:text-white
+      dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300
+      dark:hover:border-pink-500 dark:hover:bg-pink-500 dark:hover:text-white
+    "
+  >
+    <SocialIcons.Instagram size={14} />
+  </a>
+
+  <a
+    href={whatsappUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp"
+    className="
+      flex h-8 w-8 items-center justify-center rounded-full
+      border border-gray-200 bg-white text-gray-700
+      transition-all duration-200
+      hover:border-green-500 hover:bg-green-500 hover:text-white
+      dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300
+      dark:hover:border-green-500 dark:hover:bg-green-500 dark:hover:text-white
+    "
+  >
+    <SocialIcons.WhatsApp size={15} />
+  </a>
+</div>
           </div>
 
           {/* Boutique */}
