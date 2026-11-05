@@ -1,26 +1,52 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-// https://vite.dev/config/
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineConfig({
-  plugins: [react(), tailwindcss(),
+  plugins: [
+    react(),
+    tailwindcss(),
 
+    VitePWA({
+      registerType: "autoUpdate",
 
+      devOptions: {
+        enabled: true,
+      },
 
+      manifest: {
+        name: "MboaShop",
+        short_name: "MboaShop",
+        description:
+          "MboaShop - Votre boutique en ligne au Cameroun.",
+
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+
+        display: "standalone",
+        orientation: "portrait",
+        start_url: "/",
+
+        icons: [
+          {
+            src: "/icons/logo.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/icons/logo.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      },
+
+      workbox: {
+        globPatterns: [
+          "**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp,woff,woff2}",
+        ],
+      },
+    }),
   ],
-  base: '/',
-  build: {
-    outDir: "dist",
-    sourcemap: false,
-    minify: "true",
-    cssCodeSplit: true,
-
-
-    chunkSizeWarningLimit: 500,
-  },
-
-  server: {
-    host: "0.0.0.0",
-    port: 5173,
-  },
-})
+});
