@@ -1137,7 +1137,101 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
             shadow-lg transition\r
             hover:border-blue-300 hover:text-blue-600\r
             sm:bottom-6 sm:right-6\r
-          `,children:[(0,k.jsx)(`span`,{className:`flex h-7 w-7 items-center justify-center rounded-full bg-gray-950 text-white`,children:(0,k.jsx)(_e,{size:14})}),`Assistant MboaShop`]})]})}function qa(){let[e,t]=(0,w.useState)(null),[n,r]=(0,w.useState)(!1),[i,a]=(0,w.useState)(!1);return(0,w.useEffect)(()=>{(()=>{let e=window.matchMedia(`(display-mode: standalone)`).matches||window.navigator.standalone===!0;a(e),e&&(r(!1),t(null))})();let e=e=>{e.preventDefault(),window.matchMedia(`(display-mode: standalone)`).matches||window.navigator.standalone===!0||(t(e),r(!0))},n=()=>{a(!0),t(null),r(!1)};return window.addEventListener(`beforeinstallprompt`,e),window.addEventListener(`appinstalled`,n),()=>{window.removeEventListener(`beforeinstallprompt`,e),window.removeEventListener(`appinstalled`,n)}},[]),i||!n||!e?null:(0,k.jsx)(`div`,{className:`fixed bottom-20 left-4 right-4 z-[1000] sm:left-auto sm:right-5 sm:w-[360px]`,children:(0,k.jsx)(`div`,{className:`rounded-2xl border border-gray-200 bg-white p-4 shadow-[0_15px_50px_rgba(15,23,42,0.15)]`,children:(0,k.jsxs)(`div`,{className:`flex items-start gap-3`,children:[(0,k.jsx)(`div`,{className:`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-950 text-white`,children:(0,k.jsx)(ke,{size:18})}),(0,k.jsxs)(`div`,{className:`min-w-0 flex-1`,children:[(0,k.jsx)(`h3`,{className:`text-sm font-extrabold text-gray-950`,children:`Installer MboaShop`}),(0,k.jsx)(`p`,{className:`mt-1 text-[11px] leading-5 text-gray-500`,children:`Ajoutez MboaShop à votre écran d’accueil pour y accéder rapidement.`}),(0,k.jsx)(`button`,{type:`button`,onClick:async()=>{if(e&&!i)try{await e.prompt(),(await e.userChoice).outcome===`accepted`&&(a(!0),r(!1),t(null))}catch(e){console.error(`Erreur installation PWA :`,e)}},className:`mt-3 rounded-lg bg-gray-950 px-3 py-2 text-[11px] font-bold text-white transition hover:bg-blue-600`,children:`Installer maintenant`})]}),(0,k.jsx)(`button`,{type:`button`,onClick:()=>{r(!1)},className:`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-900`,"aria-label":`Fermer`,children:(0,k.jsx)(Rt,{size:15})})]})})})}function Ja(){return(0,k.jsxs)(`div`,{className:`flex min-h-screen flex-col bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white`,children:[(0,k.jsx)(ba,{cartCount:2}),(0,k.jsxs)(`main`,{className:`flex-grow bg-white transition-colors duration-300 dark:bg-slate-950`,children:[(0,k.jsx)(Yi,{}),(0,k.jsx)(Ki,{}),(0,k.jsx)(Ta,{}),(0,k.jsx)(Ka,{}),(0,k.jsx)(qa,{})]}),(0,k.jsx)(Oa,{})]})}var Ya=[`All`,`Audio`,`Electronics`,`Gadgets`,`Gaming`,`Home`,`Computers`],Xa=(e=``)=>String(e).toLowerCase().normalize(`NFD`).replace(/[\u0300-\u036f]/g,``).trim(),Za=`mboashop_visitor_seed`;function Qa(){try{let e=localStorage.getItem(Za);return e||(e=`${Date.now()}-${Math.random()}-${Math.random()}`,localStorage.setItem(Za,e)),e}catch{return`${Date.now()}-${Math.random()}`}}function $a(e){let t=0;for(let n=0;n<e.length;n++)t=(t<<5)-t+e.charCodeAt(n),t|=0;return Math.abs(t)}function eo(){let e=new Date;return`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`}function to(e){let t=Qa(),n=eo();return[...e].map(e=>({product:e,score:$a(`${t}-${n}-${e.id}`)})).sort((e,t)=>e.score-t.score).map(({product:e})=>e)}function no({onAddToCart:e=()=>{}}){let[t,n]=zi(),[r,i]=(0,w.useState)(t.get(`search`)||``),[a,o]=(0,w.useState)(t.get(`category`)||`All`),[s,c]=(0,w.useState)(t.get(`sort`)||`for-you`);(0,w.useEffect)(()=>{i(t.get(`search`)||``),o(t.get(`category`)||`All`),c(t.get(`sort`)||`for-you`)},[t]);let l=(0,w.useMemo)(()=>{let e=Xi.filter(e=>e.isPublished!==!1),t=Xa(r);switch(t&&(e=e.filter(e=>Xa([e.name,e.category,e.shortDescription,e.description,...e.tags||[]].join(` `)).includes(t))),a!==`All`&&(e=e.filter(e=>e.category===a)),s){case`for-you`:e=to(e);break;case`featured`:break;case`price-asc`:e.sort((e,t)=>Number(e.price||0)-Number(t.price||0));break;case`price-desc`:e.sort((e,t)=>Number(t.price||0)-Number(e.price||0));break;case`rating`:e.sort((e,t)=>Number(t.rating||0)-Number(e.rating||0));break;case`popular`:e.sort((e,t)=>Number(t.reviewsCount||t.reviews||0)-Number(e.reviewsCount||e.reviews||0))}return e},[r,a,s]),u=()=>{i(``),o(`All`),c(`for-you`),n({})},d=()=>{i(``);let e=new URLSearchParams(t);e.delete(`search`),n(e)},f=r.trim()!==``||a!==`All`||s!==`for-you`,p=e=>{c(e);let r=new URLSearchParams(t);e===`for-you`?r.delete(`sort`):r.set(`sort`,e),n(r)};return(0,k.jsxs)(`main`,{className:`\r
+          `,children:[(0,k.jsx)(`span`,{className:`flex h-7 w-7 items-center justify-center rounded-full bg-gray-950 text-white`,children:(0,k.jsx)(_e,{size:14})}),`Assistant MboaShop`]})]})}function qa(){let{darkMode:e}=$i(),[t,n]=(0,w.useState)(null),[r,i]=(0,w.useState)(!1),[a,o]=(0,w.useState)(!1);return(0,w.useEffect)(()=>{(()=>{let e=window.matchMedia(`(display-mode: standalone)`).matches||window.navigator.standalone===!0;o(e),e&&(i(!1),n(null))})();let e=e=>{e.preventDefault(),window.matchMedia(`(display-mode: standalone)`).matches||window.navigator.standalone===!0||(n(e),i(!0))},t=()=>{o(!0),n(null),i(!1)};return window.addEventListener(`beforeinstallprompt`,e),window.addEventListener(`appinstalled`,t),()=>{window.removeEventListener(`beforeinstallprompt`,e),window.removeEventListener(`appinstalled`,t)}},[]),a||!r||!t?null:(0,k.jsx)(`div`,{className:`\r
+        fixed bottom-20 left-4 right-4 z-[1000]\r
+        sm:left-auto sm:right-5 sm:w-[380px]\r
+      `,children:(0,k.jsxs)(`div`,{className:`\r
+          overflow-hidden\r
+          rounded-2xl\r
+          border border-slate-200\r
+          bg-white\r
+          p-4\r
+          shadow-[0_15px_50px_rgba(15,23,42,0.15)]\r
+          transition-colors duration-300\r
+\r
+          dark:border-slate-700\r
+          dark:bg-slate-900\r
+          dark:shadow-[0_15px_50px_rgba(0,0,0,0.45)]\r
+        `,children:[(0,k.jsxs)(`div`,{className:`flex items-start gap-3`,children:[(0,k.jsx)(`div`,{className:`\r
+              flex h-11 w-11 shrink-0\r
+              items-center justify-center\r
+              rounded-xl\r
+              bg-slate-950\r
+              text-white\r
+              shadow-sm\r
+\r
+              dark:bg-blue-600\r
+              dark:text-white\r
+            `,children:(0,k.jsx)(ke,{size:18,strokeWidth:2})}),(0,k.jsxs)(`div`,{className:`min-w-0 flex-1`,children:[(0,k.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,k.jsx)(`h3`,{className:`\r
+                  text-sm font-extrabold\r
+                  text-slate-950\r
+\r
+                  dark:text-white\r
+                `,children:`Installer MboaShop`}),(0,k.jsx)(`span`,{className:`\r
+                  hidden rounded-full\r
+                  bg-blue-50\r
+                  px-2 py-0.5\r
+                  text-[9px] font-bold\r
+                  text-blue-600\r
+\r
+                  dark:bg-blue-950/60\r
+                  dark:text-blue-400\r
+\r
+                  sm:inline-flex\r
+                `,children:`APPLICATION`})]}),(0,k.jsx)(`p`,{className:`\r
+                mt-1\r
+                text-[11px]\r
+                leading-5\r
+                text-slate-500\r
+\r
+                dark:text-slate-400\r
+              `,children:`Ajoutez MboaShop à votre écran d’accueil pour accéder rapidement à votre boutique.`}),(0,k.jsxs)(`button`,{type:`button`,onClick:async()=>{if(t&&!a)try{await t.prompt(),(await t.userChoice).outcome===`accepted`&&(o(!0),i(!1),n(null))}catch(e){console.error(`Erreur installation PWA :`,e)}},className:`\r
+                mt-3\r
+                inline-flex\r
+                items-center gap-2\r
+                rounded-lg\r
+                bg-slate-950\r
+                px-3.5\r
+                py-2\r
+                text-[11px]\r
+                font-bold\r
+                text-white\r
+                transition-all duration-200\r
+\r
+                hover:bg-blue-600\r
+                active:scale-[0.98]\r
+\r
+                dark:bg-blue-600\r
+                dark:hover:bg-blue-500\r
+              `,children:[(0,k.jsx)(ke,{size:14}),`Installer maintenant`]})]}),(0,k.jsx)(`button`,{type:`button`,onClick:()=>{i(!1)},className:`\r
+              flex h-7 w-7 shrink-0\r
+              items-center justify-center\r
+              rounded-lg\r
+              text-slate-400\r
+              transition-colors\r
+\r
+              hover:bg-slate-100\r
+              hover:text-slate-900\r
+\r
+              dark:text-slate-500\r
+              dark:hover:bg-slate-800\r
+              dark:hover:text-slate-200\r
+            `,"aria-label":`Fermer`,children:(0,k.jsx)(Rt,{size:15})})]}),(0,k.jsxs)(`div`,{className:`\r
+            mt-3 flex items-center gap-2\r
+            border-t border-slate-100\r
+            pt-3\r
+\r
+            dark:border-slate-800\r
+          `,children:[(0,k.jsx)(bt,{size:13,className:`\r
+              text-slate-400\r
+              dark:text-slate-500\r
+            `}),(0,k.jsx)(`span`,{className:`\r
+              text-[9px]\r
+              font-medium\r
+              text-slate-400\r
+\r
+              dark:text-slate-500\r
+            `,children:`Installation rapide · Accès depuis votre écran d’accueil`})]})]})})}function Ja(){return(0,k.jsxs)(`div`,{className:`flex min-h-screen flex-col bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white`,children:[(0,k.jsx)(ba,{cartCount:2}),(0,k.jsxs)(`main`,{className:`flex-grow bg-white transition-colors duration-300 dark:bg-slate-950`,children:[(0,k.jsx)(Yi,{}),(0,k.jsx)(Ki,{}),(0,k.jsx)(Ta,{}),(0,k.jsx)(Ka,{}),(0,k.jsx)(qa,{})]}),(0,k.jsx)(Oa,{})]})}var Ya=[`All`,`Audio`,`Electronics`,`Gadgets`,`Gaming`,`Home`,`Computers`],Xa=(e=``)=>String(e).toLowerCase().normalize(`NFD`).replace(/[\u0300-\u036f]/g,``).trim(),Za=`mboashop_visitor_seed`;function Qa(){try{let e=localStorage.getItem(Za);return e||(e=`${Date.now()}-${Math.random()}-${Math.random()}`,localStorage.setItem(Za,e)),e}catch{return`${Date.now()}-${Math.random()}`}}function $a(e){let t=0;for(let n=0;n<e.length;n++)t=(t<<5)-t+e.charCodeAt(n),t|=0;return Math.abs(t)}function eo(){let e=new Date;return`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`}function to(e){let t=Qa(),n=eo();return[...e].map(e=>({product:e,score:$a(`${t}-${n}-${e.id}`)})).sort((e,t)=>e.score-t.score).map(({product:e})=>e)}function no({onAddToCart:e=()=>{}}){let[t,n]=zi(),[r,i]=(0,w.useState)(t.get(`search`)||``),[a,o]=(0,w.useState)(t.get(`category`)||`All`),[s,c]=(0,w.useState)(t.get(`sort`)||`for-you`);(0,w.useEffect)(()=>{i(t.get(`search`)||``),o(t.get(`category`)||`All`),c(t.get(`sort`)||`for-you`)},[t]);let l=(0,w.useMemo)(()=>{let e=Xi.filter(e=>e.isPublished!==!1),t=Xa(r);switch(t&&(e=e.filter(e=>Xa([e.name,e.category,e.shortDescription,e.description,...e.tags||[]].join(` `)).includes(t))),a!==`All`&&(e=e.filter(e=>e.category===a)),s){case`for-you`:e=to(e);break;case`featured`:break;case`price-asc`:e.sort((e,t)=>Number(e.price||0)-Number(t.price||0));break;case`price-desc`:e.sort((e,t)=>Number(t.price||0)-Number(e.price||0));break;case`rating`:e.sort((e,t)=>Number(t.rating||0)-Number(e.rating||0));break;case`popular`:e.sort((e,t)=>Number(t.reviewsCount||t.reviews||0)-Number(e.reviewsCount||e.reviews||0))}return e},[r,a,s]),u=()=>{i(``),o(`All`),c(`for-you`),n({})},d=()=>{i(``);let e=new URLSearchParams(t);e.delete(`search`),n(e)},f=r.trim()!==``||a!==`All`||s!==`for-you`,p=e=>{c(e);let r=new URLSearchParams(t);e===`for-you`?r.delete(`sort`):r.set(`sort`,e),n(r)};return(0,k.jsxs)(`main`,{className:`\r
         min-h-screen\r
         overflow-hidden\r
         bg-[#f8f9fb]\r

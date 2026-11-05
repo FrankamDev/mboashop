@@ -32,9 +32,16 @@ a {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    overflow:hidden;
+    
   }
 }
-
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .scrollbar-hide {
   scrollbar-width: none;
 }

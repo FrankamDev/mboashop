@@ -564,10 +564,9 @@ export default function Navbar() {
             overflow-visible transition-all duration-300 ease-out
             lg:max-h-[80px] lg:opacity-100
 
-            ${
-              searchVisibleMobile
-                ? "max-h-[90px] opacity-100"
-                : "max-h-0 opacity-0 pointer-events-none"
+            ${searchVisibleMobile
+              ? "max-h-[90px] opacity-100"
+              : "max-h-0 opacity-0 pointer-events-none"
             }
           `}
         >
@@ -960,10 +959,9 @@ export default function Navbar() {
                   transition-all duration-200
                   sm:h-12 sm:w-12
 
-                  ${
-                    filterOpen
-                      ? "border-blue-600 bg-blue-600 text-white"
-                      : `
+                  ${filterOpen
+                    ? "border-blue-600 bg-blue-600 text-white"
+                    : `
                         border-slate-200
                         bg-white
                         text-slate-700
@@ -1373,10 +1371,9 @@ export default function Navbar() {
           transition-opacity duration-300
           xl:hidden
 
-          ${
-            menuOpen
-              ? "visible opacity-100"
-              : "invisible pointer-events-none opacity-0"
+          ${menuOpen
+            ? "visible opacity-100"
+            : "invisible pointer-events-none opacity-0"
           }
         `}
       />
@@ -1398,10 +1395,9 @@ export default function Navbar() {
 
           dark:bg-slate-950
 
-          ${
-            menuOpen
-              ? "translate-x-0"
-              : "-translate-x-full pointer-events-none"
+          ${menuOpen
+            ? "translate-x-0"
+            : "-translate-x-full pointer-events-none"
           }
         `}
       >
