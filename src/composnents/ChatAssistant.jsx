@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  ArrowRight,
   Bot,
-  X,
+  MessageCircle,
+  Minus,
   Send,
   Sparkles,
-  Minus,
-  MessageCircle,
   User,
+  X,
 } from "lucide-react";
-
-/**
- * Assistant client MboaShop
- *
- * Pour connecter une vraie IA plus tard :
- * remplace simplement sendToAI() par un appel API.
- */
+import { Link } from "react-router-dom";
 
 const QUICK_QUESTIONS = [
   "Comment commander ?",
@@ -23,7 +18,7 @@ const QUICK_QUESTIONS = [
 ];
 
 const INITIAL_MESSAGE = {
-  id: 1,
+  id: "welcome",
   role: "assistant",
   content:
     "Bonjour ! Je suis l’assistant MboaShop. Je peux vous aider à trouver un produit, comprendre les commandes ou obtenir des informations sur la livraison.",
@@ -57,11 +52,48 @@ const PRODUCTS = [
 ];
 
 function normalizeText(text) {
-  return text
+  return String(text ?? "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
+}
+
+function createId(prefix = "msg") {
+  return `${prefix}-${Date.now()}-${Math.random()
+    .toString(36)
+    .slice(2, 8)}`;
+}
+
+function isValidMessage(message) {
+  return (
+    message &&
+    typeof message === "object" &&
+    (message.role === "user" || message.role === "assistant") &&
+    typeof message.content === "string" &&
+    message.content.trim() !== ""
+  );
+}
+
+function sanitizeMessages(messages) {
+  if (!Array.isArray(messages)) {
+    return [INITIAL_MESSAGE];
+  }
+
+  const cleaned = messages
+    .filter(isValidMessage)
+    .map((message) => ({
+      id: message.id || createId(),
+      role: message.role,
+      content: message.content,
+      link:
+        typeof message.link === "string"
+          ? message.link
+          : undefined,
+      whatsapp: Boolean(message.whatsapp),
+    }));
+
+  return cleaned.length > 0 ? cleaned : [INITIAL_MESSAGE];
 }
 
 function getLocalResponse(message) {
@@ -94,8 +126,7 @@ function getLocalResponse(message) {
   if (
     text.includes("livraison") ||
     text.includes("livrer") ||
-    text.includes("delai") ||
-    text.includes("délais")
+    text.includes("delai")
   ) {
     return {
       content:
@@ -107,7 +138,6 @@ function getLocalResponse(message) {
   if (
     text.includes("prix") ||
     text.includes("cout") ||
-    text.includes("coût") ||
     text.includes("fcfa")
   ) {
     return {
@@ -120,8 +150,7 @@ function getLocalResponse(message) {
   if (
     text.includes("whatsapp") ||
     text.includes("contact") ||
-    text.includes("numero") ||
-    text.includes("numéro")
+    text.includes("numero")
   ) {
     return {
       content:
@@ -165,56 +194,63 @@ export default function ChatAssistant({
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+
   const [messages, setMessages] = useState(() => {
     try {
       const saved = sessionStorage.getItem("mboashop_chat");
 
-      if (saved) {
-        const parsed = JSON.parse(saved);
-
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
-        }
+      if (!saved) {
+        return [INITIAL_MESSAGE];
       }
-    } catch {
-      // On utilise simplement l'historique initial.
-    }
 
-    return [INITIAL_MESSAGE];
+      return sanitizeMessages(JSON.parse(saved));
+    } catch {
+      return [INITIAL_MESSAGE];
+    }
   });
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const isMountedRef = useRef(true);
 
-  const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const whatsappUrl = `https://wa.me/${String(
+    whatsappNumber
+  ).replace(/\D/g, "")}`;
 
-  // Sauvegarde pendant la session
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   useEffect(() => {
     try {
-      sessionStorage.setItem("mboashop_chat", JSON.stringify(messages));
-    } catch {
-      // sessionStorage peut être indisponible.
-    }
+      sessionStorage.setItem(
+        "mboashop_chat",
+        JSON.stringify(messages)
+      );
+    } catch {}
   }, [messages]);
 
-  // Scroll automatique
   useEffect(() => {
-    if (isOpen && !isMinimized) {
-      messagesEndRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
+    if (!isOpen || isMinimized) return;
+
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   }, [messages, isOpen, isMinimized]);
 
-  // Focus input
   useEffect(() => {
-    if (isOpen && !isMinimized) {
-      setTimeout(() => inputRef.current?.focus(), 150);
-    }
+    if (!isOpen || isMinimized) return;
+
+    const timer = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [isOpen, isMinimized]);
 
-  // Escape
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -231,40 +267,20 @@ export default function ChatAssistant({
   }, []);
 
   const sendToAI = async (userMessage) => {
-    /*
-     * FUTURE API IA
-     *
-     * Exemple :
-     *
-     * const response = await fetch("/api/chat", {
-     *   method: "POST",
-     *   headers: {
-     *     "Content-Type": "application/json",
-     *   },
-     *   body: JSON.stringify({
-     *     message: userMessage,
-     *     history: messages,
-     *   }),
-     * });
-     *
-     * return await response.json();
-     *
-     * Le backend Laravel pourra ensuite appeler
-     * OpenAI, Gemini, etc.
-     */
-
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    await new Promise((resolve) =>
+      setTimeout(resolve, 500)
+    );
 
     return getLocalResponse(userMessage);
   };
 
   const handleSend = async (message = input) => {
-    const cleanMessage = message.trim();
+    const cleanMessage = String(message ?? "").trim();
 
     if (!cleanMessage || isTyping) return;
 
     const userMessage = {
-      id: Date.now(),
+      id: createId("user"),
       role: "user",
       content: cleanMessage,
     };
@@ -276,33 +292,45 @@ export default function ChatAssistant({
     try {
       const response = await sendToAI(cleanMessage);
 
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now() + 1,
-            role: "assistant",
-            content: response.content,
-            link: response.link,
-            whatsapp: response.whatsapp,
-          },
-        ]);
+      if (!isMountedRef.current) return;
 
-        setIsTyping(false);
-      }, 300);
-    } catch {
+      const assistantMessage = {
+        id: createId("assistant"),
+        role: "assistant",
+        content:
+          typeof response?.content === "string"
+            ? response.content
+            : "Je n’ai pas pu générer une réponse.",
+        link:
+          typeof response?.link === "string"
+            ? response.link
+            : undefined,
+        whatsapp: Boolean(response?.whatsapp),
+      };
+
+      setMessages((prev) => [
+        ...prev,
+        assistantMessage,
+      ]);
+    } catch (error) {
+      console.error("Erreur ChatAssistant :", error);
+
+      if (!isMountedRef.current) return;
+
       setMessages((prev) => [
         ...prev,
         {
-          id: Date.now() + 1,
+          id: createId("error"),
           role: "assistant",
           content:
             "Une erreur est survenue. Vous pouvez nous contacter directement sur WhatsApp.",
           whatsapp: true,
         },
       ]);
-
-      setIsTyping(false);
+    } finally {
+      if (isMountedRef.current) {
+        setIsTyping(false);
+      }
     }
   };
 
@@ -313,17 +341,16 @@ export default function ChatAssistant({
 
   const resetChat = () => {
     setMessages([INITIAL_MESSAGE]);
+    setInput("");
+    setIsTyping(false);
 
     try {
       sessionStorage.removeItem("mboashop_chat");
-    } catch {
-      // Rien à faire.
-    }
+    } catch {}
   };
 
   return (
     <>
-      {/* Overlay mobile */}
       {isOpen && !isMinimized && (
         <div
           className="fixed inset-0 z-[998] bg-black/10 backdrop-blur-[1px] sm:hidden"
@@ -332,31 +359,27 @@ export default function ChatAssistant({
         />
       )}
 
-      {/* Fenêtre */}
       {isOpen && !isMinimized && (
         <div
           className="
             fixed z-[999]
             bottom-0 left-0 right-0
             h-[min(680px,92dvh)]
-            sm:bottom-24 sm:right-5 sm:left-auto
-            sm:h-[620px] sm:w-[390px]
             overflow-hidden
-            rounded-t-3xl sm:rounded-2xl
+            rounded-t-3xl
             border border-gray-200
             bg-white
             shadow-[0_20px_80px_rgba(15,23,42,0.18)]
-            animate-in fade-in slide-in-from-bottom-4
-            duration-200
+            sm:bottom-24 sm:left-auto sm:right-5
+            sm:h-[620px] sm:w-[390px]
+            sm:rounded-2xl
           "
           role="dialog"
           aria-label="Assistant MboaShop"
-          aria-modal="false"
         >
-          {/* Header */}
           <div className="flex items-center justify-between border-b border-gray-100 bg-white px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-950 text-white shadow-sm">
+              <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-950 text-white">
                 <Bot size={20} />
 
                 <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-500" />
@@ -368,7 +391,10 @@ export default function ChatAssistant({
                     Assistant MboaShop
                   </h2>
 
-                  <Sparkles size={13} className="text-blue-600" />
+                  <Sparkles
+                    size={13}
+                    className="shrink-0 text-blue-600"
+                  />
                 </div>
 
                 <p className="mt-0.5 text-[10px] text-gray-500">
@@ -389,7 +415,10 @@ export default function ChatAssistant({
 
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsMinimized(false);
+                }}
                 className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-900"
                 aria-label="Fermer le chat"
               >
@@ -398,26 +427,28 @@ export default function ChatAssistant({
             </div>
           </div>
 
-          {/* Messages */}
-          <div
-            className="
-              h-[calc(100%-132px)]
-              overflow-y-auto
-              bg-gray-50/70
-              px-3 py-4
-              sm:px-4
-            "
-          >
+          <div className="h-[calc(100%-132px)] overflow-y-auto bg-gray-50/70 px-3 py-4 sm:px-4">
             <div className="mx-auto flex max-w-md flex-col gap-3">
-              {/* Suggestions */}
-              {messages.length === 1 && (
+              {messages.length === 1 && !isTyping && (
                 <div className="mb-1 flex flex-wrap gap-2">
                   {QUICK_QUESTIONS.map((question) => (
                     <button
                       key={question}
                       type="button"
                       onClick={() => handleSend(question)}
-                      className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-[10px] font-semibold text-gray-600 shadow-sm transition hover:border-blue-300 hover:text-blue-600"
+                      className="
+                        rounded-full
+                        border border-gray-200
+                        bg-white
+                        px-3 py-1.5
+                        text-[10px]
+                        font-semibold
+                        text-gray-600
+                        shadow-sm
+                        transition
+                        hover:border-blue-300
+                        hover:text-blue-600
+                      "
                     >
                       {question}
                     </button>
@@ -432,7 +463,9 @@ export default function ChatAssistant({
                   <div
                     key={message.id}
                     className={`flex items-end gap-2 ${
-                      isUser ? "justify-end" : "justify-start"
+                      isUser
+                        ? "justify-end"
+                        : "justify-start"
                     }`}
                   >
                     {!isUser && (
@@ -487,7 +520,6 @@ export default function ChatAssistant({
                 );
               })}
 
-              {/* Typing */}
               {isTyping && (
                 <div className="flex items-end gap-2">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-950 text-white">
@@ -508,19 +540,21 @@ export default function ChatAssistant({
             </div>
           </div>
 
-          {/* Input */}
           <div className="border-t border-gray-100 bg-white p-3">
             <form onSubmit={handleSubmit}>
-              <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-2 py-2 transition focus-within:border-blue-400 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100">
+              <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-2 py-2 focus-within:border-blue-400 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100">
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
-                  onChange={(event) => setInput(event.target.value)}
+                  onChange={(event) =>
+                    setInput(event.target.value)
+                  }
                   placeholder="Écrivez votre question..."
                   disabled={isTyping}
                   className="min-w-0 flex-1 bg-transparent px-2 text-xs text-gray-900 outline-none placeholder:text-gray-400 disabled:cursor-not-allowed"
                   aria-label="Votre message"
+                  autoComplete="off"
                 />
 
                 <button
@@ -551,7 +585,6 @@ export default function ChatAssistant({
         </div>
       )}
 
-      {/* Bouton flottant */}
       {!isOpen && (
         <button
           type="button"
@@ -560,26 +593,16 @@ export default function ChatAssistant({
             setIsMinimized(false);
           }}
           className="
-            fixed
-            bottom-20 right-4
-            z-[997]
-            flex
-            h-12 w-12
-            items-center justify-center
-            rounded-full
-            bg-gray-950
-            text-white
+            fixed bottom-20 right-4 z-[997]
+            flex h-12 w-12 items-center justify-center
+            rounded-full bg-gray-950 text-white
             shadow-[0_10px_35px_rgba(15,23,42,0.25)]
-            transition
-            hover:scale-105
-            hover:bg-blue-600
-            active:scale-95
-            sm:bottom-6 sm:right-6
-            sm:h-14 sm:w-14
+            transition hover:scale-105 hover:bg-blue-600 active:scale-95
+            sm:bottom-6 sm:right-6 sm:h-14 sm:w-14
           "
           aria-label="Ouvrir l'assistant MboaShop"
         >
-          <Bot size={22} strokeWidth={1.8} className="sm:h-6 sm:w-6" />
+          <Bot size={22} strokeWidth={1.8} />
 
           <span className="absolute right-0.5 top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-500" />
 
@@ -587,7 +610,6 @@ export default function ChatAssistant({
         </button>
       )}
 
-      {/* Bouton réduit */}
       {isOpen && isMinimized && (
         <button
           type="button"
@@ -595,14 +617,10 @@ export default function ChatAssistant({
           className="
             fixed bottom-20 right-4 z-[997]
             flex items-center gap-2
-            rounded-full
-            border border-gray-200
-            bg-white
-            px-3 py-2
-            text-[10px] font-bold
-            text-gray-800
-            shadow-lg
-            transition hover:border-blue-300 hover:text-blue-600
+            rounded-full border border-gray-200
+            bg-white px-3 py-2
+            text-[10px] font-bold text-gray-800
+            shadow-lg transition hover:border-blue-300 hover:text-blue-600
             sm:bottom-6 sm:right-6
           "
         >
