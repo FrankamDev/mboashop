@@ -4,13 +4,47 @@ import { Download, X } from "lucide-react";
 export default function InstallPWA() {
   const [installPrompt, setInstallPrompt] = useState(null);
   const [showInstall, setShowInstall] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
+    // Vérifie si MboaShop est déjà installé
+    const checkIfInstalled = () => {
+      const standalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+
+      setIsInstalled(standalone);
+
+      // Si déjà installé, surtout ne pas afficher le bouton
+      if (standalone) {
+        setShowInstall(false);
+        setInstallPrompt(null);
+      }
+    };
+
+    checkIfInstalled();
+
     const handleBeforeInstallPrompt = (event) => {
       event.preventDefault();
 
+      // Vérification supplémentaire
+      const standalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+
+      if (standalone) {
+        return;
+      }
+
       setInstallPrompt(event);
       setShowInstall(true);
+    };
+
+    // Quand l'installation est terminée
+    const handleAppInstalled = () => {
+      setIsInstalled(true);
+      setInstallPrompt(null);
+      setShowInstall(false);
     };
 
     window.addEventListener(
@@ -18,24 +52,36 @@ export default function InstallPWA() {
       handleBeforeInstallPrompt
     );
 
+    window.addEventListener("appinstalled", handleAppInstalled);
+
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
         handleBeforeInstallPrompt
       );
+
+      window.removeEventListener(
+        "appinstalled",
+        handleAppInstalled
+      );
     };
   }, []);
 
   const handleInstall = async () => {
-    if (!installPrompt) return;
+    if (!installPrompt || isInstalled) return;
 
-    await installPrompt.prompt();
+    try {
+      await installPrompt.prompt();
 
-    const result = await installPrompt.userChoice;
+      const result = await installPrompt.userChoice;
 
-    if (result.outcome === "accepted") {
-      setInstallPrompt(null);
-      setShowInstall(false);
+      if (result.outcome === "accepted") {
+        setIsInstalled(true);
+        setShowInstall(false);
+        setInstallPrompt(null);
+      }
+    } catch (error) {
+      console.error("Erreur installation PWA :", error);
     }
   };
 
@@ -43,7 +89,10 @@ export default function InstallPWA() {
     setShowInstall(false);
   };
 
-  if (!showInstall) return null;
+  // Déjà installée → aucun composant
+  if (isInstalled || !showInstall || !installPrompt) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-20 left-4 right-4 z-[1000] sm:left-auto sm:right-5 sm:w-[360px]">
